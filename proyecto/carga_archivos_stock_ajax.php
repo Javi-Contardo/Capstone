@@ -176,7 +176,7 @@ if ($area=='PROCESA_ARCHIVO')
 								}
 								else
 								{
-									$mysqli->query("INSERT INTO comercial_stock(numero_tienda,numero_local,numero_articulo,desc_art_1,upc,cantidad_existente_tienda, fecha_carga, subido_por) VALUES('$texto1','$texto2','$texto3','$texto4','$texto5','$texto6','$fecha_carga', '$nombre_usuario')");
+									$mysqli->query("INSERT INTO comercial_stock(numero_tienda,nombre_tienda,numero_articulo,desc_art_1,upc,cantidad_existente_tienda, fecha_carga, subido_por) VALUES('$texto1','$texto2','$texto3','$texto4','$texto5','$texto6','$fecha_carga', '$nombre_usuario')");
 									$result5 = $mysqli->query("select * from locales where numero_local='$texto1'");
 									if($row5 = $result5->fetch_row())
 									{

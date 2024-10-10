@@ -20,6 +20,7 @@
 					$nombre = "$row[2]";
 					$nombre_usuario = "$row[2]";
 					$labor = "$row[6]";		
+					$id_local = "$row[7]";		
 				}
 			else
 				{

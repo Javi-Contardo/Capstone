@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="SpreadsheetReader.php" server="negocioelchinoges.cl" local="133723355400000000" remote="133723355400000000" Dst="2" />
+<file name="SpreadsheetReader.php" server="negocioelchinoges.cl" local="133730031640675124" remote="133723355400000000" Dst="2" />
+<file name=".gitignore" server="negocioelchinoges.cl" local="133730031608478912" remote="133723355400000000" Dst="2" />
+<file name="CHANGELOG.md" server="negocioelchinoges.cl" local="133730031608578656" remote="133723355400000000" Dst="2" />
+<file name="README.md" server="negocioelchinoges.cl" local="133730031618651768" remote="133723355400000000" Dst="2" />
+<file name="LICENSE.md" server="negocioelchinoges.cl" local="133730031618701645" remote="133723355400000000" Dst="2" />
+<file name="SpreadsheetReader_CSV.php" server="negocioelchinoges.cl" local="133730031618990861" remote="133723355400000000" Dst="2" />
+<file name="SpreadsheetReader_ODS.php" server="negocioelchinoges.cl" local="133730031629112387" remote="133723355400000000" Dst="2" />
+<file name="SpreadsheetReader_XLS.php" server="negocioelchinoges.cl" local="133730031631031898" remote="133723355400000000" Dst="2" />
+<file name="SpreadsheetReader_XLSX.php" server="negocioelchinoges.cl" local="133730031631161297" remote="133723355400000000" Dst="2" />
+<file name="composer.json" server="negocioelchinoges.cl" local="133730031631311493" remote="133723355400000000" Dst="2" />
+<file name="test.php" server="negocioelchinoges.cl" local="133730031633504252" remote="133723355400000000" Dst="2" />
 </dwsync>

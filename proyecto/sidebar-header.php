@@ -63,9 +63,9 @@
 					
 					<li class="app-sidebar__heading">ADMINISTRACI&oacute;N</li>
 					<? if ($labor=='ADMINISTRADOR'){?>
-					<li id="act-clientes">
-						<a href="clientes.php">
-							<i class="metismenu-icon fa-solid fa-star"></i>Clientes
+					<li id="act-sucursales">
+						<a href="sucursales.php">
+							<i class="metismenu-icon fa-solid fa-star"></i>Sucursales
 						</a>
 					</li>
 					<? } ?>
@@ -142,7 +142,7 @@
 							<div class="dropdown-menu-header-inner bg-night-sky">
 								<div class="menu-header-image opacity-5" style="background-image: url('assets/images/dropdown-header/city1.jpg');"></div>
 								<div class="menu-header-content text-light">
-									<h5 class="menu-header-title">Clientes</h5>
+									<h5 class="menu-header-title">Sucursales</h5>
 								</div>
 							</div>
 						</div>

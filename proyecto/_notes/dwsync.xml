@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name=".ftpquota" server="negocioelchinoges.cl" local="133730030466855017" remote="133729999800000000" Dst="2" />
+<file name=".htaccess" server="negocioelchinoges.cl" local="133730030467014859" remote="133724401800000000" Dst="2" />
+<file name="algoritmo_leer_xlsx.php" server="negocioelchinoges.cl" local="133730030506244675" remote="133724504400000000" Dst="2" />
+<file name="carga_archivos_progreso.php" server="negocioelchinoges.cl" local="133730030523219883" remote="133723969800000000" Dst="2" />
+<file name="carga_archivos_progreso_cancelar.php" server="negocioelchinoges.cl" local="133730030523608988" remote="133723902000000000" Dst="2" />
+<file name="carga_archivos_stock.php" server="negocioelchinoges.cl" local="133730030524233967" remote="133724381400000000" Dst="2" />
+<file name="carga_archivos_stock_ajax.php" server="negocioelchinoges.cl" local="133730030524353655" remote="133724566800000000" Dst="2" />
+<file name="carga_archivos_stock_progreso.php" server="negocioelchinoges.cl" local="133730030524393548" remote="133723428600000000" Dst="2" />
+<file name="carga_archivos_stock_progreso_cancelar.php" server="negocioelchinoges.cl" local="133730030525041812" remote="133723428600000000" Dst="2" />
+<file name="carga_archivos_venta_ajax.php" server="negocioelchinoges.cl" local="133730030525191409" remote="133723404600000000" Dst="2" />
+<file name="carga_archivos_venta.php" server="negocioelchinoges.cl" local="133730030525211360" remote="133723959000000000" Dst="2" />
+<file name="carga_archivos_venta_progreso.php" server="negocioelchinoges.cl" local="133730030525520532" remote="133723428000000000" Dst="2" />
+<file name="carga_archivos_venta_progreso_cancelar.php" server="negocioelchinoges.cl" local="133730030525560420" remote="133723428600000000" Dst="2" />
+<file name="conexion.php" server="negocioelchinoges.cl" local="133730030526119058" remote="133726570200000000" Dst="2" />
+<file name="dashboard.php" server="negocioelchinoges.cl" local="133730030526458149" remote="133724370000000000" Dst="2" />
+<file name="login.php" server="negocioelchinoges.cl" local="133730031212204638" remote="133724367000000000" Dst="2" />
+<file name="entrada.php" server="negocioelchinoges.cl" local="133730031213925503" remote="133721251800000000" Dst="2" />
+<file name="index.php" server="negocioelchinoges.cl" local="133730031213945450" remote="133717104000000000" Dst="2" />
+<file name="puerta_checksesion.php" server="negocioelchinoges.cl" local="133730031608060282" remote="133723915200000000" Dst="2" />
+<file name="puerta_principal.php" server="negocioelchinoges.cl" local="133730031608100207" remote="133729952400000000" Dst="2" />
+<file name="scripts-header.php" server="negocioelchinoges.cl" local="133730031608179983" remote="133726570200000000" Dst="2" />
+<file name="scripts.php" server="negocioelchinoges.cl" local="133730031608269483" remote="133726570200000000" Dst="2" />
+<file name="sidebar-header.php" server="negocioelchinoges.cl" local="133730031608349261" remote="133726566000000000" Dst="2" />
+<file name="usuarios.php" server="negocioelchinoges.cl" local="133730031640705053" remote="133729990200000000" Dst="2" />
+<file name="usuarios_ajax.php" server="negocioelchinoges.cl" local="133730031640944401" remote="133729985400000000" Dst="2" />
+<file name="usuarios_back.php" server="negocioelchinoges.cl" local="133730031650993522" remote="133726572000000000" Dst="2" />
+<file name="usuarios_datatable.php" server="negocioelchinoges.cl" local="133730031652945687" remote="133729988400000000" Dst="2" />
+<file name="usuarios_modificar.php" server="negocioelchinoges.cl" local="133730031653035442" remote="133729990200000000" Dst="2" />
+<file name="usuarios_nuevo.php" server="negocioelchinoges.cl" local="133730031653109268" remote="133729991400000000" Dst="2" />
+</dwsync>
