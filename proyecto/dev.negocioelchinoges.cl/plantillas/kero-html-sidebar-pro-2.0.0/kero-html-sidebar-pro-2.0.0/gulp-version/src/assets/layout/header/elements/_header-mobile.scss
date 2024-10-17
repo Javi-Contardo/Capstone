@@ -1,0 +1,31 @@
+// Header Mobile
+
+ .header-mobile-wrapper {
+   display: none;
+   background: $primary;
+
+   .app-header__logo {
+     padding: ($grid-gutter-width / 2) $grid-gutter-width;
+
+     .hamburger {
+       margin-left: auto;
+
+       .hamburger-inner,
+       .hamburger-inner::before,
+       .hamburger-inner::after {
+         background: $white;
+       }
+     }
+
+     .logo-src {
+       background: url('../images/logo-inverse.png') 50% 50% no-repeat;
+     }
+   }
+ }
+
+
+.closed-sidebar-mobile.header-mobile-open {
+  .app-sidebar-wrapper {
+    display: block;
+  }
+}

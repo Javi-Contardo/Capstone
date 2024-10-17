@@ -1,0 +1,93 @@
+// Header Nav Menu
+
+.horizontal-nav-menu {
+  list-style: none;
+  margin: 0 0 0 $layout-spacer-x;
+  padding: 0;
+
+  .nav-icon-big {
+    font-size: $h4-font-size;
+    opacity: .3;
+    margin-right: 8px;
+
+    &.typcn::before {
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .nav-icon-pointer {
+    margin: 2px 0 0 7px;
+    opacity: .6;
+    transition: all .2s;
+  }
+
+  & > li {
+    display: inline-block;
+    position: relative;
+
+    & > a {
+      color: $gray-600;
+      padding: ($layout-spacer-x / 2) ($layout-spacer-x / 1.5);
+      transition: all .2s;
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      span {
+        position: relative;
+      }
+
+      span::before {
+        width: 0;
+        content: '';
+        position: absolute;
+        transition: all .2s;
+        background: $primary;
+        bottom: -10px;
+        height: 4px;
+        @include border-radius(30px);
+        left: 50%;
+      }
+
+      &:hover {
+        text-decoration: none;
+        color: $black;
+
+        span::before {
+          width: 40px;
+          margin-left: -20px;
+        }
+      }
+
+      &.active {
+        color: $black;
+        font-weight: 500;
+
+        span::before {
+          width: 20px;
+          margin-left: -10px;
+        }
+      }
+    }
+
+    &.show {
+      & > a {
+        color: $black;
+        font-weight: 500;
+
+        .nav-icon-pointer {
+          transform: rotate(-180deg);
+          margin-top: -2px;
+        }
+
+        span::before {
+          width: 20px;
+          margin-left: -10px;
+        }
+      }
+    }
+  }
+
+}

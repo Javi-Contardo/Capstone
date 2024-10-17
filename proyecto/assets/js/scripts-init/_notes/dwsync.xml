@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
+<<<<<<< HEAD
+<file name="app.js" server="negocioelchinoges.cl" local="133724538402111866" remote="133726570200000000" Dst="2" />
+<file name="demo.js" server="negocioelchinoges.cl" local="133724538402161868" remote="133726570200000000" Dst="2" />
+<file name="blockui.js" server="negocioelchinoges.cl" local="133724538402121870" remote="133726570200000000" Dst="2" />
+<file name="calendar.js" server="negocioelchinoges.cl" local="133724538402121870" remote="133726570200000000" Dst="2" />
+<file name="carousel-slider.js" server="negocioelchinoges.cl" local="133724538402131885" remote="133726570200000000" Dst="2" />
+<file name="circle-progress.js" server="negocioelchinoges.cl" local="133724538402151887" remote="133726570200000000" Dst="2" />
+<file name="count-up.js" server="negocioelchinoges.cl" local="133724538402161868" remote="133726570200000000" Dst="2" />
+<file name="image-crop.js" server="negocioelchinoges.cl" local="133724538402251881" remote="133726570200000000" Dst="2" />
+<file name="maps-word-map.js" server="negocioelchinoges.cl" local="133724538402291856" remote="133726570200000000" Dst="2" />
+<file name="maps.js" server="negocioelchinoges.cl" local="133724538402291856" remote="133726570200000000" Dst="2" />
+<file name="guided-tours.js" server="negocioelchinoges.cl" local="133724538402241900" remote="133726570200000000" Dst="2" />
+<file name="ladda-loading.js" server="negocioelchinoges.cl" local="133724538402271910" remote="133726570200000000" Dst="2" />
+<file name="rating.js" server="negocioelchinoges.cl" local="133724538402301883" remote="133726570200000000" Dst="2" />
+<file name="scrollbar.js" server="negocioelchinoges.cl" local="133724538402311879" remote="133726570200000000" Dst="2" />
+<file name="toastr.js" server="negocioelchinoges.cl" local="133724538402321846" remote="133726570200000000" Dst="2" />
+<file name="treeview.js" server="negocioelchinoges.cl" local="133724538402321846" remote="133726570200000000" Dst="2" />
+<file name="jquery.dataTables.min.js" server="negocioelchinoges.cl" local="133724538402261881" remote="133726570200000000" Dst="2" />
+<file name="tables.js" server="negocioelchinoges.cl" local="133724538402311879" remote="133726570200000000" Dst="2" />
+<file name="app.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402111866" remote="133736074800000000" Dst="2" />
+<file name="demo.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402161868" remote="133736074800000000" Dst="2" />
+<file name="blockui.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402121870" remote="133736074800000000" Dst="2" />
+<file name="calendar.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402121870" remote="133736074800000000" Dst="2" />
+<file name="carousel-slider.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402131885" remote="133736074800000000" Dst="2" />
+<file name="circle-progress.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402151887" remote="133736074800000000" Dst="2" />
+<file name="count-up.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402161868" remote="133736074800000000" Dst="2" />
+<file name="image-crop.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402251881" remote="133736074800000000" Dst="2" />
+<file name="maps-word-map.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402291856" remote="133736074800000000" Dst="2" />
+<file name="maps.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402291856" remote="133736074800000000" Dst="2" />
+<file name="guided-tours.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402241900" remote="133736074800000000" Dst="2" />
+<file name="ladda-loading.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402271910" remote="133736074800000000" Dst="2" />
+<file name="rating.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402301883" remote="133736074800000000" Dst="2" />
+<file name="scrollbar.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402311879" remote="133736074800000000" Dst="2" />
+<file name="toastr.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402321846" remote="133736074800000000" Dst="2" />
+<file name="treeview.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402321846" remote="133736074800000000" Dst="2" />
+<file name="jquery.dataTables.min.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402261881" remote="133736074800000000" Dst="2" />
+<file name="tables.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402311879" remote="133736074800000000" Dst="2" />
+=======
 <file name="app.js" server="negocioelchinoges.cl" local="133730030517594773" remote="133726570200000000" Dst="2" />
 <file name="demo.js" server="negocioelchinoges.cl" local="133730030518302879" remote="133726570200000000" Dst="2" />
 <file name="blockui.js" server="negocioelchinoges.cl" local="133730030517584796" remote="133726570200000000" Dst="2" />
@@ -18,4 +56,5 @@
 <file name="treeview.js" server="negocioelchinoges.cl" local="133730030519818820" remote="133726570200000000" Dst="2" />
 <file name="jquery.dataTables.min.js" server="negocioelchinoges.cl" local="133730030519399948" remote="133726570200000000" Dst="2" />
 <file name="tables.js" server="negocioelchinoges.cl" local="133730030519749008" remote="133726570200000000" Dst="2" />
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 </dwsync>

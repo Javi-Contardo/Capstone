@@ -1,0 +1,120 @@
+// Inner Bar
+
+.app-inner-bar {
+  display: flex;
+  align-items: center;
+  @include border-radius($border-radius);
+  padding: ($layout-spacer-x / 3) 0;
+  margin: 0 $grid-gutter-width;
+
+  .inner-bar-center {
+    width: 100%;
+
+    & > .nav {
+      display: block;
+      text-align: center;
+
+      .nav-item {
+        display: inline-block;
+
+        .nav-link {
+          color: $black;
+          font-weight: 500;
+          position: relative;
+
+          &::before {
+            position: absolute;
+            content: '';
+            @include border-radius(3px);
+            width: 16px;
+            height: 16px;
+            transform: rotate(45deg);
+            visibility: hidden;
+            opacity: 0;
+            transition: all .2s;
+            left: 50%;
+            margin-left: -8px;
+            bottom: -30px;
+            box-shadow: -1px -1px 1px 0px rgba($border-color, .9);
+          }
+
+          span {
+            position: relative;
+
+            &::before {
+              width: 0;
+              content: '';
+              position: absolute;
+              transition: all .2s;
+              background: $primary;
+              top: -8px;
+              height: 4px;
+              @include border-radius(30px);
+              left: 50%;
+            }
+          }
+
+          &:hover {
+            color: $primary;
+
+            span::before {
+              width: 8px;
+              margin-left: -4px;
+            }
+          }
+
+          &.active {
+            color: $primary;
+
+            &::before {
+              opacity: 1;
+              visibility: visible;
+              bottom: -20px;
+            }
+
+            &:hover {
+              span::before {
+                display: none;
+              }
+            }
+          }
+        }
+
+        &.dropdown {
+          & > .nav-link {
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+
+  .inner-bar-right,
+  .inner-bar-left {
+    & > .nav {
+      & > .nav-item > .nav-link {
+        font-size: $font-size-xs;
+        color: $gray-500;
+        @include border-radius(30px);
+        padding: ($layout-spacer-x / 5) ($layout-spacer-x / 2);
+        white-space: nowrap;
+
+        i {
+          opacity: .8;
+        }
+
+        &:hover {
+          color: $gray-900;
+
+          i {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Themes
+
+@import "themes/inner-bar-pills";

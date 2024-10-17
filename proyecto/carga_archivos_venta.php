@@ -8,9 +8,14 @@
             {
                 $("#act-carga-archivos").addClass("mm-active");
                 $("#act-carga-venta").addClass("mm-active");
+<<<<<<< HEAD
+                $("#titulo-cabecera").text("Carga de Archivos Ventas");
+                $("#titulo-cabecera").append($("<a href='dashboard.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
+=======
                 $("#titulo-cabecera").text("Conectores B2B (Walmart) | ");
                 $("#titulo-cabecera").append($("<a href='conectorb2b_walmart.php' class='text-success'><i class='fa-solid fa-arrow-left'></i> Atras</a>"));
                 $("#descripcion-cabecera").text("Cargar Archivo Cuenta Corriente");
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
             });
         
         function listado()
@@ -75,7 +80,11 @@
       
         function sube_archivo(input) 
         	{
+<<<<<<< HEAD
+            $.post("carga_archivos_venta_progreso_cancelar.php",{limpiar_sesion:'OK'})
+=======
             $.post("carga_archivos_walmart_venta_progreso_cancelar.php",{limpiar_sesion:'OK'})
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
             console.log("Espere un momento por favor");
             var reader = new FileReader();
             reader.onload = function (e) 
@@ -239,9 +248,12 @@
 						setTimeout(function (){
 							$('#modal-overlay2').modal('hide')
 							var inputfile=document.getElementById('customFile1').file;
+<<<<<<< HEAD
+=======
 							var clone = inputfile.clone();
 							clone.value = '';
 							inputfile.replaceWith(clone);
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 							//document.getElementById('modal-warning-texto2').innerHTML=obj.respuesta;
 						},500);
 						listado();

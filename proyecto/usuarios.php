@@ -97,7 +97,11 @@ error_reporting(E_ALL);*/
 
                         }); 	
                     }
+<<<<<<< HEAD
+/*			function eliminar_usuario(id) 
+=======
 			function eliminar_usuario(id) 
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
                     {
                         console.log("id:"+id);
                     $.post("usuarios_ajax.php", {id:id,proceso:'ELIMINAR_USUARIO'}, 
@@ -112,7 +116,11 @@ error_reporting(E_ALL);*/
                                 }
 
                         }); 	
+<<<<<<< HEAD
+                    }*/
+=======
                     }
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 		
             function activar_usuario(id)
                     {

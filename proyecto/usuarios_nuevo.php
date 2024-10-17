@@ -12,8 +12,14 @@ error_reporting(E_ALL);*/
         $(document).ready(function() 
             {
                 $("#act-usuarios").addClass("mm-active");
+<<<<<<< HEAD
+				$("#titulo-cabecera").text("Usuarios ");
+				$("#descripcion-cabecera").text("Módulo para la gestión de usuarios del sistema Gungastore");
+				$("#titulo-cabecera").append($("<a href='usuarios.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
+=======
 				$("#titulo-cabecera").text("Usuarios");
 				$("#descripcion-cabecera").text("Módulo para la gestión de usuarios del sistema Gungastore");
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 
                 //Evitar el envío del formulario al recargar la página.
                 if ( window.history.replaceState ) {

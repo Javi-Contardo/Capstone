@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
+<<<<<<< HEAD
+<file name="reader.php" server="negocioelchinoges.cl" local="133733168461617904" remote="133724417400000000" Dst="2" />
+<file name="oleread.inc" server="negocioelchinoges.cl" local="133733168461522936" remote="133724417400000000" Dst="2" />
+=======
 <file name="reader.php" server="negocioelchinoges.cl" local="133730030505270549" remote="133724417400000000" Dst="2" />
 <file name="oleread.inc" server="negocioelchinoges.cl" local="133730030505140897" remote="133724417400000000" Dst="2" />
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 </dwsync>

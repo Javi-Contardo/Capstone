@@ -1,0 +1,51 @@
+{{#> base }}
+    <div class="app-main">
+        {{> AppSidebar/sidebar charts-apexcharts=this }}
+        <div class="app-main__outer">
+            <div class="app-main__inner">
+                {{> AppHeader/header }}
+                <div class="app-inner-layout app-inner-layout-page">
+                    <div class="app-inner-layout__wrapper">
+                        <div class="app-inner-layout__content pt-1">
+                            <div class="tab-content">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="main-card mb-3 card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Area Chart</h5>
+                                                    <div id="chart-apex-area"></div>
+                                                </div>
+                                            </div>
+                                            <div class="main-card mb-3 card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Area with Negative Values</h5>
+                                                    <div id="chart-apex-negative"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="main-card mb-3 card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Vertical Columns</h5>
+                                                    <div id="chart-apex-column"></div>
+                                                </div>
+                                            </div>
+                                            <div class="main-card mb-3 card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Stacked Horizontal Bars</h5>
+                                                    <div id="chart-apex-stacked"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{> AppFooter/footer }}
+        </div>
+    </div>
+{{/ base }}

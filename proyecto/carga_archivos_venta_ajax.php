@@ -1,9 +1,15 @@
 <?
 header("Access-Control-Allow-Origin: * ");
 set_time_limit (3600);
+<<<<<<< HEAD
+ini_set("memory_limit","256M");
+error_reporting(E_ERROR);
+ini_set('display_errors', '1');
+=======
 error_reporting(E_ERROR);
 ini_set('display_errors', '1');
 
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 include("puerta_principal.php");
 	
 $area=$_POST['area'];
@@ -18,8 +24,13 @@ if ($area=='SUBE_ARCHIVO')
 	    $ruta_provisional = $file["tmp_name"];
 	    $respuesta=$ruta_provisional;
 	    $unixtime=strtotime("$fechabase $horabase");
+<<<<<<< HEAD
+	    $nombrefinal="ventas-$unixtime.$extension";		
+	    $ruta="archivos/ventas/";
+=======
 	    $nombrefinal="Cargatesteando-$unixtime.$extension";		
 	    $ruta="/archivos/ventas/";
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 	    $src = $ruta.$nombrefinal;
 	    if (file_exists($ruta)) 
 	    	{
@@ -32,6 +43,8 @@ if ($area=='SUBE_ARCHIVO')
 	    		    $respuesta="El archivo no se ha subido debido al siguiente error: #".$_FILES["archivo"]["error"];
 	    		}
 	    	}
+<<<<<<< HEAD
+=======
 	    else
 	    	{
 	    		$ruta="archivos/walmart/";
@@ -45,12 +58,40 @@ if ($area=='SUBE_ARCHIVO')
 	    		    $respuesta="El archivo no se ha subido debido al siguiente error: #".$_FILES["archivo"]["error"];
 	    		}
 	    	}
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 	    $datos = array('respuesta' => $respuesta,'nombre_archivo' => $nombrefinal);
 	    echo json_encode($datos);
 	}
 
 if ($area=='PROCESA_ARCHIVO')
 	{
+<<<<<<< HEAD
+		$nombrefinal=$_POST['nombre_archivo'];
+		ini_set("memory_limit","256M");
+		$errores='';
+		$respuesta='OK';
+		$fecha_carga="$fechabase";
+		$procesa_big='SI';
+		ini_set("memory_limit","256M");
+
+		require('spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
+		require('spreadsheet-reader-master/SpreadsheetReader.php');
+		$data = new SpreadsheetReader('archivos/ventas/'.$nombrefinal);
+		$Sheets = $data -> Sheets();
+		$data -> ChangeSheet(1);
+
+
+
+
+
+		$con=0;
+		$item=1;		
+		$num_val=1;
+		$totalregistros=sizeof($data);
+		$i=1;
+		$contador=0;
+		foreach ($data as $Key => $Row) 
+=======
 	  $nombrefinal=$_POST['nombre_archivo'];
 		if (isset($_POST['registro'])) {$registro=$_POST['registro'];} else {$registro=0;}
 		ini_set("memory_limit","256M");
@@ -140,10 +181,41 @@ if ($area=='PROCESA_ARCHIVO')
   
 		$existe=0;
 		for ($i = 19; $i <= 39; $i++) 
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 		{
 			$contador++;
 			$num=1;
 			$start_time=microtime();
+<<<<<<< HEAD
+			$texto1=trim("$Row[0]");
+            $texto2=trim("$Row[1]");
+            $texto3=trim("$Row[2]");
+            $texto4=trim("$Row[3]");
+            $texto5=trim("$Row[4]");
+            $texto6=trim("$Row[5]");
+
+			
+			
+            
+            $buscar=array("'","´",".",",");
+            $cambiar=array("","","",".");
+			
+            $texto1=str_replace($buscar,$cambiar,utf8_encode($texto1));
+            $texto2=str_replace($buscar,$cambiar,utf8_encode($texto2));
+            $texto3=str_replace($buscar,$cambiar,utf8_encode($texto3));
+            $texto4=str_replace($buscar,$cambiar,utf8_encode($texto4));
+            $texto5=str_replace($buscar,$cambiar,utf8_encode($texto5));
+            $texto6=str_replace($buscar,$cambiar,utf8_encode($texto6));
+			$buscar_fec=array(".");
+            $cambiar_fec=array("-");
+
+			if ($Key==1)
+			{
+				if ($texto1!='Diario')
+				{    
+					$status='error';
+					$respuesta="1 El campo 'Num Articulo' no es valido o no esta escrito correctamente. # $texto1 #";
+=======
 			for ($j = 1; $j <= $data->sheets[0]['numCols']; $j++) 
 			{
 				$buscar=array("°");
@@ -164,42 +236,77 @@ if ($area=='PROCESA_ARCHIVO')
 				{    
 					$status='error';
 					$respuesta="1 El campo 'Diario (Sólo POS)' no es válido o no está escrito correctamente. # $texto[1] #";
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
+<<<<<<< HEAD
+				elseif ($texto2!='Num Articulo')
+				{    
+					$status='error';
+					$respuesta="El campo 'Num Articulo' no es valido o no esta escrito correctamente. # $texto2 #";
+=======
 				elseif ($texto[2]!='Núm de Tienda')
 				{    
 					$status='error';
 					$respuesta="El campo 'Núm de Tienda' no es válido o no está escrito correctamente. # $texto[2] #";
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
+<<<<<<< HEAD
+				elseif ($texto3!='Desc Art 1')
+				{
+					$status='error';
+					$respuesta="El campo <b>'UPC'</b> no es valido o no esta escrito correctamente. # $texto3 #";
+=======
 				elseif ($texto[3]!='Nombre de Tienda')
 				{
 					$status='error';
 					$respuesta="El campo <b>'Nombre de Tienda'</b> no es válido o no está escrito correctamente. # $texto[3] #";
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
+<<<<<<< HEAD
+				elseif ($texto4!='UPC')
+				{
+					$status='error';
+					$respuesta=" El campo 'Cantidad Actual en Existentes de la tienda' no es valido o no esta escrito correctamente. # $texto4 #";
+=======
 				elseif ($texto[4]!='Núm Artículo'&&$texto[4]!='NÚM ARTICULO')
 				{
 					$status='error';
 					$respuesta=" El campo 'Núm Artículo' no es válido o no está escrito correctamente. # $texto[4] #";
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
+<<<<<<< HEAD
+				elseif ($texto5!='Cnt POS')
+				{
+					$status='error';
+					$respuesta=" El campo 'Cantidad Actual en Existentes de la tienda' no es valido o no esta escrito correctamente. # $texto5 #";
+=======
 				elseif ($texto[5]!='Desc Art 1')
 				{
 					$status='error';
 					$respuesta="El campo 'Desc Art 1' no es válido o no está escrito correctamente. # $texto[5] #";
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
+<<<<<<< HEAD
+				elseif ($texto6!='Sku Interno')
+				{
+					$status='error';
+					$respuesta=" El campo 'Sku Interno' no es valido o no esta escrito correctamente. # $texto6 #";
+=======
 				elseif ($texto[6]!='UPC')
 				{
 					$status='error';
@@ -228,11 +335,32 @@ if ($area=='PROCESA_ARCHIVO')
 				{
 					$status='error';
 					$respuesta="1 El campo 'Cnt POS' no es válido o no está escrito correctamente. # $texto[9] #";
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
 			}
+<<<<<<< HEAD
+			elseif($Key>=2)
+			{
+				if($texto2!='')
+				{
+
+					if ($texto3=='')
+					{
+						$errores.="Error en la línea $Key del campo <b>'Desc Art 1'.</b> El campo está vacio. <br>";
+						$error='SI';
+					}
+					elseif ($texto4=='')
+					{
+						$errores.="Error en la línea $Key del campo <b>'UPC'.</b> El campo está vacio. <br>";
+						$error='SI';
+					}
+					elseif ($texto5=='')
+					{
+						$errores.="Error en la línea $Key del campo <b>'Cnt POS'.</b> El campo está vacio. <br>";
+=======
 			else
 			{
 				$cod_retail=$texto[4];
@@ -375,10 +503,29 @@ if ($area=='PROCESA_ARCHIVO')
 					elseif ($texto[6]=='')
 					{
 						$errores.="Error en la línea $i del campo <b>'UPC'.</b> El campo está vacio. <br>";
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 						$error='SI';
 					}
 					else
 					{
+<<<<<<< HEAD
+						$nro_producto=$texto2;
+						$cnt_pos=$texto5;
+						$result1 = $mysqli->query("select id from comercial_ventas where numero_tienda='$id_local' and numero_articulo='$nro_producto' and cnt_pos!='$cnt_pos' and fecha_carga='$fecha_carga'");
+						if($row1 = $result1->fetch_row())
+						{
+							$id_tabla=$row1[0];
+							$mysqli->query("UPDATE comercial_ventas SET cnt_pos='$cnt_pos' WHERE id='$id_tabla'");
+
+						}
+						else
+						{
+							$mysqli->query("INSERT INTO comercial_ventas(numero_tienda, nombre_tienda, diario, numero_articulo, desc_art_1, upc, cnt_pos, sku_interno, fecha_carga, subido_por) 
+							VALUES($id_local, '$nombre_local', '$texto1', '$texto2', '$texto3', '$texto4', $texto5, '$texto6', '$fecha_carga', '$nombre_usuario')");
+						}
+					}
+				}
+=======
 						$nro_producto=$texto[4];
 						$cod_proveedor= $homologacion[$nro_producto];
 						$fecha_diario=$texto[1];
@@ -417,6 +564,7 @@ if ($area=='PROCESA_ARCHIVO')
 				//							$errores.="Error en la línea $i del campo <b>'NÚMERO DE DOCUMENTO COMPRAS'.</b> El campo está vacio. <br>";
 				//							$error='SI';
 				//						}
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 
 			}
 			$end_time=microtime();
@@ -444,7 +592,11 @@ if ($area=='PROCESA_ARCHIVO')
 			//$i++;
 			////progress bar////////
 		}
+<<<<<<< HEAD
+	
+=======
 	}
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 		//Se hace un array para recorrer todas las órdenes de compra de cencopsud
         unset($_SESSION['progress']); 
 		header_remove('Set-Cookie');// permite quitar el error : ERR_RESPONSE_HEADERS_TOO_BIG
@@ -452,4 +604,8 @@ if ($area=='PROCESA_ARCHIVO')
 		echo json_encode($datos);	
 	}
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 ?>

@@ -1,0 +1,27 @@
+// Search Box
+
+.search-wrapper {
+  position: relative;
+
+  input {
+    border: 0;
+    background: transparent;
+    padding: 5px 5px 5px 38px;
+    @include border-radius(30px);
+    width: 100px;
+    outline: none !important;
+  }
+
+  .search-icon-wrapper {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -16px;
+    height: 32px;
+    line-height: 32px;
+    width: 32px;
+    text-align: center;
+    opacity: .6;
+    font-size: $h3-font-size;
+  }
+}

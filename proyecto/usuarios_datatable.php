@@ -144,7 +144,11 @@ if ($labor!='ADMINISTRADOR'){$filtro_cliente=" and id_cliente='$id_cliente' and 
 				$nombre_local=$valores1[1];
 			}
 		$row[] = $nombre_local;
+<<<<<<< HEAD
+        $botones ='<a href="usuarios_modificar.php?id_usuario='.$aRow[$aColumns[5]].'" data-toggle="tooltip" data-placement="top" data-original-title="Editar" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 botones"><i class="fas fa-edit text-warning"></i></a>'; 
+=======
         $botones ='<a href="usuarios_modificar.php?id_usuario='.$aRow[$aColumns[5]].'" data-toggle="tooltip" data-placement="top" data-original-title="Editar" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 botones"><i class="fas fa-edit text-warning"></i></a>'; 
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
         /*if($aRow[ $aColumns[4] ]=="ACTIVO")
                 {
 				$botones.='<a id="des'.$aRow[$aColumns[0]].'" href="#" onClick="desactivar_usuario('.$aRow[$aColumns[0]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 botones"><i class="fa-solid fa-lock text-success"></i></a>';
@@ -155,11 +159,19 @@ if ($labor!='ADMINISTRADOR'){$filtro_cliente=" and id_cliente='$id_cliente' and 
 				
                 }*/
 		if($aRow[ $aColumns[3] ]=="ACTIVO") {$des="d-block"; $act="d-none"; }else {$des="d-none"; $act="d-block";}
+<<<<<<< HEAD
+                $botones.='<a id="des'.$aRow[$aColumns[5]].'" href="#" onClick="desactivar_usuario('.$aRow[$aColumns[5]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 botones '.$des.'"><i class="fa-solid fa-lock text-success"></i></a>';
+				
+				$botones.='<a id="act'.$aRow[$aColumns[5]].'" href="#" onClick="activar_usuario('.$aRow[$aColumns[5]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 botones '.$act.'"><i class="fa-solid fa-lock-open text-danger"></i></a>';
+		
+/*				$botones.='<a id="act'.$aRow[$aColumns[5]].'" href="#" onClick="eliminar_usuario('.$aRow[$aColumns[5]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 botones"><i class="fa-solid fa-trash-can text-danger"></i></a>';*/
+=======
                 $botones.='<a id="des'.$aRow[$aColumns[5]].'" href="#" onClick="desactivar_usuario('.$aRow[$aColumns[5]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 botones '.$des.'"><i class="fa-solid fa-lock text-success"></i></a>';
 				
 				$botones.='<a id="act'.$aRow[$aColumns[5]].'" href="#" onClick="activar_usuario('.$aRow[$aColumns[5]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 botones '.$act.'"><i class="fa-solid fa-lock-open text-danger"></i></a>';
 		
 				$botones.='<a id="act'.$aRow[$aColumns[5]].'" href="#" onClick="eliminar_usuario('.$aRow[$aColumns[5]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 botones"><i class="fa-solid fa-trash-can text-danger"></i></a>';
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 				
                 
 		$botones= '<div class="row">'.$botones.'</div>';

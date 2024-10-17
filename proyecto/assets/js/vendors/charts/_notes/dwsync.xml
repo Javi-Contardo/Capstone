@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
+<<<<<<< HEAD
+<file name="charts-sparklines.js" server="negocioelchinoges.cl" local="133724538402421866" remote="133726570200000000" Dst="2" />
+<file name="charts-sparklines.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402421866" remote="133736074800000000" Dst="2" />
+<file name="apex-charts.js" server="negocioelchinoges.cl" local="133736605165946389" remote="133717081800000000" Dst="2" />
+=======
 <file name="charts-sparklines.js" server="negocioelchinoges.cl" local="133730030520776254" remote="133726570200000000" Dst="2" />
 <file name="apex-charts.js" server="negocioelchinoges.cl" local="133730030521658969" remote="133717081800000000" Dst="2" />
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 </dwsync>

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
+<<<<<<< HEAD
+<file name="city1.jpg" server="negocioelchinoges.cl" local="133717081800000000" remote="133717081800000000" Dst="2" />
+<file name="city2.jpg" server="negocioelchinoges.cl" local="133733168480034798" remote="133717081800000000" Dst="2" />
+<file name="abstract4.jpg" server="negocioelchinoges.cl" local="133733168479709230" remote="133717081800000000" Dst="2" />
+<file name="city3.jpg" server="negocioelchinoges.cl" local="133733168480066040" remote="133717081800000000" Dst="2" />
+<file name="city1.jpg" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133717081800000000" remote="133736074800000000" Dst="2" />
+=======
 <file name="city1.jpg" server="negocioelchinoges.cl" local="133730030516218414" remote="133717081800000000" Dst="2" />
 <file name="city2.jpg" server="negocioelchinoges.cl" local="133730030516348106" remote="133717081800000000" Dst="2" />
 <file name="abstract4.jpg" server="negocioelchinoges.cl" local="133730030516068825" remote="133717081800000000" Dst="2" />
 <file name="city3.jpg" server="negocioelchinoges.cl" local="133730030516378029" remote="133717081800000000" Dst="2" />
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 </dwsync>

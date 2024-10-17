@@ -1,9 +1,13 @@
 <!--Toastr-->
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" crossorigin="anonymous"></script>
 <script src="assets/js/scripts-init/toastr.js"></script>-->
+<script>
+        $(document).ready(function() 
+            {
+               filtrar_cliente();
+            });
 
-
-
+</script>
 
 
 <!-- Íconos -->
@@ -24,13 +28,8 @@
 <!-- SIDEBAR -->
 <div class="app-sidebar-wrapper">
 	<div class="app-sidebar sidebar-shadow">
-		<div class="app-header__logo">
-			<a href="#" data-toggle="tooltip" data-placement="bottom" title="GungaStore" class=""></a>
-			<button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-					<span class="hamburger-box">
-						<span class="hamburger-inner"></span>
-					</span>
-			</button>
+		<div class="app-header__logo" style="align-content: center">
+			<a href="#" data-toggle="tooltip" data-placement="bottom" title="GungaStore" class=""><img src="assets/images/logo-lol.png" alt="GungaStore" class="logo-img" style="width: 200px"></a>
 		</div>
 		<div class="scrollbar-sidebar scrollbar-container">
 			<div class="app-sidebar__inner">
@@ -54,7 +53,6 @@
 							
 							<li><a href="carga_archivos_venta.php" id="act-carga-venta" style="list-style: none;"><i class="fa-solid fa-dollar-sign" style="margin-right: 5px"></i> Ventas</a></li>
 							<li><a href="carga_archivos_stock.php" id="act-stock" style="list-style: none;"><i class="fa-solid fa-chart-simple" style="margin-right: 5px"></i>Stock</a></li>
-							<li><a href="conectorb2b_falabella.php" id="act-carga-stock-cd" style="list-style: none;"><i class="fa-solid fa-warehouse" style="margin-right: 5px"></i>Stock CD</a></li>
 						</ul>
 					</li>
 					<!-- SUB. SIDEBAR -->
@@ -63,9 +61,15 @@
 					
 					<li class="app-sidebar__heading">ADMINISTRACI&oacute;N</li>
 					<? if ($labor=='ADMINISTRADOR'){?>
+<<<<<<< HEAD
+					<li id="act-locales">
+						<a href="locales.php">
+							<i class="metismenu-icon fa-solid fa-star"></i>Locales
+=======
 					<li id="act-sucursales">
 						<a href="sucursales.php">
 							<i class="metismenu-icon fa-solid fa-star"></i>Sucursales
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 						</a>
 					</li>
 					<? } ?>
@@ -134,7 +138,7 @@
 			<div class="header-dots">
 				<div class="dropdown">
 					<button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="p-0 btn btn-link">
-						<div class="page-title-heading text-decoration-none" id="nombre_cliente"><?=$nombre_cliente;?></div>
+						<div class="page-title-heading text-decoration-none" id="nombre_cliente"><?=$nombre_local;?></div>
 					</button>
 					<? if ($labor=='ADMINISTRADOR'){?>
 					<div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-xl rm-pointers dropdown-menu dropdown-menu-right">
@@ -149,7 +153,7 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab-events-header" role="tabpanel">
 									<div class="form-group">
-                                        <input type="text" class="mb-2 form-control-sm form-control" id="filtro_cliente" name="filtro_cliente" placeholder="Escriba el cliente acá..." value="" onKeyUp="espera()" />
+                                        <input type="text" class="mb-2 form-control-sm form-control" id="filtro_cliente" name="filtro_cliente" placeholder="Escriba la sucursal acá..." value="" onKeyUp="espera()" />
                                     </div>
 									<div class="scroll-area-sm">
 									<div class="scrollbar-container">

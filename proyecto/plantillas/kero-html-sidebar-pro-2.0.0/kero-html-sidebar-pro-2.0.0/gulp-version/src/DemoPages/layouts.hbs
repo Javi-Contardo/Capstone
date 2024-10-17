@@ -1,0 +1,302 @@
+{{#> base }}
+    <div class="app-main">
+        {{> sidebar forms-layouts=this }}
+        <div class="app-main__outer">
+            <div class="app-main__inner">
+                {{> header }}
+                <div class="app-inner-layout app-inner-layout-page">
+                    <div class="app-inner-bar">
+                        {{> inner-bar-left-alt }}
+                        <div class="inner-bar-center">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a role="tab" data-toggle="tab" id="tab-nav-0" class="nav-link active"
+                                       href="#tab-content-0">
+                                        <span>Layout</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a role="tab" data-toggle="tab" id="tab-nav-1" class="nav-link"
+                                       href="#tab-content-1">
+                                        <span>Grid</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                       class="nav-link opacity-8">
+                                        <span>More</span>
+                                        <i class="fa fa-angle-down ms-1 opacity-6"></i>
+                                    </a>
+                                    <div tabindex="-1" role="menu" aria-hidden="true"
+                                         class="dropdown-menu-right rm-pointers dropdown-menu-shadow dropdown-menu-hover-link dropdown-menu">
+                                        <h6 tabindex="-1" class="dropdown-header">Header</h6>
+                                        <button type="button" tabindex="0" class="dropdown-item"><i
+                                                class="dropdown-icon lnr-inbox"> </i><span>Menus</span></button>
+                                        <button type="button" tabindex="0" class="dropdown-item"><i
+                                                class="dropdown-icon lnr-file-empty"> </i><span>Settings</span></button>
+                                        <button type="button" tabindex="0" class="dropdown-item"><i
+                                                class="dropdown-icon lnr-book"> </i><span>Actions</span></button>
+                                        <div tabindex="-1" class="dropdown-divider"></div>
+                                        <div class="p-3 text-right">
+                                            <button class="me-2 btn-shadow btn-sm btn btn-link">View Details</button>
+                                            <button class="me-2 btn-shadow btn-sm btn btn-primary">Action</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        {{> inner-bar-right }}
+                    </div>
+                    <div class="app-inner-layout__wrapper">
+                        <div class="app-inner-layout__content">
+                            <div class="tab-content">
+                                <div class="tab-pane tabs-animation fade show active" id="tab-content-0"
+                                     role="tabpanel">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="main-card mb-3 card">
+                                                    <div class="card-body"><h5 class="card-title">Grid Rows</h5>
+                                                        <form class="">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="position-relative mb-3"><label
+                                                                            for="exampleEmail11"
+                                                                            class="form-label">Email</label><input name="email"
+                                                                                                         id="exampleEmail11"
+                                                                                                         placeholder="with a placeholder"
+                                                                                                         type="email"
+                                                                                                         class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="position-relative mb-3"><label
+                                                                            for="examplePassword11"
+                                                                            class="form-label">Password</label><input
+                                                                            name="password" id="examplePassword11"
+                                                                            placeholder="password placeholder"
+                                                                            type="password"
+                                                                            class="form-control"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="position-relative mb-3"><label
+                                                                    for="exampleAddress" class="form-label">Address</label><input
+                                                                    name="address" id="exampleAddress"
+                                                                    placeholder="1234 Main St" type="text"
+                                                                    class="form-control"></div>
+                                                            <div class="position-relative mb-3"><label
+                                                                    for="exampleAddress2" class="form-label">Address
+                                                                2</label><input name="address2" id="exampleAddress2"
+                                                                                placeholder="Apartment, studio, or floor"
+                                                                                type="text"
+                                                                                class="form-control">
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="position-relative mb-3"><label
+                                                                            for="exampleCity"
+                                                                            class="form-label">City</label><input name="city"
+                                                                                                        id="exampleCity"
+                                                                                                        type="text"
+                                                                                                        class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <div class="position-relative mb-3"><label
+                                                                            for="exampleState"
+                                                                            class="form-label">State</label><input name="state"
+                                                                                                         id="exampleState"
+                                                                                                         type="text"
+                                                                                                         class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="position-relative mb-3"><label
+                                                                            for="exampleZip" class="form-label">Zip</label><input
+                                                                            name="zip" id="exampleZip" type="text"
+                                                                            class="form-control"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="position-relative form-check"><input
+                                                                    name="check" id="exampleCheck" type="checkbox"
+                                                                    class="form-check-input"><label for="exampleCheck"
+                                                                                                    class="form-label form-check-label">Check
+                                                                me out</label></div>
+                                                            <button class="mt-2 btn btn-primary">Sign in</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="main-card mb-3 card">
+                                                    <div class="card-body"><h5 class="card-title">Inline</h5>
+                                                        <div>
+                                                            <form class="form-inline">
+                                                                <div class="mb-2 me-sm-2 mb-sm-0 position-relative mb-3">
+                                                                    <label for="exampleEmail22"
+                                                                           class="form-label me-sm-2">Email</label><input
+                                                                        name="email" id="exampleEmail22"
+                                                                        placeholder="something@idk.cool" type="email"
+                                                                        class="form-control"></div>
+                                                                <div class="mb-2 me-sm-2 mb-sm-0 position-relative mb-3">
+                                                                    <label for="examplePassword22" class="form-label me-sm-2">Password</label><input
+                                                                        name="password" id="examplePassword22"
+                                                                        placeholder="don't tell!"
+                                                                        type="password"
+                                                                        class="form-control"></div>
+                                                                <button class="btn btn-primary">Submit</button>
+                                                            </form>
+                                                            <div class="divider"></div>
+                                                            <form class="">
+                                                                <div class="position-relative form-check form-check-inline">
+                                                                    <label class="form-label form-check-label"><input
+                                                                            type="checkbox" class="form-check-input">
+                                                                        Some input</label></div>
+                                                                <div class="position-relative form-check form-check-inline">
+                                                                    <label class="form-label form-check-label"><input
+                                                                            type="checkbox" class="form-check-input">
+                                                                        Some other input</label></div>
+                                                            </form>
+                                                            <div class="divider"></div>
+                                                            <form class="form-inline">
+                                                                <div class="position-relative mb-3"><label
+                                                                        for="exampleEmail33"
+                                                                        class="form-label sr-only">Email</label><input name="email"
+                                                                                                            id="exampleEmail33"
+                                                                                                            placeholder="Email"
+                                                                                                            type="email"
+                                                                                                            class="me-2 form-control">
+                                                                </div>
+                                                                <div class="position-relative mb-3"><label
+                                                                        for="examplePassword44"
+                                                                        class="form-label sr-only">Password</label><input
+                                                                        name="password" id="examplePassword44"
+                                                                        placeholder="Password" type="password"
+                                                                        class="me-2 form-control"></div>
+                                                                <button class="btn btn-primary">Submit</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane tabs-animation fade" id="tab-content-1" role="tabpanel">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="main-card mb-3 card">
+                                                    <div class="card-body"><h5 class="card-title">Grid</h5>
+                                                        <form class="">
+                                                            <div class="position-relative row mb-3"><label
+                                                                    for="exampleEmail" class="form-label col-sm-2 col-form-label">Email</label>
+                                                                <div class="col-sm-10"><input name="email"
+                                                                                              id="exampleEmail"
+                                                                                              placeholder="with a placeholder"
+                                                                                              type="email"
+                                                                                              class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="position-relative row mb-3"><label
+                                                                    for="examplePassword"
+                                                                    class="form-label col-sm-2 col-form-label">Password</label>
+                                                                <div class="col-sm-10"><input name="password"
+                                                                                              id="examplePassword"
+                                                                                              placeholder="password placeholder"
+                                                                                              type="password"
+                                                                                              class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="position-relative row mb-3"><label
+                                                                    for="exampleSelect" class="form-label col-sm-2 col-form-label">Select</label>
+                                                                <div class="col-sm-10"><select name="select"
+                                                                                               id="exampleSelect"
+                                                                                               class="form-control"></select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="position-relative row mb-3"><label
+                                                                    for="exampleSelectMulti"
+                                                                    class="form-label col-sm-2 col-form-label">Select
+                                                                Multiple</label>
+                                                                <div class="col-sm-10"><select multiple=""
+                                                                                               name="selectMulti"
+                                                                                               id="exampleSelectMulti"
+                                                                                               class="form-control"></select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="position-relative row mb-3"><label
+                                                                    for="exampleText" class="form-label col-sm-2 col-form-label">Text
+                                                                Area</label>
+                                                                <div class="col-sm-10"><textarea name="text"
+                                                                                                 id="exampleText"
+                                                                                                 class="form-control"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="position-relative row mb-3"><label
+                                                                    for="exampleFile" class="form-label col-sm-2 col-form-label">File</label>
+                                                                <div class="col-sm-10"><input name="file"
+                                                                                              id="exampleFile"
+                                                                                              type="file"
+                                                                                              class="">
+                                                                    <small class="form-text text-muted">This is some
+                                                                        placeholder block-level help text for the above
+                                                                        input. It's a bit lighter and easily wraps to a
+                                                                        new line.
+                                                                    </small>
+                                                                </div>
+                                                            </div>
+                                                            <fieldset class="position-relative row mb-3">
+                                                                <legend class="col-form-label col-sm-2">Radio Buttons
+                                                                </legend>
+                                                                <div class="col-sm-10">
+                                                                    <div class="position-relative form-check"><label
+                                                                            class="form-label form-check-label"><input
+                                                                            name="radio2" type="radio"
+                                                                            class="form-check-input"> Option one is this
+                                                                        and that—be sure to include why it's
+                                                                        great</label>
+                                                                    </div>
+                                                                    <div class="position-relative form-check"><label
+                                                                            class="form-label form-check-label"><input
+                                                                            name="radio2" type="radio"
+                                                                            class="form-check-input"> Option two can be
+                                                                        something else and selecting it will deselect
+                                                                        option
+                                                                        one</label></div>
+                                                                    <div class="position-relative form-check disabled">
+                                                                        <label class="form-label form-check-label"><input
+                                                                                name="radio2" disabled="" type="radio"
+                                                                                class="form-check-input"> Option three
+                                                                            is disabled</label></div>
+                                                                </div>
+                                                            </fieldset>
+                                                            <div class="position-relative row mb-3"><label
+                                                                    for="checkbox2" class="form-label col-sm-2 col-form-label">Checkbox</label>
+                                                                <div class="col-sm-10">
+                                                                    <div class="position-relative form-check"><label
+                                                                            class="form-label form-check-label"><input
+                                                                            id="checkbox2" type="checkbox"
+                                                                            class="form-check-input"> Check me
+                                                                        out</label></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="position-relative row form-check">
+                                                                <div class="col-sm-10 offset-sm-2">
+                                                                    <button class="btn btn-secondary">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{> footer }}
+        </div>
+    </div>
+{{/ base }}

@@ -1,0 +1,107 @@
+// Sidebar Base
+
+.app-sidebar-wrapper {
+  position: fixed;
+  left: $grid-gutter-width;
+  top: $grid-gutter-width;
+  height: calc(100% - 60px);
+  z-index: 14;
+}
+
+.app-sidebar {
+  width: $app-sidebar-width;
+  z-index: 11;
+  overflow: hidden;
+  min-width: $app-sidebar-width;
+  position: relative;
+  flex: 0 0 $app-sidebar-width;
+  transition: all .2s;
+  background: $white;
+  @include border-radius($border-radius);
+  height: 100%;
+
+  &.sidebar-shadow {
+    box-shadow: 0 0.46875rem 2.1875rem rgba(darken($primary, 50%), .03),
+    0 0.9375rem 1.40625rem rgba(darken($primary, 50%), .03),
+    0 0.25rem 0.53125rem rgba(darken($primary, 50%), .05),
+    0 0.125rem 0.1875rem rgba(darken($primary, 50%), .03);
+  }
+
+  .app-sidebar__inner {
+    padding: 2px ($layout-spacer-x) calc((#{$layout-spacer-x}) + 70px);
+  }
+
+  .scrollbar-sidebar {
+    z-index: 15;
+    width: 100%;
+  }
+
+  .app-sidebar-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.05;
+    background-size: cover;
+    z-index: 10;
+  }
+}
+
+.app-header__logo {
+  width: 100%;
+  min-width: $logo-width;
+  display: flex;
+  align-items: center;
+  padding: $layout-spacer-x;
+  border-bottom: rgba(0, 0, 0, 0.04) solid 1px;
+  background: rgba(0, 0, 0, 0.01);
+
+  .hamburger {
+    margin-left: auto;
+
+    .hamburger-box {
+      height: 12px;
+    }
+  }
+
+  .logo-src {
+    background: url('../images/logo.png') 50% 50% no-repeat;
+    height: $logo-img-height;
+    width: 68px;
+  }
+}
+
+.app-sidebar__heading {
+  text-transform: uppercase;
+  font-size: $font-size-xs / 1.1;
+  margin: ($layout-spacer-x / 1.5) 0;
+  color: $primary;
+  opacity: .6;
+  white-space: nowrap;
+  position: relative;
+}
+
+.sidebar-mobile-overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #333;
+  opacity: .6;
+  left: 0;
+  top: 0;
+  z-index: 12;
+}
+
+// Sidebar Components
+
+@import "modifiers/navmenu-vertical";
+
+// Sidebar Modifiers
+
+@import "themes/sidebar-light";
+@import "themes/sidebar-dark";
+
+@import "modifiers/closed-sidebar";
+@import "modifiers/sidebar-full";

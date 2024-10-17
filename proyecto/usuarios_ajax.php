@@ -13,14 +13,22 @@ if ($proceso=='DESACTIVAR_USUARIO')
 	echo json_encode($datos);	
 	}
 
+<<<<<<< HEAD
+/*if ($proceso=='ELIMINAR_USUARIO')
+=======
 if ($proceso=='ELIMINAR_USUARIO')
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 	{
 	$id=$_POST['id'];
 	$mysqli->query("DELETE from acceso where id_acceso='$id'");
 	$respuesta='OK';
 	$datos = array('respuesta' => $respuesta);
 	echo json_encode($datos);	
+<<<<<<< HEAD
+	}*/
+=======
 	}
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 
 if ($proceso=='ACTIVAR_USUARIO')
 	{

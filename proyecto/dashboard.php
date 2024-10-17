@@ -1,7 +1,13 @@
-<?php include("puerta_principal.php");?>
+<?php include("puerta_principal.php");
+/*ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ERROR);*/
+?>
 <html lang="es"><head>
     <?php include("scripts-header.php");?>
     <script>
+		var intento=1;
+		var grafico_update=''
         $(document).ready(function() {
             $("#act-dashboard").addClass("mm-active");
             $("#titulo-cabecera").text("Dashboard");
@@ -11,14 +17,299 @@
                 window.history.replaceState( null, null, window.location.href );
             }
 			
-			
+			listado_datos();
 			
 			
         });
 
-        
-        
 		
+		
+		function graficado_general(codigo_reatil_grafico){ 
+			
+			document.getElementById('div_grafico').style.display = 'block';
+			console.log("mensaje: "+codigo_reatil_grafico);
+			if(codigo_reatil_grafico!=''){
+			$.post("dashboard_ajax_stock.php", {proceso:'DATOS_GRAFICADO', codigo_reatil_grafico:codigo_reatil_grafico}, 
+				function(result) 
+				{
+				 console.log(result);
+                    var obj = JSON.parse(result);
+					var grafico_inicial = {
+						colors : ['#ADD500', '#0071CE'],
+						chart: {
+							height: 397,
+							type: 'line',
+							toolbar:{
+								show:false
+							}
+						},
+						series: [{
+							name: 'On Hand(Diario)',
+							type: 'bar',
+							data: obj.on_hand
+						},{
+							name: 'Ventas',
+							type: 'line',
+							data: obj.ventas_semana_actual
+						}],
+							plotOptions: {
+								bar: {
+									horizontal: false,
+									/*endingShape: 'rounded',
+									columnWidth: '55%',*/
+									borderRadius: 5,
+									borderRadiusApplication: 'end',
+									borderRadiusWhenStacked: 'last',
+								},
+							},
+						dataLabels: {
+								enabled: false
+							},
+                        stroke: {
+                            show: true,
+                            width: 2/*,
+                            colors: ['#ADD500']*/
+                        },
+						// labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+						labels: obj.nombres_locales_array,
+						xaxis: {
+							type: 'text'
+						}
+					};
+				
+					console.log("intentox:"+intento)
+					if (grafico_update)
+						{
+							grafico_update.destroy();
+							grafico_update = new ApexCharts(document.querySelector("#dashboard-sparklines-primary"), grafico_inicial);
+							setTimeout(function () {
+						if (document.getElementById('dashboard-sparklines-primary')) {
+							grafico_update.render();
+						}
+					}, 1000);
+							$("#titulo_grafico").html(nombre_local);
+						}
+					else
+						{
+							grafico_update = new ApexCharts(document.querySelector("#dashboard-sparklines-primary"),
+								grafico_inicial
+							);
+
+							setTimeout(function () {
+									if (document.getElementById('dashboard-sparklines-primary')) {
+										grafico_update.render();
+										intento=2;
+									}
+								 }, 1000);
+							$("#titulo_grafico").html(nombre_local);
+							document.getElementById('titulo_grafico1').style.display ='block'
+
+						}
+				}
+				   );
+			}
+		}
+		
+		
+		
+		function abrir_detalle(codigo_retail, sku, descripcion, numero_local) {
+			/*if (grafico_update) {
+						// Destruir el gráfico si ya existe
+						grafico_update.destroy();
+						$("#titulo_grafico").html('');
+						document.getElementById('titulo_grafico1').style.display ='none'
+					}*/
+			document.getElementById('listado_general').style.display = 'none';
+			document.getElementById('listado_detalle').style.display = 'block';
+			detalle_datatable(codigo_retail);
+			console.log("codigo de retail: "+codigo_retail);
+			console.log(" y el numero del local: "+numero_local);
+			console.log("sku: "+sku);
+			/*$.post("conciliacion_comercial_walmart_ajax.php"), {proceso:'DATOS_GRAFICO', codigo_retail:codigo_retail, numero_local:numero_local},
+			function(datos) 
+			{
+				console.log("estos son los datos de vueltos: "+datos);
+			}*/
+			/*$('#ctd_existencia_cd1').html(ctd_existencia_cd);*/
+			$('#titulo_grafico_detalle').html(sku+"-"+descripcion);
+			$('#codigo_retail').val(codigo_retail);
+			
+		}
+		
+		function detalle_datatable(codigo_retatil){
+			if(codigo_retatil==undefined)
+			{
+				codigo_retatil=document.getElementById('codigo_retail').value;
+			}
+			console.log("codigo de retail: "+codigo_retatil);
+			
+			
+			
+            $('#lista_oc1').DataTable().clear().destroy();
+            $('#lista_oc1').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "dashboard_datatable_stock.php?var1="+codigo_retatil,
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+				"orderMulti": true,
+				"dom": '<"toolbar2">frtip',
+                "order": [
+                    [3, "desc"]
+                ],
+				"oLanguage": {
+							   "sSearch": "Buscar"
+							 },
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "className": "text-left",
+                        "width": "1%"
+                    },
+					{
+                        "targets": 1,
+                        "className": "text-left",
+                        "width": "20%"
+                    },
+                    {
+                        "targets": 2,
+                        "className": "text-center",
+                        "width": "10%"
+                    },
+                    {
+                        "targets": 3,
+                        "className": "text-center",
+                        "width": "10%"
+                    },
+
+                    {
+                        "targets": 4,
+                        "className": "text-center",
+                        "width": "10%"
+                    }
+					
+					
+                ],
+            });
+			//document.querySelector('div.toolbar').innerHTML = '<div class="col-lg-2 float-left"><button type="button" class="btn btn-primary justify-content-end form-control-sm float-right" onClick="descargar_conciliacion()">Descargar</button></div><div class="col-lg-2 float-left"><button type="button" class="btn btn-primary justify-content-end form-control-sm float-right" onClick="descargar_conciliacion_detalle()">Descargar Detalle</button></div>';
+			//document.querySelector('div.toolbar').style.position='absolute';
+
+			
+		}
+		
+		function generar_tabla_general() 
+        {
+        	$('#modal-overlay2').modal({backdrop: 'static',keyboard: false})
+        	$('#modal-overlay2').modal('show')
+            
+        	document.getElementById('modal-overlay-texto2').innerHTML="Procesando Conciliación";
+        	console.log("Espere un momento por favor... ");	
+            
+            $.post("dashboard_ajax_stock.php",{proceso:'GENERAR_CONCILIACION'},
+            function(result) 
+                {
+                console.log(result);
+                console.log('generar conciliacion');
+                var obj = JSON.parse(result);
+                if (obj.respuesta=='OK')
+                    {
+                    console.log("ok")
+        			listado_datos();
+        			setTimeout(function (){
+        			$('#modal-overlay2').modal('hide')
+        			},500);
+        			}
+                
+                else
+                    {
+                        console.log("error:"+obj.respuesta)
+                        alertaGeneral("Error inesperado","Se ha producido el siguiente error: "+obj.respuesta,"error");
+        			    setTimeout(function (){
+        			    	$('#modal-overlay2').modal('hide')
+        		        },500);
+        			    clearInterval(intervalo);	
+                    }
+                
+                });
+        	}
+		
+		function cancelar_carga()
+        	{
+        			$('#modal-overlay2').modal('hide')
+                  
+        	}
+		
+        function listado_datos() {
+            $('#lista_oc').DataTable().clear().destroy();
+            $('#lista_oc').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "dashboard_datatable_stock_general.php",
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": false,
+                "autoWidth": false,
+                "responsive": true,
+                "order": [
+                    [0, "desc"]
+                ],
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "className": "text-center",
+                        "width": "12%"
+                    },
+                    {
+                        "targets": 1,
+                        "className": "text-left",
+                        "width": "50%"
+                    },
+                    {
+                        "targets": 2,
+                        "className": "text-left",
+                        "width": "15%"
+                    },
+                    {
+                        "targets": 3,
+                        "className": "text-left",
+                        "width": "15%"
+                    },
+                    {
+                        "targets": 4,
+                        "className": "text-left",
+                        "width": "10%"
+                    }<? if($id_local=='0'){ ?>,
+                    {
+                        "targets": 5,
+                        "className": "text-left",
+                        "width": "1%"
+                    },
+                    {
+                        "targets": 6,
+                        "className": "text-left",
+                        "width": "1%"
+                    }
+					<? } ?>
+                ]
+
+            });
+			
+			
+	
+			
+        }
+        
+		function cerrar_detalle() {
+			document.getElementById('listado_detalle').style.display = 'none';
+			document.getElementById('listado_general').style.display = 'block';
+		}
 
     </script>
     <style>
@@ -76,16 +367,139 @@
 						</div>-->
 							<!-- ****************DATATABLE DE LA LISTA DE OC*************** -->
 							<div class="row">
-                                <div class="col-md-3">
-                                    <div class="main-card mb-3 card">
+                                <div class="col-md-12">
+                                    <div class="main-card mb-3 card" id="listado_general">
                                         <div class="card-body">
-                                            <h5 class="card-title">Inicio pendiente</h5>
-                                            <canvas id="grafico_casos"></canvas>
+                                            <h5 class="card-title">Stock actual</h5>
+											<a href="#" class="justify-content-end" onClick="generar_tabla_general()">
+                                                    <button class="mb-2 mr-2 btn btn-primary form-control-sm">Generar informacion Diaria</button>
+                                                </a>
+                                            <table  id="lista_oc"
+                                                class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>SKU</th>
+                                                        <th>Descripcion</th>
+                                                        <th>Inventario actual</th>
+                                                        <th>Ventas Semana Actual</th>
+                                                        <th>Dias desde ultima venta</th>
+														<? if($id_local=='0'){ ?>
+														<th></th>
+														<th></th>
+														<? }  ?>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                </tbody>
+                                            </table>
                                         </div>
+										
                                     </div>
+									
+									<div class="main-card col-12 card" id="listado_detalle" style="display: none">
+														<div class="card-header text-white bg-primary"><span id="titulo_grafico_detalle"></span>
+                                                            <div class="btn-actions-pane-right">
+                                                                <button class="btn btn-light btn-sm" onClick="cerrar_detalle()">Cerrar</button>
+                                                            </div>
+                                                        </div>
+														<div class="card-body">
+															<div class="tab-content pb-3" >
+																<div class="card col-12 widget-content bg-happy-green">
+																	<div class="widget-content-wrapper text-white">
+																		<div class="widget-content-left">
+																			<div class="widget-heading">Stock CD</div>
+																			<div class="widget-subheading">Stock disponible en centros de distribución</div>
+																		</div>
+																		<div class="widget-content-right">
+																			<div class="widget-numbers text-white"><span id="ctd_existencia_cd1"></span></div>
+																		</div>
+																	</div>
+																</div>
+																<div class="tab-pane fade active show" id="sales-tab-1">
+																	<div class="text-center">
+																		<h5 class="menu-header-title" id="titulo_grafico"></h5>
+																		<h6 class="menu-header-subtitle opacity-6" style="display: none" id="titulo_grafico1">Resultado de las últimas 10 semanas</h6>
+																	</div>
+																	
+																</div>
+																<div class="tab-pane fade" id="sales-tab-2">
+																	<div class="text-center">
+																		<h5 class="menu-header-title">Tabbed Content</h5>
+																		<h6 class="menu-header-subtitle opacity-6">Example of
+																			various options built with KeroUI</h6>
+																	</div>
+																	<div class="card-hover-shadow-2x widget-chart widget-chart2 bg-premium-dark text-left mt-3 card">
+																		<div class="widget-chart-content text-white">
+																			<div class="widget-chart-flex">
+																				<div class="widget-title">Sales</div>
+																				<div class="widget-subtitle opacity-7">Monthly
+																					Goals
+																				</div>
+																			</div>
+																			<div class="widget-chart-flex">
+																				<div class="widget-numbers text-success">
+																					<small>$</small>
+																					<span>976</span>
+																					<small class="opacity-8 pl-2">
+																						<i class="fa fa-angle-up"></i>
+																					</small>
+																				</div>
+																				<div class="widget-description ml-auto opacity-7">
+																					<i class="fa fa-angle-up"></i>
+																					<span class="pl-1">175%</span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="text-center mt-3">
+																		<button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-success btn-lg">
+																			<span class="mr-2 opacity-7">
+																				<i class="icon icon-anim-pulse ion-ios-analytics-outline"></i>
+																			</span>
+																			<span class="mr-1">View Complete Report</span>
+																		</button>
+																	</div>
+																</div>
+															</div>
+															<div class="tab-content">
+																<table  id="lista_oc1"
+																class="table table-hover table-striped table-bordered">
+																<thead>
+																	<tr>
+																		<th>Num. Local</th>
+																		<th>Nombre Local</th>
+																		<th>Venta sem. actual</th>
+																		<th>Dias ultima venta</th>
+																		<th>Inv. en gondola<h6 class="mb-0 text-muted"><small><cite title="Source Title">(Prom. ult. 7 dias)</cite></small></h6></th>
+																	 </tr>
+																</thead>
+																<tbody>
+																	<!-- Acá van los datos. -->
+																</tbody>
+															</table>
+															</div>
+														</div>
+													</div>
                                 </div>
                             </div>
-							
+							<? if($id_local=='0'){ ?>
+							<div class="row" id="div_grafico" style="display: none">
+                                <div class="col-md-12">
+                                    <div class="main-card mb-3 card" >
+                                        
+									<div class="card-body" id="carta_grafico">
+										<h5 class="card-title">Stock/Ventas</h5>
+                                            <div id="dashboard-sparklines-primary"></div>
+                                        </div>
+									
+										
+                                    </div>
+									
+                                </div>
+                            </div>
+							<? } ?>
 							
 							
 							
@@ -202,11 +616,14 @@ function actualiza_graf_hom(porcentaje)
 		
 	}
 </script>
+
+
+
 <div class="modal fade" id="modal-overlay2">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-        <h4 class="modal-title" id="modal-overlay-texto2">Procesando Archivo</h4><i class="fas fa-2x fa-sync fa-spin"></i> 
+        <h4 class="modal-title" id="modal-overlay-texto2">Procesando Archivos</h4><i class="fas fa-2x fa-sync fa-spin"></i> 
         </div>
         <div class="modal-body">
           <p>Estamos procesando el archivo, por favor espere.&hellip;</p>

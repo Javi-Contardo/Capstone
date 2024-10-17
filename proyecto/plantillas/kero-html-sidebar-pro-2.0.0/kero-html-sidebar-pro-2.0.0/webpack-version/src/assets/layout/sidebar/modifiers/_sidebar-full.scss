@@ -1,0 +1,23 @@
+// Sidebar Full
+
+.app-sidebar-full {
+  .app-sidebar-wrapper {
+    left: 0;
+    top: 0;
+    height: 100%;
+
+    .app-sidebar {
+      @include border-radius(0);
+    }
+  }
+
+  .app-main .app-main__outer {
+    padding-left: $app-sidebar-width;
+  }
+
+  &.header-mobile-open {
+    .app-main .app-main__outer {
+      padding-left: $app-sidebar-width-collapsed;
+    }
+  }
+}

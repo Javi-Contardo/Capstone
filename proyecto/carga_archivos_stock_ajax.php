@@ -91,50 +91,50 @@ if ($area=='PROCESA_ARCHIVO')
 
 			if ($Key==1)
 			{
-				if ($texto1!='Núm de Tienda'&& $texto1!='Num de Tienda')
+				if ($texto1!='Núm Articulo'&& $texto1!='Num Articulo')
 				{    
 					$status='error';
-					$respuesta="1 El campo 'Num de Tienda' no es valido o no esta escrito correctamente. # $texto1 #";
+					$respuesta="1 El campo 'Num Articulo' no es valido o no esta escrito correctamente. # $texto1 #";
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
-				elseif ($texto2!='Nombre de Tienda')
+				elseif ($texto2!='Desc Art 1')
 				{    
 					$status='error';
-					$respuesta="El campo 'Nombre de Tienda' no es valido o no esta escrito correctamente. # $texto2 #";
+					$respuesta="El campo 'Desc Art 1' no es valido o no esta escrito correctamente. # $texto2 #";
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
-				elseif ($texto3!='Num Articulo')
+				elseif ($texto3!='UPC')
 				{
 					$status='error';
-					$respuesta="El campo <b>'Num Articulo'</b> no es valido o no esta escrito correctamente. # $texto3 #";
+					$respuesta="El campo <b>'UPC'</b> no es valido o no esta escrito correctamente. # $texto3 #";
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
-				elseif ($texto4!='Desc Art 1')
+				elseif ($texto4!='Cantidad Actual en Existentes de la tienda')
 				{
 					$status='error';
-					$respuesta=" El campo 'Desc Art 1' no es valido o no esta escrito correctamente. # $texto4 #";
+					$respuesta=" El campo 'Cantidad Actual en Existentes de la tienda' no es valido o no esta escrito correctamente. # $texto4 #";
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
-				elseif ($texto5!='UPC')
+				elseif ($texto5!='Fecha expiracion')
 				{
 					$status='error';
-					$respuesta="El campo 'UPC' no es valido o no esta escrito correctamente. # $texto5 #";
+					$respuesta=" El campo 'Fecha expiracion' no es valido o no esta escrito correctamente. # $texto5 #";
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
 				}
-				elseif ($texto6!='Cantidad Actual en Existentes de la tienda')
+				elseif ($texto6!='Sku Interno')
 				{
 					$status='error';
-					$respuesta="El campo 'Cantidad Actual en Existentes de la tienda' no es valido o no esta escrito correctamente. # $texto6 #";
+					$respuesta=" El campo 'Sku Interno' no es valido o no esta escrito correctamente. # $texto6 #";
 					$datos = array('respuesta' => $respuesta);
 					echo json_encode($datos);	
 					exit;
@@ -147,21 +147,42 @@ if ($area=='PROCESA_ARCHIVO')
 
 					if ($texto3=='')
 					{
-						$errores.="Error en la línea $Key del campo <b>'Nombre de Tienda'.</b> El campo está vacio. <br>";
+						$errores.="Error en la línea $Key del campo <b>'UPC'.</b> El campo está vacio. <br>";
 						$error='SI';
 					}
 					elseif ($texto4=='')
 					{
-						$errores.="Error en la línea $Key del campo <b>'Núm Artículo'.</b> El campo está vacio. <br>";
+						$errores.="Error en la línea $Key del campo <b>'Cantidad Actual en Existentes de la tienda'.</b> El campo está vacio. <br>";
+						$error='SI';
+					}
+					elseif ($texto5=='')
+					{
+						$errores.="Error en la línea $Key del campo <b>'Fecha expiracion'.</b> El campo está vacio. <br>";
 						$error='SI';
 					}
 					elseif ($texto6=='')
 					{
-						$errores.="Error en la línea $Key del campo <b>'UPC'.</b> El campo está vacio. <br>";
+						$errores.="Error en la línea $Key del campo <b>'Sku Interno'.</b> El campo está vacio. <br>";
 						$error='SI';
 					}
 					else
 					{
+<<<<<<< HEAD
+						$nro_producto=$texto1;
+						$cantidad_existente_tienda=$texto4;
+						$result1 = $mysqli->query("select id,cantidad_existente_tienda from comercial_stock where numero_tienda='$id_local' and numero_articulo='$nro_producto' and cantidad_existente_tienda!='$cantidad_existente_tienda' and fecha_carga='$fecha_carga'");
+						if($row1 = $result1->fetch_row())
+						{
+							$id_tabla=$row1[0];
+							$mysqli->query("UPDATE comercial_ventas SET cantidad_existente_tienda='$cantidad_existente_tienda' WHERE id='$id_tabla'");
+
+						}
+						else
+						{
+
+							$mysqli->query("INSERT INTO comercial_stock(numero_tienda,nombre_tienda,numero_articulo,desc_art_1,upc,cantidad_existente_tienda, fecha_carga, subido_por,sku_interno) VALUES('$id_local','$nombre_local','$texto1','$texto2','$texto3','$texto4','$fecha_carga', '$nombre_usuario','$texto6')");
+						}
+=======
 						
 						
 						$nro_tienda=$texto1;
@@ -188,6 +209,7 @@ if ($area=='PROCESA_ARCHIVO')
 								}
 							
 						
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 					}
 				}
 

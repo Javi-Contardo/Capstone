@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
+<<<<<<< HEAD
+<file name="clipboard.js" server="negocioelchinoges.cl" local="133724538402181874" remote="133726570200000000" Dst="2" />
+<file name="datepicker.js" server="negocioelchinoges.cl" local="133724538402191859" remote="133726570200000000" Dst="2" />
+<file name="input-select.js" server="negocioelchinoges.cl" local="133724538402211887" remote="133726570200000000" Dst="2" />
+<file name="form-validation.js" server="negocioelchinoges.cl" local="133724538402191859" remote="133726570200000000" Dst="2" />
+<file name="form-wizard.js" server="negocioelchinoges.cl" local="133724538402201880" remote="133726570200000000" Dst="2" />
+<file name="input-mask.js" server="negocioelchinoges.cl" local="133724538402211887" remote="133726570200000000" Dst="2" />
+<file name="range-slider.js" server="negocioelchinoges.cl" local="133724538402221873" remote="133726570200000000" Dst="2" />
+<file name="textarea-autosize.js" server="negocioelchinoges.cl" local="133724538402221873" remote="133726570200000000" Dst="2" />
+<file name="clipboard.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402181874" remote="133736074800000000" Dst="2" />
+<file name="datepicker.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402191859" remote="133736074800000000" Dst="2" />
+<file name="input-select.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402211887" remote="133736074800000000" Dst="2" />
+<file name="form-validation.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402191859" remote="133736074800000000" Dst="2" />
+<file name="form-wizard.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402201880" remote="133736074800000000" Dst="2" />
+<file name="input-mask.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402211887" remote="133736074800000000" Dst="2" />
+<file name="range-slider.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402221873" remote="133736074800000000" Dst="2" />
+<file name="textarea-autosize.js" server="negocioelchinoges.cl/dev.negocioelchinoges.cl/" local="133724538402221873" remote="133736074800000000" Dst="2" />
+=======
 <file name="clipboard.js" server="negocioelchinoges.cl" local="133730030518602074" remote="133726570200000000" Dst="2" />
 <file name="datepicker.js" server="negocioelchinoges.cl" local="133730030518681864" remote="133726570200000000" Dst="2" />
 <file name="input-select.js" server="negocioelchinoges.cl" local="133730030518841434" remote="133726570200000000" Dst="2" />
@@ -8,4 +26,5 @@
 <file name="input-mask.js" server="negocioelchinoges.cl" local="133730030518841434" remote="133726570200000000" Dst="2" />
 <file name="range-slider.js" server="negocioelchinoges.cl" local="133730030518991041" remote="133726570200000000" Dst="2" />
 <file name="textarea-autosize.js" server="negocioelchinoges.cl" local="133730030519040903" remote="133726570200000000" Dst="2" />
+>>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 </dwsync>

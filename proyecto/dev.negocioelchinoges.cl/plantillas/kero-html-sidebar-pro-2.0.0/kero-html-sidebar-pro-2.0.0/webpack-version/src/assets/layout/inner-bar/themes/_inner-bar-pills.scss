@@ -1,0 +1,33 @@
+// Inner Bar Pills
+
+.body-subnav-pills {
+  .inner-bar-center {
+     & > .nav {
+      .nav-item {
+        .nav-link {
+          @include border-radius(30px);
+          padding: ($layout-spacer-x / 4) ($layout-spacer-x);
+
+          &::before {
+            display: none;
+          }
+
+          span {
+            &::before {
+              display: none;
+            }
+          }
+
+          &:hover {
+            background: $white;
+          }
+
+          &.active {
+            background: $primary;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}

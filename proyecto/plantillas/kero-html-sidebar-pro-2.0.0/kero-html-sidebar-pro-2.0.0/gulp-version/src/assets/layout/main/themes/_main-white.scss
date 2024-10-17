@@ -1,0 +1,44 @@
+// Theme White
+
+// Variables
+
+$app-container-bg: #fff;
+$app-header-bg: #fff;
+$app-page-title-bg: #fbfcfc;
+$app-page-title-border: $gray-300;
+$app-inner-bar-border: $app-page-title-border;
+$app-inner-bar-bg: lighten($gray-200, 5%);
+
+// Content
+
+.app-theme-white {
+
+  &.app-container {
+    background: $app-container-bg;
+  }
+
+  .app-footer__inner,
+  .app-inner-bar {
+    background: $app-inner-bar-bg;
+    border: $app-inner-bar-border solid 1px;
+  }
+
+  .app-sidebar {
+    box-shadow: 0 0 0 transparent !important;
+    border: $app-inner-bar-border solid 1px;
+  }
+
+  .app-inner-bar {
+    .inner-bar-center {
+      & > .nav {
+        .nav-item {
+          .nav-link {
+            &::before {
+              background: $app-container-bg;
+            }
+          }
+        }
+      }
+    }
+  }
+}

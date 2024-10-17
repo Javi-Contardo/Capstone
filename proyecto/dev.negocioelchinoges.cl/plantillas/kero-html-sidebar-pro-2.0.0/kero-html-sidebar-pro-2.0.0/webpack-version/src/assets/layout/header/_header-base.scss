@@ -1,0 +1,53 @@
+// Header Base
+
+.app-header {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  z-index: 10;
+  height: $app-header-height;
+  width: 100%;
+  padding: 0 $grid-gutter-width;
+
+  .page-title-heading,
+  .page-title-subheading {
+    margin: 0;
+    padding: 0;
+  }
+
+  .page-title-heading {
+    font-size: $h5-font-size;
+    font-weight: 500;
+    position: relative;
+    z-index: 5;
+  }
+
+  .page-title-subheading {
+    padding: 3px 0 0;
+    font-size: $font-size-base;
+    opacity: .6;
+    font-weight: 300;
+    display: block;
+
+    .breadcrumb {
+      padding: 0;
+      margin: 3px 0 0;
+      background: transparent;
+    }
+  }
+}
+
+.app-header-right {
+  margin-left: auto;
+  align-items: center;
+  display: flex;
+  position: relative;
+  z-index: 6;
+}
+
+// Header Components
+@import "elements/header-mobile";
+@import "elements/nav-menu";
+@import "elements/search-box";
+@import "elements/header-dots";
+@import "elements/header-buttons";

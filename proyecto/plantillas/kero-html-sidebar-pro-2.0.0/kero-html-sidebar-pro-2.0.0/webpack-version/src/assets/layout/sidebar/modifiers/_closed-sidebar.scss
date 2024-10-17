@@ -1,0 +1,104 @@
+// Closed Sidebar
+
+.header-mobile-open {
+  .app-sidebar {
+    transition: all .3s ease;
+    width: $app-sidebar-width-collapsed;
+    min-width: $app-sidebar-width-collapsed;
+    z-index: 13;
+
+    .app-header__logo .hamburger {
+      margin: 0 auto;
+    }
+
+    .logo-src {
+      display: none;
+    }
+
+    .app-sidebar__inner {
+
+      .app-sidebar__heading {
+        text-indent: -999em;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: $dropdown-link-hover-bg;
+          text-indent: 1px;
+        }
+      }
+
+      .metismenu-icon {
+        text-indent: 0;
+      }
+
+      .vertical-nav-menu {
+        li a {
+          text-indent: -99rem;
+          transition: color .2s;
+
+          i.metismenu-icon {
+            left: 4px;
+            transition: all .2s;
+          }
+
+          &::before {
+            display: none;
+          }
+        }
+
+        li.mm-active ul {
+          display: none;
+        }
+      }
+    }
+
+    &:hover {
+      width: $app-sidebar-width !important;
+
+      .app-header__logo .hamburger {
+        margin: 0 0 0 auto;
+      }
+
+      .logo-src {
+        display: block;
+      }
+
+      .app-sidebar__inner {
+
+        .vertical-nav-menu {
+
+          li a {
+            text-indent: initial;
+
+            i.metismenu-icon {
+              left: -5px;
+            }
+
+            &::before {
+              display: block;
+            }
+          }
+
+          li.mm-active ul {
+            display: block;
+          }
+        }
+
+        .app-sidebar__heading {
+          text-indent: initial;
+
+          &::before {
+            display: none;
+          }
+        }
+
+      }
+    }
+  }
+
+}

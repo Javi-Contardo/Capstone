@@ -1,0 +1,25 @@
+// Header Dots
+
+.header-dots {
+  margin-left: auto;
+  display: flex;
+
+  & > .dropdown {
+    display: flex;
+    align-content: center;
+
+    & > .btn {
+      font-size: $h3-font-size;
+      color: $black;
+
+      &:hover {
+        opacity: .6;
+      }
+
+      .badge-dot {
+        top: 7px;
+        right: 1px;
+      }
+    }
+  }
+}
