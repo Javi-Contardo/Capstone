@@ -1,9 +1,12 @@
 <?
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ERROR);
 include("puerta_principal.php");
 
-/*if ($id_local!='0'){$filtro_cliente=" and numero_local='$id_local'";}else{$filtro_cliente=" and numero_local='0'";}*/
+if ($id_local!='0'){$filtro_cliente=" and numero_local='$id_local'";}else{$filtro_cliente=" and numero_local='$id_local'";}
 
-	$aColumns = array('sku','descripcion','on_hand','ventas_semana_actual', 'dias_desde_ultima_venta','codigo_retail','id','numero_local','nombre_local');
+	$aColumns = array('codigo_retail','descripcion','on_hand','ventas_semana_actual', 'dias_desde_ultima_venta','codigo_retail','id','numero_local','nombre_local');
 	
 	/* Indexed column (used for fast and accurate table cardinality) */
 	$sIndexColumn = "id";
@@ -59,7 +62,7 @@ include("puerta_principal.php");
 	$sWhere = "";
 	if ( $_GET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE (";
+		$sWhere = "WHERE id!='' and fecha_subida='$fechabase' and(";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= $aColumns[$i]." LIKE '%".$mysqli->real_escape_string( $_GET['sSearch'] )."%' OR ";
@@ -69,7 +72,7 @@ include("puerta_principal.php");
 	}
 	else
 	{
-		$sWhere = "WHERE id!='' and numero_local='$id_local' ";
+		$sWhere = "WHERE id!='' and fecha_subida='$fechabase' $filtro_cliente";
 	}
 	
 	/* Individual column filtering */
@@ -79,7 +82,7 @@ include("puerta_principal.php");
 		{
 			if ( $sWhere == "" )
 			{
-				$sWhere = "WHERE id!='' and numero_local='$id_local' ";
+				$sWhere = "WHERE ";
 			}
 			else
 			{
@@ -144,14 +147,14 @@ include("puerta_principal.php");
 		$descripcion1=$aRow[ $aColumns[1] ];	
 		$numero_local=$aRow[ $aColumns[7] ];	
 		$nombre_local1=$aRow[ $aColumns[8] ];	
-		$ver_factura ='<a href="#" onclick="abrir_detalle(\''.$codigo_retail.'\',\''.$sku1.'\',\''.$descripcion1.'\',\''.$numero_local.'\')"><i class="fa-sharp fa-solid fa-circle-exclamation text-success"></i></a>';
-		if($id_local=='0')
-		{
+		$ver_factura ='<a href="#" onclick="abrir_detalle(\''.$codigo_retail.'\',\''.$descripcion1.'\',\''.$numero_local.'\')"><i class="fa-sharp fa-solid fa-circle-exclamation text-success"></i></a>';
 		$ver_grafico ='<a href="#" onclick="graficado_general(\''.$codigo_retail.'\')"><i class="fa-sharp fa-solid fa-chart-simple text-success"></i></a>';
-		$row[] =$ver_grafico;
+		if($id_local=='0'){
+			$row[] =$ver_grafico;
 		
 			$row[] =$ver_factura;
 		}
+		
 		
 		$output['aaData'][] = $row;
 	}

@@ -61,15 +61,9 @@
 					
 					<li class="app-sidebar__heading">ADMINISTRACI&oacute;N</li>
 					<? if ($labor=='ADMINISTRADOR'){?>
-<<<<<<< HEAD
 					<li id="act-locales">
 						<a href="locales.php">
 							<i class="metismenu-icon fa-solid fa-star"></i>Locales
-=======
-					<li id="act-sucursales">
-						<a href="sucursales.php">
-							<i class="metismenu-icon fa-solid fa-star"></i>Sucursales
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 						</a>
 					</li>
 					<? } ?>
@@ -97,9 +91,9 @@
 <div class="app-sidebar-overlay d-none animated fadeIn"></div>
 <div class="app-main__outer">
 	<div class="app-main__inner">
-		<div class="header-mobile-wrapper">
+		<div  style="background-color: azure" class="header-mobile-wrapper">
 			<div class="app-header__logo">
-				<a href="#" data-toggle="tooltip" data-placement="bottom" title="Koncilia" class="logo-src"></a>
+				<a href="#" data-toggle="tooltip" data-placement="bottom" title="GungaStore" class=""><img src="assets/images/logo-lol.png" alt="GungaStore" class="logo-img" style="width: 200px"></a>
 				<button type="button" class="hamburger hamburger--elastic mobile-toggle-sidebar-nav">
 					<span class="hamburger-box">
 						<span class="hamburger-inner"></span>

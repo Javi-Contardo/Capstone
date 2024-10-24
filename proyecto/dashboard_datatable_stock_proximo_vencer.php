@@ -1,17 +1,18 @@
 <?
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ERROR);
 include("puerta_principal.php");
 
-/*if ($id_local!='0'){$filtro_cliente=" and numero_local='$id_local'";}else{$filtro_cliente=" and numero_local='0'";}*/
+if ($id_local!='0'){$filtro_cliente=" and numero_tienda='$id_local'";}else{$filtro_cliente="";}
 
-	$codigo_retail=$_GET['var1'];
-
-	$aColumns = array('numero_local','nombre_local','ventas_semana_actual','dias_desde_ultima_venta', 'on_hand','id');
+	$aColumns = array('numero_tienda','nombre_tienda','numero_articulo','desc_art_1', 'cantidad_existente_tienda','lote','fecha_vencimiento','sku_interno');
 	
 	/* Indexed column (used for fast and accurate table cardinality) */
 	$sIndexColumn = "id";
 	
 	/* DB table to use */
-	$sTable = "comercial_stock_out";
+	$sTable = "comercial_stock";
 	
 	/* 
 	 * mysqli connection
@@ -61,18 +62,19 @@ include("puerta_principal.php");
 	$sWhere = "";
 	if ( $_GET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE numero_local!='0' and codigo_retail='$codigo_retail' and fecha_subida='$fechabase' and(";
+		$sWhere = "WHERE id!='' and DATEDIFF(fecha_vencimiento, fecha_carga)<='7' and fecha_carga = (SELECT MAX(fecha_carga) FROM comercial_stock) and(";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= $aColumns[$i]." LIKE '%".$mysqli->real_escape_string( $_GET['sSearch'] )."%' OR ";
 		}
 		$sWhere = substr_replace( $sWhere, "", -3 );
-		$sWhere .= ')';
+		$sWhere .= ")  $filtro_cliente ";
 	}
 	else
 	{
-		$sWhere = "WHERE numero_local!='0' and codigo_retail='$codigo_retail' and fecha_subida='$fechabase' ";
+		$sWhere = "WHERE id!='' and DATEDIFF(fecha_vencimiento, fecha_carga)<='7' and fecha_carga = (SELECT MAX(fecha_carga) FROM comercial_stock) $filtro_cliente ";
 	}
+	
 	/* Individual column filtering */
 	for ( $i=0 ; $i<count($aColumns) ; $i++ )
 	{
@@ -102,6 +104,7 @@ include("puerta_principal.php");
 		$sOrder
 		$sLimit
 	";
+
 	$rResult = $mysqli->query($sQuery) or die(mysqli_error($mysqli));
 	/* Data set length after filtering */
 	$sQuery = "
@@ -138,11 +141,28 @@ include("puerta_principal.php");
 		$row[] = $aRow[ $aColumns[0] ];	
 		$row[] = $aRow[ $aColumns[1] ];	
 		$row[] = $aRow[ $aColumns[2] ];	
-		$row[] = $aRow[ $aColumns[3] ];
-		$numero_local= $aRow[$aColumns[0]];	
-		$nombre_local= $aRow[$aColumns[1]];	
-		$ver_factura ='<a style="color: #3ac47d" href="#" onclick="abrir_detalle_lote(\''.$codigo_retail.'\',\''.$numero_local.'\',\''.$nombre_local.'\')">'.$aRow[ $aColumns[4] ].'</a>';
-		$row[] = $ver_factura;	
+		$row[] = $aRow[ $aColumns[3] ];	
+		$row[] = $aRow[ $aColumns[4] ];	
+		$row[] = $aRow[ $aColumns[5] ];	
+		$row[] = $aRow[ $aColumns[6] ];
+		// Convertir $aRow[$aColumns[6]] a un objeto DateTime
+		$fecha_vencimiento = new DateTime(date('Y-m-d', strtotime($aRow[$aColumns[6]])));
+
+		// Crear un objeto DateTime para la fecha actual
+		$hoy = new DateTime();
+		
+		$diferencia = $hoy->diff($fecha_vencimiento);
+		$diferencia = $diferencia->days;
+		$row[] = $diferencia;	
+		if($diferencia>=1)
+		{
+			$estado='<p style="color: green">NO VENCIDO</p>';
+		}
+		else
+		{
+			$estado='<p style="color: red">VENCIDO</p>';
+		}
+		$row[] = $estado;	
 		
 		
 		$output['aaData'][] = $row;

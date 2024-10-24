@@ -154,7 +154,7 @@ if ($proceso=='NOTIFICA_OK')
 if ($proceso=='LISTADO_CLIENTES')
 	{
 	$filtro_valor=isset($_POST['filtro_valor'])?$_POST['filtro_valor']:'';
-	$busquedatienda = $mysqli->query("select * from locales where estado='ACTIVO' and nombre_local like '%$filtro_valor%' order by nombre_local asc");
+	$busquedatienda = $mysqli->query("select * from locales where estado='ACTIVO' and nombre_local like '%$filtro_valor%' order by id asc");
     while ($row12=$busquedatienda->fetch_row())
         {
         $id_cliente=$row12[0];

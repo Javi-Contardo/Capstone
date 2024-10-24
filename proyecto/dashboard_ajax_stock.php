@@ -158,7 +158,7 @@ error_reporting(E_ERROR);
 		$fecha_actual = $fecha_actual->format('Y-m-d');
 
 		$fechaInicioSemana11 = new DateTime($fecha_actual);
-		$fechaInicioSemana11->modify('-6 days');
+		$fechaInicioSemana11->modify('-6 months');
 		$fechaInicioSemana11 = $fechaInicioSemana11->format('Y-m-d');
 
 		$fechaTerminoSemana = new DateTime($fechaInicioSemana);
@@ -193,7 +193,6 @@ error_reporting(E_ERROR);
 		while ($row1=$result1->fetch_assoc())
 		{
 			$id_homologacion=$row1['id_homologacion'];
-			$sku=$row1['sku'];
 			$descripcion=$row1['descripcion'];
 			$codigo_retail=$row1['codigo_retail'];
 			
@@ -249,7 +248,6 @@ error_reporting(E_ERROR);
 			if ($row5=$result5->fetch_assoc())
 			{
 				$on_hand_general=$row5['caet'];
-				$upstream_units_on_hand=$cantidad_actual_transito_tienda+$cantidad_actual_pedidos_tienda+$cantidad_actual_bodega_tienda;
 			}
 
 			if($sumacnt==null)
@@ -281,119 +279,119 @@ error_reporting(E_ERROR);
 			else
 			{
 				/*print("INSERT INTO comercial_stock_out(id_homologacion,sku,codigo_retail,descripcion,numero_local,nombre_local,numero_semana,ventas_semana_actual,ultima_venta,dias_desde_ultima_venta, on_hand,fecha_subida) VALUES('$id_homologacion','$sku','$codigo_retail','$descripcion','0','$nombre_local','$semcalendario','$sumacnt','$ultima_venta','$diferencia1','$cantidad_actual_existente_tienda','$fecha_actual')");*/
-				$mysqli->query("INSERT INTO comercial_stock_out(id_homologacion,sku,codigo_retail,descripcion,numero_local,nombre_local,numero_semana,ventas_semana_actual,ultima_venta,dias_desde_ultima_venta, on_hand,fecha_subida) VALUES('$id_homologacion','$sku','$codigo_retail','$descripcion','0','$nombre_local','$semcalendario','$sumacnt','$ultima_venta','$diferencia1','$cantidad_actual_existente_tienda','$fecha_actual')");
+				$mysqli->query("INSERT INTO comercial_stock_out(id_homologacion,codigo_retail,descripcion,numero_local,nombre_local,numero_semana,ventas_semana_actual,ultima_venta,dias_desde_ultima_venta, on_hand,fecha_subida) VALUES('$id_homologacion','$codigo_retail','$descripcion','0','$nombre_local','$semcalendario','$sumacnt','$ultima_venta','$diferencia1','$cantidad_actual_existente_tienda','$fecha_actual')");
 			}
 
 			$result6 = $mysqli->query("select * from locales where id!='0'");
 			while ($row6=$result6->fetch_assoc())
 			{
+				
 				$nombre_local=$row6['nombre_local'];
 				$numero_local=$row6['id'];
-				$color='white';
 				
-				$result5 = $mysqli->query("select sum(cantidad_existente_tienda) as caet from comercial_stock where numero_articulo='$codigo_retail' and numero_tienda='$numero_local' and fecha_carga='$fecha_ultima_carga'");
-				if ($row5=$result5->fetch_assoc())
-				{
-					$on_hand_general=$row5['caet'];
-					$upstream_units_on_hand=$cantidad_actual_transito_tienda+$cantidad_actual_pedidos_tienda+$cantidad_actual_bodega_tienda;
-				}
-				
-				if($on_hand_general==null)
-				{
-					$on_hand_general=0;
-				}
-				
-				
-				
-				$ultima_venta='0001-01-01';
-				$result2 = $mysqli->query("select max(diario) as ultima_venta from comercial_ventas where numero_articulo='$codigo_retail' and numero_tienda='$numero_local'  order by diario");
-				if ($row2=$result2->fetch_assoc())
-				{
-					$ultima_venta=$row2['ultima_venta'];
-				}
+					$result5 = $mysqli->query("select sum(cantidad_existente_tienda) as caet from comercial_stock where numero_articulo='$codigo_retail' and numero_tienda='$numero_local' and fecha_carga='$fecha_ultima_carga'");
+					if ($row5=$result5->fetch_assoc())
+					{
+						$on_hand_general=$row5['caet'];
+					}
 
-				$cantidad_actual_existente_tienda=0;
-				$result2 = $mysqli->query("select round(avg(cantidad_existente_tienda),0) as promediostock from comercial_stock where numero_articulo='$codigo_retail' and numero_tienda='$numero_local' and fecha_carga between '$fechaInicioSemana11' and '$fecha_actual'");
-				if ($row2=$result2->fetch_assoc())
-				{
-					$cantidad_actual_existente_tienda=$row4['promediostock'];
-				}
-				if($cantidad_actual_existente_tienda==null)
-				{
+					if($on_hand_general==null)
+					{
+						$on_hand_general=0;
+					}
+
+
+
+					$ultima_venta='0001-01-01';
+					$result2 = $mysqli->query("select max(diario) as ultima_venta from comercial_ventas where numero_articulo='$codigo_retail' and numero_tienda='$numero_local'  order by diario");
+					if ($row2=$result2->fetch_assoc())
+					{
+						$ultima_venta=$row2['ultima_venta'];
+					}
+
 					$cantidad_actual_existente_tienda=0;
-				}
-				
-
-				$cantidad_actual_existente_tienda_ultimo=0;
-				
-				$result2 = $mysqli->query("select cantidad_existente_tienda from comercial_stock where numero_articulo='$codigo_retail' and numero_tienda='$numero_local'  order by fecha_carga desc");
-				if ($row2=$result2->fetch_assoc())
-				{
-					$cantidad_actual_existente_tienda_ultimo=$row4['cantidad_existente_tienda'];
-				}
-
-
-				// Define las fechas
-				$fecha1 = new DateTime("$ultima_venta");
-				$fecha2 = new DateTime("$fechabase");
-
-				// Calcula la diferencia
-				$diferencia = $fecha2->diff($fecha1);
-				$diferencia1=$diferencia->days;
-				// Muestra la diferencia en días
-
-				$sumacnt=0;
-				/// pendiente a revisar
-				$result3 = $mysqli->query("select cnt_pos as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario='$fecha_actual' and numero_tienda='$numero_local' ");
-				if ($row3=$result3->fetch_assoc())
-				{
-					$sumacnt=$row3['suma'];
-				}
-				$result31 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana2' and '$fechaTerminoSemana2' and numero_tienda='$numero_local'");
-				if ($row31=$result31->fetch_assoc())
-				{
-					$sumacnt2=$row31['suma'];
-				}
-				$result32 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana3' and '$fechaTerminoSemana3' and numero_tienda='$numero_local'");
-				if ($row32=$result32->fetch_assoc())
-				{
-					$sumacnt3=$row32['suma'];
-				}
-				$result33 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana4' and '$fechaTerminoSemana4' and numero_tienda='$numero_local'");
-				if ($row33=$result33->fetch_assoc())
-				{
-					$sumacnt4=$row33['suma'];
-				}
-
-				$sumacntpromedio=($sumacnt+$sumacnt2+$sumacnt3+$sumacnt4)/4;
+					$result2 = $mysqli->query("select round(avg(cantidad_existente_tienda),0) as promediostock from comercial_stock where numero_articulo='$codigo_retail' and numero_tienda='$numero_local' and fecha_carga between '$fechaInicioSemana11' and '$fecha_actual'");
+					if ($row2=$result2->fetch_assoc())
+					{
+						$cantidad_actual_existente_tienda=$row4['promediostock'];
+					}
+					if($cantidad_actual_existente_tienda==null)
+					{
+						$cantidad_actual_existente_tienda=0;
+					}
 
 
-				
+					$cantidad_actual_existente_tienda_ultimo=0;
 
-				if($sumacnt==null)
-				{
+					$result2 = $mysqli->query("select cantidad_existente_tienda from comercial_stock where numero_articulo='$codigo_retail' and numero_tienda='$numero_local'  order by fecha_carga desc");
+					if ($row2=$result2->fetch_assoc())
+					{
+						$cantidad_actual_existente_tienda_ultimo=$row4['cantidad_existente_tienda'];
+					}
+
+
+					// Define las fechas
+					$fecha1 = new DateTime("$ultima_venta");
+					$fecha2 = new DateTime("$fechabase");
+
+					// Calcula la diferencia
+					$diferencia = $fecha2->diff($fecha1);
+					$diferencia1=$diferencia->days;
+					// Muestra la diferencia en días
+
 					$sumacnt=0;
-				}
+					/// pendiente a revisar
+					$result3 = $mysqli->query("select cnt_pos as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario='$fecha_actual' and numero_tienda='$numero_local' ");
+					if ($row3=$result3->fetch_assoc())
+					{
+						$sumacnt=$row3['suma'];
+					}
+					$result31 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana2' and '$fechaTerminoSemana2' and numero_tienda='$numero_local'");
+					if ($row31=$result31->fetch_assoc())
+					{
+						$sumacnt2=$row31['suma'];
+					}
+					$result32 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana3' and '$fechaTerminoSemana3' and numero_tienda='$numero_local'");
+					if ($row32=$result32->fetch_assoc())
+					{
+						$sumacnt3=$row32['suma'];
+					}
+					$result33 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana4' and '$fechaTerminoSemana4' and numero_tienda='$numero_local'");
+					if ($row33=$result33->fetch_assoc())
+					{
+						$sumacnt4=$row33['suma'];
+					}
 
-				$sem_inventario='0';
-				if($sumacntpromedio>0){
-				$sem_inventario=$cantidad_actual_existente_tienda_ultimo/$sumacntpromedio;
-				$sem_inventario=number_format($sem_inventario,1,'.','');
-				}
+					$sumacntpromedio=($sumacnt+$sumacnt2+$sumacnt3+$sumacnt4)/4;
 
 
+
+
+					if($sumacnt==null)
+					{
+						$sumacnt=0;
+					}
+
+					$sem_inventario='0';
+					if($sumacntpromedio>0){
+					$sem_inventario=$cantidad_actual_existente_tienda_ultimo/$sumacntpromedio;
+					$sem_inventario=number_format($sem_inventario,1,'.','');
+					}
+
+
+
+					$result7 = $mysqli->query("select * from comercial_stock_out where fecha_subida='$fechabase' and codigo_retail='$codigo_retail' and numero_local='$numero_local' ");
+					if ($row7=$result7->fetch_assoc())
+					{
+						$id_registro=$row7['id'];
+
+						$mysqli->query("UPDATE  comercial_stock_out SET ventas_semana_actual='$sumacnt' ,ultima_venta='$ultima_venta' , dias_desde_ultima_venta='$diferencia1', on_hand='$on_hand_general'  where id='$id_registro'");
+					}
+					else
+					{
+						$mysqli->query("INSERT INTO comercial_stock_out(id_homologacion,sku,codigo_retail,descripcion,numero_local,nombre_local,numero_semana,ventas_semana_actual,ultima_venta,dias_desde_ultima_venta, on_hand,fecha_subida) VALUES('$id_homologacion','$sku','$codigo_retail','$descripcion','$numero_local','$nombre_local','$semcalendario','$sumacnt','$ultima_venta','$diferencia1','$on_hand_general','$fechabase')");
+					}
 				
-				$result7 = $mysqli->query("select * from comercial_stock_out where numero_semana='$semcalendario' and codigo_retail='$codigo_retail' and numero_local='$numero_local' ");
-				if ($row7=$result7->fetch_assoc())
-				{
-					$id_registro=$row7['id'];
-					
-					$mysqli->query("UPDATE  comercial_stock_out SET ventas_semana_actual='$sumacnt' ,ultima_venta='$ultima_venta' , dias_desde_ultima_venta='$diferencia1', on_hand='$on_hand_general'  where id='$id_registro'");
-				}
-				else
-				{
-					$mysqli->query("INSERT INTO comercial_stock_out(id_homologacion,sku,codigo_retail,descripcion,numero_local,nombre_local,numero_semana,ventas_semana_actual,ultima_venta,dias_desde_ultima_venta, on_hand,fecha_subida) VALUES('$id_homologacion','$sku','$codigo_retail','$descripcion','$numero_local','$nombre_local','$semcalendario','$sumacnt','$ultima_venta','$diferencia1','$on_hand_general','$fecha_actual')");
-				}
 
 			}
 		}

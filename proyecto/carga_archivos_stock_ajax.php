@@ -73,6 +73,7 @@ if ($area=='PROCESA_ARCHIVO')
             $texto4=trim("$Row[3]");
             $texto5=trim("$Row[4]");
             $texto6=trim("$Row[5]");
+            $texto7=trim("$Row[6]");
 
 			
 			
@@ -86,6 +87,7 @@ if ($area=='PROCESA_ARCHIVO')
             $texto4=str_replace($buscar,$cambiar,utf8_encode($texto4));
             $texto5=str_replace($buscar,$cambiar,utf8_encode($texto5));
             $texto6=str_replace($buscar,$cambiar,utf8_encode($texto6));
+            $texto7=str_replace($buscar,$cambiar,utf8_encode($texto7));
 			$buscar_fec=array(".");
             $cambiar_fec=array("-");
 
@@ -139,6 +141,14 @@ if ($area=='PROCESA_ARCHIVO')
 					echo json_encode($datos);	
 					exit;
 				}
+				elseif ($texto7!='Lote')
+				{
+					$status='error';
+					$respuesta=" El campo 'Lote' no es valido o no esta escrito correctamente. # $texto7 #";
+					$datos = array('respuesta' => $respuesta);
+					echo json_encode($datos);	
+					exit;
+				}
 			}
 			elseif($Key>=2)
 			{
@@ -165,12 +175,17 @@ if ($area=='PROCESA_ARCHIVO')
 						$errores.="Error en la línea $Key del campo <b>'Sku Interno'.</b> El campo está vacio. <br>";
 						$error='SI';
 					}
+					elseif ($texto7=='')
+					{
+						$errores.="Error en la línea $Key del campo <b>'Lote'.</b> El campo está vacio. <br>";
+						$error='SI';
+					}
 					else
 					{
-<<<<<<< HEAD
 						$nro_producto=$texto1;
 						$cantidad_existente_tienda=$texto4;
-						$result1 = $mysqli->query("select id,cantidad_existente_tienda from comercial_stock where numero_tienda='$id_local' and numero_articulo='$nro_producto' and cantidad_existente_tienda!='$cantidad_existente_tienda' and fecha_carga='$fecha_carga'");
+						$lote=$texto7;
+						$result1 = $mysqli->query("select id,cantidad_existente_tienda from comercial_stock where numero_tienda='$id_local' and numero_articulo='$nro_producto' and cantidad_existente_tienda!='$cantidad_existente_tienda' and fecha_carga='$fecha_carga' and lote='$lote'");
 						if($row1 = $result1->fetch_row())
 						{
 							$id_tabla=$row1[0];
@@ -179,37 +194,8 @@ if ($area=='PROCESA_ARCHIVO')
 						}
 						else
 						{
-
-							$mysqli->query("INSERT INTO comercial_stock(numero_tienda,nombre_tienda,numero_articulo,desc_art_1,upc,cantidad_existente_tienda, fecha_carga, subido_por,sku_interno) VALUES('$id_local','$nombre_local','$texto1','$texto2','$texto3','$texto4','$fecha_carga', '$nombre_usuario','$texto6')");
+							$mysqli->query("INSERT INTO comercial_stock(numero_tienda,nombre_tienda,numero_articulo,desc_art_1,upc,cantidad_existente_tienda, fecha_carga, subido_por,sku_interno,lote,fecha_vencimiento) VALUES('$id_local','$nombre_local','$texto1','$texto2','$texto3','$texto4','$fecha_carga', '$nombre_usuario','$texto6','$texto7','$texto5')");
 						}
-=======
-						
-						
-						$nro_tienda=$texto1;
-						$nro_producto=$texto3;
-						$cantidad_existente_tienda=$texto6;
-								$result1 = $mysqli->query("select id,cantidad_existente_tienda from comercial_stock where numero_tienda='$nro_tienda' and numero_articulo='$nro_producto' and cantidad_existente_tienda!='$cantidad_existente_tienda'");
-								if($row1 = $result1->fetch_row())
-								{
-									$id_tabla=$row1[0];
-									$mysqli->query("UPDATE comercial_stock SET cantidad_existente_tienda='$cantidad_existente_tienda' WHERE id='$id_tabla'");
-									
-								}
-								else
-								{
-									$mysqli->query("INSERT INTO comercial_stock(numero_tienda,nombre_tienda,numero_articulo,desc_art_1,upc,cantidad_existente_tienda, fecha_carga, subido_por) VALUES('$texto1','$texto2','$texto3','$texto4','$texto5','$texto6','$fecha_carga', '$nombre_usuario')");
-									$result5 = $mysqli->query("select * from locales where numero_local='$texto1'");
-									if($row5 = $result5->fetch_row())
-									{
-									}
-									else
-									{
-										$mysqli->query("INSERT INTO locales(numero_local,nombre_local) VALUES('$texto1','$texto2')");
-									}
-								}
-							
-						
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 					}
 				}
 

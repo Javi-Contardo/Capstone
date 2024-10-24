@@ -1,17 +1,21 @@
 <?
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ERROR);
 include("puerta_principal.php");
 
 /*if ($id_local!='0'){$filtro_cliente=" and numero_local='$id_local'";}else{$filtro_cliente=" and numero_local='0'";}*/
 
-	$codigo_retail=$_GET['var1'];
+	$codigo_retail_lote=$_GET['var1'];
+	$numero_local_lote=$_GET['var2'];
 
-	$aColumns = array('numero_local','nombre_local','ventas_semana_actual','dias_desde_ultima_venta', 'on_hand','id');
+	$aColumns = array('desc_art_1','upc','cantidad_existente_tienda','sku_interno', 'lote','id');
 	
 	/* Indexed column (used for fast and accurate table cardinality) */
 	$sIndexColumn = "id";
 	
 	/* DB table to use */
-	$sTable = "comercial_stock_out";
+	$sTable = "comercial_stock";
 	
 	/* 
 	 * mysqli connection
@@ -61,7 +65,7 @@ include("puerta_principal.php");
 	$sWhere = "";
 	if ( $_GET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE numero_local!='0' and codigo_retail='$codigo_retail' and fecha_subida='$fechabase' and(";
+		$sWhere = "WHERE numero_tienda='$numero_local_lote' and numero_articulo='$codigo_retail_lote' and fecha_carga='$fechabase' and(";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= $aColumns[$i]." LIKE '%".$mysqli->real_escape_string( $_GET['sSearch'] )."%' OR ";
@@ -71,7 +75,7 @@ include("puerta_principal.php");
 	}
 	else
 	{
-		$sWhere = "WHERE numero_local!='0' and codigo_retail='$codigo_retail' and fecha_subida='$fechabase' ";
+		$sWhere = "WHERE numero_tienda='$numero_local_lote' and numero_articulo='$codigo_retail_lote' and fecha_carga='$fechabase' ";
 	}
 	/* Individual column filtering */
 	for ( $i=0 ; $i<count($aColumns) ; $i++ )
@@ -138,13 +142,8 @@ include("puerta_principal.php");
 		$row[] = $aRow[ $aColumns[0] ];	
 		$row[] = $aRow[ $aColumns[1] ];	
 		$row[] = $aRow[ $aColumns[2] ];	
-		$row[] = $aRow[ $aColumns[3] ];
-		$numero_local= $aRow[$aColumns[0]];	
-		$nombre_local= $aRow[$aColumns[1]];	
-		$ver_factura ='<a style="color: #3ac47d" href="#" onclick="abrir_detalle_lote(\''.$codigo_retail.'\',\''.$numero_local.'\',\''.$nombre_local.'\')">'.$aRow[ $aColumns[4] ].'</a>';
-		$row[] = $ver_factura;	
-		
-		
+		$row[] = $aRow[ $aColumns[3] ];	
+		$row[] = $aRow[ $aColumns[4] ];	
 		$output['aaData'][] = $row;
 	}
 	

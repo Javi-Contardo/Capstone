@@ -20,7 +20,6 @@
 					$nombre = "$row[2]";
 					$nombre_usuario = "$row[2]";
 					$labor = "$row[6]";		
-<<<<<<< HEAD
 					$id_local = "$row[7]";	
 					$nombre_fantasia = "$row[8]";	
 					$img_avatar = "$row[9]";
@@ -29,9 +28,6 @@
 						{
 						$nombre_local = "$row100[1]";
 						}
-=======
-					$id_local = "$row[7]";		
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 				}
 			else
 				{

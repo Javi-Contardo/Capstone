@@ -1,7 +1,7 @@
 <?php include("puerta_principal.php");
-/*ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ERROR);*/
+error_reporting(E_ERROR);
 ?>
 <html lang="es"><head>
     <?php include("scripts-header.php");?>
@@ -18,6 +18,7 @@ error_reporting(E_ERROR);*/
             }
 			
 			listado_datos();
+			productos_proximos_vencer();
 			
 			
         });
@@ -110,9 +111,28 @@ error_reporting(E_ERROR);*/
 			}
 		}
 		
+		function abrir_detalle_lote(codigo_retail, numero_local, nombre_local) {
+			/*if (grafico_update) {
+						// Destruir el gráfico si ya existe
+						grafico_update.destroy();
+						$("#titulo_grafico").html('');
+						document.getElementById('titulo_grafico1').style.display ='none'
+					}*/
+			$('#modal_detalles_lotes').modal('show');
+			detalle_datatable_lote(codigo_retail,numero_local);
+			console.log("codigo de retail: "+codigo_retail);
+			console.log(" y el numero del local: "+numero_local);
+			/*$.post("conciliacion_comercial_walmart_ajax.php"), {proceso:'DATOS_GRAFICO', codigo_retail:codigo_retail, numero_local:numero_local},
+			function(datos) 
+			{
+				console.log("estos son los datos de vueltos: "+datos);
+			}*/
+			/*$('#ctd_existencia_cd1').html(ctd_existencia_cd);*/
+			$('#modal_detalle_lotes_titulo').html(codigo_retail+"-"+nombre_local);
+			
+		}
 		
-		
-		function abrir_detalle(codigo_retail, sku, descripcion, numero_local) {
+		function abrir_detalle(codigo_retail,  descripcion, numero_local) {
 			/*if (grafico_update) {
 						// Destruir el gráfico si ya existe
 						grafico_update.destroy();
@@ -124,17 +144,83 @@ error_reporting(E_ERROR);*/
 			detalle_datatable(codigo_retail);
 			console.log("codigo de retail: "+codigo_retail);
 			console.log(" y el numero del local: "+numero_local);
-			console.log("sku: "+sku);
 			/*$.post("conciliacion_comercial_walmart_ajax.php"), {proceso:'DATOS_GRAFICO', codigo_retail:codigo_retail, numero_local:numero_local},
 			function(datos) 
 			{
 				console.log("estos son los datos de vueltos: "+datos);
 			}*/
 			/*$('#ctd_existencia_cd1').html(ctd_existencia_cd);*/
-			$('#titulo_grafico_detalle').html(sku+"-"+descripcion);
+			$('#titulo_grafico_detalle').html(codigo_retail+"-"+descripcion);
 			$('#codigo_retail').val(codigo_retail);
 			
 		}
+		
+		
+		function detalle_datatable_lote(codigo_retatil,numero_local){
+			if(codigo_retatil==undefined)
+			{
+				codigo_retatil=document.getElementById('codigo_retail').value;
+			}
+			console.log("codigo de retail: "+codigo_retatil+" numero_localaso: "+numero_local);
+			
+			
+			
+            $('#lista_oc2').DataTable().clear().destroy();
+            $('#lista_oc2').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "dashboard_datatable_stock_lote.php?var1="+codigo_retatil+"&var2="+numero_local,
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+				"orderMulti": true,
+				"dom": '<"toolbar2">frtip',
+                "order": [
+                    [3, "desc"]
+                ],
+				"oLanguage": {
+							   "sSearch": "Buscar"
+							 },
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "className": "text-left",
+                        "width": "1%"
+                    },
+					{
+                        "targets": 1,
+                        "className": "text-left",
+                        "width": "20%"
+                    },
+                    {
+                        "targets": 2,
+                        "className": "text-center",
+                        "width": "10%"
+                    },
+                    {
+                        "targets": 3,
+                        "className": "text-center",
+                        "width": "10%"
+                    },
+                    {
+                        "targets": 4,
+                        "className": "text-center",
+                        "width": "10%"
+                    }
+					
+					
+                ],
+            });
+			//document.querySelector('div.toolbar').innerHTML = '<div class="col-lg-2 float-left"><button type="button" class="btn btn-primary justify-content-end form-control-sm float-right" onClick="descargar_conciliacion()">Descargar</button></div><div class="col-lg-2 float-left"><button type="button" class="btn btn-primary justify-content-end form-control-sm float-right" onClick="descargar_conciliacion_detalle()">Descargar Detalle</button></div>';
+			//document.querySelector('div.toolbar').style.position='absolute';
+
+			
+		}
+		
 		
 		function detalle_datatable(codigo_retatil){
 			if(codigo_retatil==undefined)
@@ -186,7 +272,6 @@ error_reporting(E_ERROR);*/
                         "className": "text-center",
                         "width": "10%"
                     },
-
                     {
                         "targets": 4,
                         "className": "text-center",
@@ -220,6 +305,7 @@ error_reporting(E_ERROR);*/
                     {
                     console.log("ok")
         			listado_datos();
+        			productos_proximos_vencer();
         			setTimeout(function (){
         			$('#modal-overlay2').modal('hide')
         			},500);
@@ -306,10 +392,89 @@ error_reporting(E_ERROR);*/
 			
         }
         
+		
+		function productos_proximos_vencer() {
+            $('#lista_proximo_vencer').DataTable().clear().destroy();
+            $('#lista_proximo_vencer').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "dashboard_datatable_stock_proximo_vencer.php",
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": false,
+                "autoWidth": false,
+                "responsive": true,
+                "order": [
+                    [0, "desc"]
+                ],
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "className": "text-center",
+                        "width": "12%"
+                    },
+                    {
+                        "targets": 1,
+                        "className": "text-left",
+                        "width": "50%"
+                    },
+                    {
+                        "targets": 2,
+                        "className": "text-left",
+                        "width": "15%"
+                    },
+                    {
+                        "targets": 3,
+                        "className": "text-left",
+                        "width": "15%"
+                    },
+                    {
+                        "targets": 4,
+                        "className": "text-left",
+                        "width": "10%"
+                    },
+                    {
+                        "targets": 5,
+                        "className": "text-left",
+                        "width": "1%"
+                    },
+                    {
+                        "targets": 6,
+                        "className": "text-left",
+                        "width": "1%"
+                    },
+                    {
+                        "targets": 7,
+                        "className": "text-left",
+                        "width": "1%"
+                    },
+                    {
+                        "targets": 8,
+                        "className": "text-left",
+                        "width": "1%"
+                    }
+                ]
+
+            });
+			
+			
+	
+			
+        }
+		
+		
 		function cerrar_detalle() {
 			document.getElementById('listado_detalle').style.display = 'none';
 			document.getElementById('listado_general').style.display = 'block';
 		}
+		
+		function cerrar_detalle_lote() {
+			document.getElementById('listado_detalle_lote').style.display = 'none';
+			document.getElementById('listado_detalle').style.display = 'block';
+		}
+
 
     </script>
     <style>
@@ -378,10 +543,10 @@ error_reporting(E_ERROR);*/
                                                 class="table table-hover table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>SKU</th>
+                                                        <th>Codigo Retail</th>
                                                         <th>Descripcion</th>
                                                         <th>Inventario actual</th>
-                                                        <th>Ventas Semana Actual</th>
+                                                        <th>Ventas Diario</th>
                                                         <th>Dias desde ultima venta</th>
 														<? if($id_local=='0'){ ?>
 														<th></th>
@@ -472,7 +637,7 @@ error_reporting(E_ERROR);*/
 																		<th>Nombre Local</th>
 																		<th>Venta sem. actual</th>
 																		<th>Dias ultima venta</th>
-																		<th>Inv. en gondola<h6 class="mb-0 text-muted"><small><cite title="Source Title">(Prom. ult. 7 dias)</cite></small></h6></th>
+																		<th>Inv. en gondola<h6 class="mb-0 text-muted"><small><cite title="Source Title">(Diario)</cite></small></h6></th>
 																	 </tr>
 																</thead>
 																<tbody>
@@ -482,11 +647,41 @@ error_reporting(E_ERROR);*/
 															</div>
 														</div>
 													</div>
+									
                                 </div>
                             </div>
-							<? if($id_local=='0'){ ?>
-							<div class="row" id="div_grafico" style="display: none">
-                                <div class="col-md-12">
+							<div class="row" style="padding-top: 15px">
+                                <div class="col-md-8">
+                                    <div class="main-card mb-3 card" id="listado_proximo_vencer">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Stock proximo a vencer</h5>
+                                            <table  id="lista_proximo_vencer"
+                                                class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Numero local</th>
+                                                        <th>Nombre local</th>
+                                                        <th>Codigo Retail</th>
+                                                        <th>Descripcion</th>
+                                                        <th>Inventario actual</th>
+                                                        <th>Lote</th>
+                                                        <th>Fecha Vencimiento</th>
+                                                        <th>Dias para perdida</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+										
+                                    </div>
+									
+									
+                                </div>
+								<? if($id_local=='0'){ ?>
+								<div class="col-md-4" id="div_grafico" style="display: none">
                                     <div class="main-card mb-3 card" >
                                         
 									<div class="card-body" id="carta_grafico">
@@ -498,8 +693,9 @@ error_reporting(E_ERROR);*/
                                     </div>
 									
                                 </div>
+								<? } ?>
                             </div>
-							<? } ?>
+							
 							
 							
 							
@@ -637,29 +833,24 @@ function actualiza_graf_hom(porcentaje)
     </div>
     <!-- /.modal-dialog -->
 </div>
-<div class="modal fade bd-example-modal-xl" id="modal_detalles_oc" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal fade bd-example-modal-xl" id="modal_detalles_lotes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Detalle de producto(s) no conciliado(s) </h5>
+                <h5 class="modal-title" id="modal_detalle_lotes_titulo"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body" id="texto_modal">
-                <table id="table_modal" class="table table-bordered table-striped">
+                <table id="lista_oc2" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>SKU</th>
-                            <th>Descripción</th>
-                            <th>Factura (Uni.)</th>
-							<th>NC (Uni.)</th>
-                            <th>Recepción (Uni.)</th>
-                            <th>Dif. (Uni.)</th>
-							<th>Factura ($$)</th>
-							<th>NC ($$)</th>
-                            <th>Recepción ($$)</th>
-                            <th>Dif. ($$)</th>
+                            <th>Descripcion</th>
+                            <th>UPC</th>
+                            <th>On Stock</th>
+							<th>SKU</th>
+                            <th>Lote</th>
                         </tr>
                     </thead>
                     <tbody>
