@@ -139,8 +139,22 @@ if ($id_local!='0'){$filtro_cliente=" and numero_local='$id_local'";}else{$filtr
 		
 		$row[] = $aRow[ $aColumns[0] ];	
 		$row[] = $aRow[ $aColumns[1] ];	
-		$row[] = $aRow[ $aColumns[2] ];	
-		$row[] = $aRow[ $aColumns[3] ];	
+		if($id_local!='0'){
+		$codigo_retail=$aRow[ $aColumns[0] ];
+		$numero_local=$id_local;
+		$ver_factura1 ='<a style="color: #3ac47d" href="#" onclick="abrir_detalle_lote(\''.$codigo_retail.'\',\''.$numero_local.'\',\''.$nombre_local.'\')">'.$aRow[ $aColumns[2] ].'</a>';
+		$row[] = $ver_factura1;	
+		$ver_ventas ='<a style="color: #3ac47d" href="#" onclick="abrir_detalle_lote_venta(\''.$codigo_retail.'\',\''.$numero_local.'\',\''.$nombre_local.'\')">'.$aRow[ $aColumns[3] ].'</a>';
+		$row[] = $ver_ventas;	
+			
+		}
+		else{
+			$row[] = $aRow[ $aColumns[2] ];	
+			$row[] = $aRow[ $aColumns[3] ];	
+		}
+		
+		
+		
 		$row[] = $aRow[ $aColumns[4] ];	
 		$codigo_retail=$aRow[ $aColumns[5] ];	
 		$sku1=$aRow[ $aColumns[0] ];	

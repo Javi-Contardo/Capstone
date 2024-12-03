@@ -1,17 +1,15 @@
 <?
 include("puerta_principal.php");
 
-/*if ($id_local!='0'){$filtro_cliente=" and numero_local='$id_local'";}else{$filtro_cliente=" and numero_local='0'";}*/
+if ($labor!='OWNER'){$filtro_cliente="";}else{ $filtro_cliente="";}
 
-	$codigo_retail=$_GET['var1'];
-
-	$aColumns = array('numero_local','nombre_local','ventas_semana_actual','dias_desde_ultima_venta', 'on_hand','id');
+	$aColumns = array( 'descripcion', 'codigo_retail', 'id_homologacion' );
 	
 	/* Indexed column (used for fast and accurate table cardinality) */
-	$sIndexColumn = "id";
+	$sIndexColumn = "id_homologacion";
 	
 	/* DB table to use */
-	$sTable = "comercial_stock_out";
+	$sTable = "homologacion";
 	
 	/* 
 	 * mysqli connection
@@ -61,18 +59,19 @@ include("puerta_principal.php");
 	$sWhere = "";
 	if ( $_GET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE numero_local!='0' and codigo_retail='$codigo_retail' and fecha_subida='$fechabase' and(";
+		$sWhere = "WHERE id_homologacion!='' (";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= $aColumns[$i]." LIKE '%".$mysqli->real_escape_string( $_GET['sSearch'] )."%' OR ";
 		}
 		$sWhere = substr_replace( $sWhere, "", -3 );
-		$sWhere .= ')';
+		$sWhere .= ")  $filtro_cliente ";
 	}
 	else
 	{
-		$sWhere = "WHERE numero_local!='0' and codigo_retail='$codigo_retail' and fecha_subida='$fechabase' ";
+		$sWhere = "WHERE id_homologacion!='' ";
 	}
+	
 	/* Individual column filtering */
 	for ( $i=0 ; $i<count($aColumns) ; $i++ )
 	{
@@ -134,19 +133,27 @@ include("puerta_principal.php");
 	while ( $aRow = $rResult->fetch_array())
 	{
 		$row = array();
-		
-		$row[] = $aRow[ $aColumns[0] ];	
-		$row[] = $aRow[ $aColumns[1] ];	
-		$numero_local= $aRow[$aColumns[0]];	
-		$nombre_local= $aRow[$aColumns[1]];
-		$ver_detalle_lote_venta ='<a style="color: #3ac47d" href="#" onclick="abrir_detalle_lote_venta(\''.$codigo_retail.'\',\''.$numero_local.'\',\''.$nombre_local.'\')">'.$aRow[ $aColumns[2] ].'</a>';
-		$row[] = $ver_detalle_lote_venta;
-		/*$row[] = $aRow[ $aColumns[2] ];*/	
-		$row[] = $aRow[ $aColumns[3] ];
-		$ver_detalle_lote_stock ='<a style="color: #3ac47d" href="#" onclick="abrir_detalle_lote(\''.$codigo_retail.'\',\''.$numero_local.'\',\''.$nombre_local.'\')">'.$aRow[ $aColumns[4] ].'</a>';
-		$row[] = $ver_detalle_lote_stock;	
-		
-		
+		$row[] = $aRow[ $aColumns[0] ];
+		$row[] = $aRow[ $aColumns[1] ];
+        $botones ='<a href="homologacion_modificar.php?id_homologacion='.$aRow[$aColumns[2]].'" data-toggle="tooltip" data-placement="top" data-original-title="Editar" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 botones"><i class="fas fa-edit text-warning"></i></a>'; 
+        /*if($aRow[ $aColumns[4] ]=="ACTIVO")
+                {
+				$botones.='<a id="des'.$aRow[$aColumns[0]].'" href="#" onClick="desactivar_usuario('.$aRow[$aColumns[0]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 botones"><i class="fa-solid fa-lock text-success"></i></a>';
+				}
+            else
+                {
+				$botones.='<a id="act'.$aRow[$aColumns[0]].'" href="#" onClick="activar_usuario('.$aRow[$aColumns[0]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 botones"><i class="fa-solid fa-lock-open text-danger"></i></a>';
+				
+                }*/
+				$botones .= '<a id="des' . $aRow[$aColumns[2]] . '" href="#" onClick="eliminar_homologacion(' . $aRow[$aColumns[2]] . ')" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 botones d-block">
+					<i class="fa-solid fa-trash text-danger"></i>
+				</a>';
+
+/*				$botones.='<a id="act'.$aRow[$aColumns[5]].'" href="#" onClick="eliminar_usuario('.$aRow[$aColumns[5]].')" data-toggle="tooltip" data-placement="top" data-original-title="Ver" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 botones"><i class="fa-solid fa-trash-can text-danger"></i></a>';*/
+				
+                
+		$botones= '<div class="row">'.$botones.'</div>';
+		$row[] =$botones;	
 		$output['aaData'][] = $row;
 	}
 	

@@ -21,9 +21,21 @@
 							setcookie("password",$password,time()+3600);
 							//setcookie("email",$email,time()+8000);
 							//setcookie("password",$password,time()+8000);
+							if($row[6]=='ADMINISTRADOR'||$row[6]=='OWNER'){
 							?>
 								<script LANGUAGE="javascript">location.href = "dashboard.php";</script>
 							<?php
+							}
+							elseif($row[6]=='VENDEDOR'){
+							?>
+								<script LANGUAGE="javascript">location.href = "carga_archivos_venta.php";</script>
+							<?php
+							}
+							elseif($row[6]=='BODEGA'){
+							?>
+								<script LANGUAGE="javascript">location.href = "carga_archivos_stock.php";</script>
+							<?php
+							}
 						}
 					else
 						{

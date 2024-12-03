@@ -3,15 +3,17 @@ include("puerta_principal.php");
 
 /*if ($id_local!='0'){$filtro_cliente=" and numero_local='$id_local'";}else{$filtro_cliente=" and numero_local='0'";}*/
 
-	$codigo_retail=$_GET['var1'];
+	$anio=$_GET['var1'];
+	$mes_desde=$_GET['var2'];
+	$mes_hasta=$_GET['var3'];
 
-	$aColumns = array('numero_local','nombre_local','ventas_semana_actual','dias_desde_ultima_venta', 'on_hand','id');
+	$aColumns = array('nombre_local','direccion','id');
 	
 	/* Indexed column (used for fast and accurate table cardinality) */
 	$sIndexColumn = "id";
 	
 	/* DB table to use */
-	$sTable = "comercial_stock_out";
+	$sTable = "locales";
 	
 	/* 
 	 * mysqli connection
@@ -61,7 +63,7 @@ include("puerta_principal.php");
 	$sWhere = "";
 	if ( $_GET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE numero_local!='0' and codigo_retail='$codigo_retail' and fecha_subida='$fechabase' and(";
+		$sWhere = "WHERE id!='0' and estado='ACTIVO' (";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= $aColumns[$i]." LIKE '%".$mysqli->real_escape_string( $_GET['sSearch'] )."%' OR ";
@@ -71,7 +73,7 @@ include("puerta_principal.php");
 	}
 	else
 	{
-		$sWhere = "WHERE numero_local!='0' and codigo_retail='$codigo_retail' and fecha_subida='$fechabase' ";
+		$sWhere = "WHERE id!='0' and estado='ACTIVO' ";
 	}
 	/* Individual column filtering */
 	for ( $i=0 ; $i<count($aColumns) ; $i++ )
@@ -137,14 +139,10 @@ include("puerta_principal.php");
 		
 		$row[] = $aRow[ $aColumns[0] ];	
 		$row[] = $aRow[ $aColumns[1] ];	
-		$numero_local= $aRow[$aColumns[0]];	
-		$nombre_local= $aRow[$aColumns[1]];
-		$ver_detalle_lote_venta ='<a style="color: #3ac47d" href="#" onclick="abrir_detalle_lote_venta(\''.$codigo_retail.'\',\''.$numero_local.'\',\''.$nombre_local.'\')">'.$aRow[ $aColumns[2] ].'</a>';
-		$row[] = $ver_detalle_lote_venta;
-		/*$row[] = $aRow[ $aColumns[2] ];*/	
-		$row[] = $aRow[ $aColumns[3] ];
-		$ver_detalle_lote_stock ='<a style="color: #3ac47d" href="#" onclick="abrir_detalle_lote(\''.$codigo_retail.'\',\''.$numero_local.'\',\''.$nombre_local.'\')">'.$aRow[ $aColumns[4] ].'</a>';
-		$row[] = $ver_detalle_lote_stock;	
+		$numero_local= $aRow[$aColumns[2]];	
+		$nombre_local= $aRow[$aColumns[0]];
+		$ver_detalle_local_rango ='<a style="color: #3ac47d" href="#" onclick="abrir_detalle_local_rango(\''.$numero_local.'\',\''.$nombre_local.'\',\''.$anio.'\',\''.$mes_desde.'\',\''.$mes_hasta.'\')"><i class="fa-sharp fa-solid fa-circle-exclamation text-success"></i></a>';
+		$row[] = $ver_detalle_local_rango;
 		
 		
 		$output['aaData'][] = $row;

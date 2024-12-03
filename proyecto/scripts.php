@@ -12,7 +12,7 @@
 
 <script src="assets/js/scripts-init/charts/apex-charts.js"></script>
 <script src="assets/js/scripts-init/charts/apex-series.js"></script>-->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!--Sparklines-->
 <script src="assets/js/vendors/charts/charts-sparklines.js"></script>
 <script src="assets/js/scripts-init/charts/charts-sparklines.js"></script>
@@ -184,7 +184,7 @@ $(document).ready(function()
 					$.post("notificaciones_ajax.php", {proceso:'LABOR'}, 
 					   function(data) 
 						{
-						if (data=='ADMINISTRADOR')
+						if (data=='OWNER')
 							{
 							var nombre=document.getElementById('nombre_cliente').innerHTML
 							console.log('para cliente')

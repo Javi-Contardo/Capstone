@@ -4,10 +4,10 @@ set_time_limit (3600);
 include("puerta_principal.php");
 $proceso=$_POST['proceso'];
 		
-if ($proceso=='DESACTIVAR_USUARIO')
+if ($proceso=='ELIMINAR_HOMOLOGACION')
 	{
 	$id=$_POST['id'];
-	$mysqli->query("update acceso set estado='SUSPENDIDO' where id_acceso='$id'");
+	$mysqli->query("DELETE FROM homologacion where id_homologacion='$id'");
 	$respuesta='OK';
 	$datos = array('respuesta' => $respuesta);
 	echo json_encode($datos);	

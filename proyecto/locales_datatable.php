@@ -1,7 +1,7 @@
 <?
 include("puerta_principal.php");
 
-if ($labor!='ADMINISTRADOR'){$filtro_cliente=" and id_cliente='$id_cliente' and nombre_labor!='ADMINISTRADOR' ";}else{ $filtro_cliente="  ";}
+
 
 	$aColumns = array( 'id', 'nombre_local', 'direccion' , 'estado');
 	
@@ -65,11 +65,11 @@ if ($labor!='ADMINISTRADOR'){$filtro_cliente=" and id_cliente='$id_cliente' and 
 			$sWhere .= $aColumns[$i]." LIKE '%".$mysqli->real_escape_string( $_GET['sSearch'] )."%' OR ";
 		}
 		$sWhere = substr_replace( $sWhere, "", -3 );
-		$sWhere .= ")  $filtro_cliente ";
+		$sWhere .= ") ";
 	}
 	else
 	{
-		$sWhere = "WHERE id!='' $filtro_cliente ";
+		$sWhere = "WHERE id!=''";
 	}
 	
 	/* Individual column filtering */

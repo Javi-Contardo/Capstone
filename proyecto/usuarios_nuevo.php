@@ -12,14 +12,9 @@ error_reporting(E_ALL);*/
         $(document).ready(function() 
             {
                 $("#act-usuarios").addClass("mm-active");
-<<<<<<< HEAD
 				$("#titulo-cabecera").text("Usuarios ");
 				$("#descripcion-cabecera").text("Módulo para la gestión de usuarios del sistema Gungastore");
 				$("#titulo-cabecera").append($("<a href='usuarios.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
-=======
-				$("#titulo-cabecera").text("Usuarios");
-				$("#descripcion-cabecera").text("Módulo para la gestión de usuarios del sistema Gungastore");
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 
                 //Evitar el envío del formulario al recargar la página.
                 if ( window.history.replaceState ) {
@@ -43,7 +38,7 @@ error_reporting(E_ALL);*/
 </head>
 
 <body>
-    <div class="app-container app-theme-gray">
+    <div class="app-container" style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-main">
             <?php include("sidebar-header.php");?>
             <div class="app-inner-layout app-inner-layout-page">
@@ -68,7 +63,12 @@ error_reporting(E_ALL);*/
                                                         $confirmar_clave= $_POST['clave'];
                                                         $id_clientex= $_POST['id_cliente'];
                                                         $clavecifrada= md5($clave);
-											             /*if ($id_user!='')
+													
+														$result = $mysqli->query("select nombre_local from locales where id='$id_localx'");
+													    if($row = $result->fetch_row()){
+														$nombre_local=$row[0];
+														}
+														/*if ($id_user!='')
                                                         {
                                                             $result = $mysqli->query("select id_acceso,email,nombre,clavevisual,nombre_labor,id_cliente,nombre_fantasia from acceso where id_acceso='$id_user'");
                                                             if($row = $result->fetch_row())
@@ -99,7 +99,7 @@ error_reporting(E_ALL);*/
                                                             else
                                                             {
                                                                
-                                                                if(!$mysqli -> query("INSERT INTO acceso(email,nombre,clavevisual,clavecifrada,estado,nombre_labor,id_local) VALUES ('$correo','$nombrec','$clave','$clavecifrada','ACTIVO','$laborx','$id_localx') ") )
+                                                                if(!$mysqli -> query("INSERT INTO acceso(email,nombre,clavevisual,clavecifrada,estado,nombre_labor,id_local,nombre_fantasia) VALUES ('$correo','$nombrec','$clave','$clavecifrada','ACTIVO','$laborx','$id_localx','$nombre_local') ") )
                                                                 {
                                                                     echo ("Error al crear el usuario. Error: ".$mysqli -> error);
                                                                 }
@@ -140,7 +140,7 @@ error_reporting(E_ALL);*/
                                                         <select class="mb-2 form-control-sm form-control" id="labor" name="labor" onChange="tipo_usuario()">
                                                             <option value="" disabled>Seleccione una labor</option>
                                                         <? 
-																$query = $mysqli -> query ("SELECT nombre_labor FROM labor where nombre_labor != 'ADMINISTRADOR' ");
+																$query = $mysqli -> query ("SELECT nombre_labor FROM labor where nombre_labor != 'OWNER' ");
 																while ($valores = mysqli_fetch_array($query)) {
 																	//echo '<option name="labor" value="'.$valores[nom_labor].'">'.$valores[nom_labor].'</option>';
 																	?>

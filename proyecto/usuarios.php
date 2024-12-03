@@ -97,11 +97,7 @@ error_reporting(E_ALL);*/
 
                         }); 	
                     }
-<<<<<<< HEAD
 /*			function eliminar_usuario(id) 
-=======
-			function eliminar_usuario(id) 
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
                     {
                         console.log("id:"+id);
                     $.post("usuarios_ajax.php", {id:id,proceso:'ELIMINAR_USUARIO'}, 
@@ -116,11 +112,7 @@ error_reporting(E_ALL);*/
                                 }
 
                         }); 	
-<<<<<<< HEAD
                     }*/
-=======
-                    }
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 		
             function activar_usuario(id)
                     {
@@ -159,7 +151,7 @@ error_reporting(E_ALL);*/
 </head>
 
 <body>
-    <div class="app-container app-theme-gray">
+    <div class="app-container"  style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-main">
         <?php include("sidebar-header.php");?>
             <div class="app-inner-layout app-inner-layout-page">

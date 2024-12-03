@@ -38,7 +38,7 @@ error_reporting(E_ALL);*/
 </head>
 
 <body>
-    <div class="app-container app-theme-gray">
+    <div class="app-container"  style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-main">
             <?php include("sidebar-header.php");?>
             <div class="app-inner-layout app-inner-layout-page">
@@ -98,7 +98,7 @@ error_reporting(E_ALL);*/
 																?>
                                                                  
                                                                     <script>
-                                                                        var func= alertaGeneralHref("Usuario creado","¡Usuario creado exitosamente!","success","locales.php");
+                                                                        var func= alertaGeneralHref("Local creado","¡Local creado exitosamente!","success","locales.php");
                                                                     </script> 
                                                                 <?php
                                                             }

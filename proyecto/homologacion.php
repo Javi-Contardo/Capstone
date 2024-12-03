@@ -12,9 +12,9 @@ error_reporting(E_ALL);*/
     <script>
         $(document).ready(function() 
             {
-                $("#act-locales").addClass("mm-active");
-				$("#titulo-cabecera").text("Locales");
-				$("#descripcion-cabecera").text("Módulo para la gestión de locales del sistema Gungastore");
+                $("#act-homologacion").addClass("mm-active");
+				$("#titulo-cabecera").text("Homologacion");
+				$("#descripcion-cabecera").text("Módulo para la gestión de homologacion del sistema Gungastore");
 
                 listado_datos();
             });	
@@ -24,7 +24,7 @@ error_reporting(E_ALL);*/
                     $('#ejemplo').dataTable( {
                         "bProcessing": true,
                         "bServerSide": true,
-                        "sAjaxSource": "locales_datatable.php",
+                        "sAjaxSource": "homologacion_datatable.php",
                         "paging": true,
                         "lengthChange": false,
                         "searching": true,
@@ -38,31 +38,18 @@ error_reporting(E_ALL);*/
                             {
                                 "targets": 0, 
                                 "className": "text-left",
-                                "width": "4%"
+                                "width": "30%"
                             },
                             {
                                 "targets": 1, 
                                 "className": "text-left",
-                                "width": "20%"
+                                "width": "30%"
                             },
                             {
                                 "targets": 2, 
                                 "className": "text-center",								                             
-                                "width": "50%"
+                                "width": "20%"
 
-                            },
-                            
-                            {
-                                "targets": 3, 
-                                "className": "text-center",
-                                "width": "15%"
-                            },
-                            
-                            {
-                                "targets": 4, 
-                                "className": "text-center",
-                                "width": "5%",
-								"orderable": false
                             }
                         ],
 
@@ -75,10 +62,11 @@ error_reporting(E_ALL);*/
                         setTimeout(function(){$('#modal-overlay').modal('hide')},3000);
                         
                     }
-            function desactivar_local(id) 
+		
+            function eliminar_homologacion(id) 
                     {
                         console.log("id:"+id);
-                    $.post("locales_ajax.php", {id:id,proceso:'DESACTIVAR_LOCAL'}, 
+                    $.post("homologacion_ajax.php", {id:id,proceso:'ELIMINAR_HOMOLOGACION'}, 
                     function(result) 
                         {
                             console.log(result);
@@ -86,22 +74,16 @@ error_reporting(E_ALL);*/
 
                             if (obj.respuesta=='OK')
                                 {
-                                    alertaGeneral("Local Suspendido","El local ha sido suspendido.","warning");
-                                    //listado_datos();
-									 $("#des"+id).addClass("d-none");
-                                	 $("#des"+id).removeClass("d-block");
-                                	 $("#act"+id).addClass("d-block");
-                                	 $("#act"+id).removeClass("d-none");
-									 listado_datos();
+                                    alertaGeneral("homologacion eliminada","La homologacion ha sido eliminada.","warning");
+                                    listado_datos();
                                 }
 
                         }); 	
                     }
-		
-            function activar_local(id)
+/*			function eliminar_usuario(id) 
                     {
                         console.log("id:"+id);
-                    $.post("locales_ajax.php", {id:id,proceso:'ACTIVAR_LOCAL'}, 
+                    $.post("usuarios_ajax.php", {id:id,proceso:'ELIMINAR_USUARIO'}, 
                     function(result) 
                         {
                             console.log(result);
@@ -109,13 +91,29 @@ error_reporting(E_ALL);*/
 
                             if (obj.respuesta=='OK')
                                 {
-                                    alertaGeneral("Local Activado","¡Local activado correctamente!","success");
+                                    alertaGeneral("Usuario Eliminado","El usuario ha sido eliminado.","warning");
+                                }
+
+                        }); 	
+                    }*/
+		
+            function activar_usuario(id)
+                    {
+                        console.log("id:"+id);
+                    $.post("usuarios_ajax.php", {id:id,proceso:'ACTIVAR_USUARIO'}, 
+                    function(result) 
+                        {
+                            console.log(result);
+                            var obj = JSON.parse(result);
+
+                            if (obj.respuesta=='OK')
+                                {
+                                    alertaGeneral("Usuario Activado","¡Usuario activado correctamente!","success");
                                     //listado_datos();
 									$("#des"+id).addClass("d-block");
                                 	$("#des"+id).removeClass("d-none");
                                 	$("#act"+id).addClass("d-none");
                                 	$("#act"+id).removeClass("d-block");
-									listado_datos();
                                 }
 
                         }); 	
@@ -148,16 +146,14 @@ error_reporting(E_ALL);*/
                                     <div class="col-md-12">
                                         <div class="main-card mb-3 card">
                                             <div class="card-body">
-                                                <a href="locales_nuevo.php" class="justify-content-end form-control-sm">
-                                                    <button class="mb-2 mr-2 btn btn-primary form-control-sm">Nuevo local</button>
+                                                <a href="homologacion_nuevo.php" class="justify-content-end form-control-sm">
+                                                    <button class="mb-2 mr-2 btn btn-primary form-control-sm">Nueva homologacion</button>
                                                 </a>
                                                 <table style="width: 100%;" id="ejemplo" class="table table-hover table-striped table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th>Id</th>
-                                                            <th>Comuna</th>
-                                                            <th>Direccion</th>
-                                                            <th>Estado</th>
+                                                            <th>Descripcion</th>
+                                                            <th>Codigo retail</th>
                                                             <th></th>
                                                         </tr>
                                                     </thead>

@@ -214,28 +214,28 @@ error_reporting(E_ERROR);
 			$diferencia1=$diferencia->days;
 			// Muestra la diferencia en días
 			$sumacnt=0;
-			$result3 = $mysqli->query("select sum(cnt_pos) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario='$fecha_actual' ");
-				if ($row3=$result3->fetch_assoc())
-				{
-					$sumacnt=$row3['suma'];
-				}
-				$result31 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana2' and '$fechaTerminoSemana2'  ");
-				if ($row31=$result31->fetch_assoc())
-				{
-					$sumacnt2=$row31['suma'];
-				}
-				$result32 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana3' and '$fechaTerminoSemana3'  ");
-				if ($row32=$result32->fetch_assoc())
-				{
-					$sumacnt3=$row32['suma'];
-				}
-				$result33 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana4' and '$fechaTerminoSemana4'  ");
-				if ($row33=$result33->fetch_assoc())
-				{
-					$sumacnt4=$row33['suma'];
-				}
+			$result3 = $mysqli->query("select sum(cnt_pos) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario='$fecha_actual' group by lote");
+			while ($row3=$result3->fetch_assoc())
+			{
+				$sumacnt+=$row3['suma'];
+			}
+			$result31 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana2' and '$fechaTerminoSemana2'  ");
+			if ($row31=$result31->fetch_assoc())
+			{
+				$sumacnt2=$row31['suma'];
+			}
+			$result32 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana3' and '$fechaTerminoSemana3'  ");
+			if ($row32=$result32->fetch_assoc())
+			{
+				$sumacnt3=$row32['suma'];
+			}
+			$result33 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana4' and '$fechaTerminoSemana4'  ");
+			if ($row33=$result33->fetch_assoc())
+			{
+				$sumacnt4=$row33['suma'];
+			}
 
-				$sumacntpromedio=($sumacnt+$sumacnt2+$sumacnt3+$sumacnt4)/4;
+			$sumacntpromedio=($sumacnt+$sumacnt2+$sumacnt3+$sumacnt4)/4;
 
 			$on_hand_general=0;
 			$fecha_ultima_carga=$fechabase;
@@ -268,7 +268,7 @@ error_reporting(E_ERROR);
 			
 			$nombre_local='General';
 			$numero_local='0';
-			$result7 = $mysqli->query("select * from comercial_stock_out where numero_semana='$semcalendario' and codigo_retail='$codigo_retail' and numero_local='0' ");
+			$result7 = $mysqli->query("select * from comercial_stock_out where fecha_subida='$fecha_actual' and codigo_retail='$codigo_retail' and numero_local='0' ");
 			if ($row7=$result7->fetch_assoc())
 			{
 				$id_registro=$row7['id'];
@@ -289,7 +289,7 @@ error_reporting(E_ERROR);
 				$nombre_local=$row6['nombre_local'];
 				$numero_local=$row6['id'];
 				
-					$result5 = $mysqli->query("select sum(cantidad_existente_tienda) as caet from comercial_stock where numero_articulo='$codigo_retail' and numero_tienda='$numero_local' and fecha_carga='$fecha_ultima_carga'");
+					$result5 = $mysqli->query("select sum(cantidad_existente_tienda) as caet from comercial_stock where numero_articulo='$codigo_retail' and numero_tienda='$numero_local' and fecha_carga='$fechabase'");
 					if ($row5=$result5->fetch_assoc())
 					{
 						$on_hand_general=$row5['caet'];
@@ -341,10 +341,14 @@ error_reporting(E_ERROR);
 
 					$sumacnt=0;
 					/// pendiente a revisar
-					$result3 = $mysqli->query("select cnt_pos as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario='$fecha_actual' and numero_tienda='$numero_local' ");
-					if ($row3=$result3->fetch_assoc())
+					$result3 = $mysqli->query("select sum(cnt_pos) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario='$fecha_actual' and numero_tienda='$numero_local' group by lote");
+					while ($row3=$result3->fetch_assoc())
 					{
-						$sumacnt=$row3['suma'];
+						$sumacnt+=$row3['suma'];
+					}
+				if($sumacnt==null)
+					{
+						$sumacnt=0;
 					}
 					$result31 = $mysqli->query("select coalesce(sum(cnt_pos),0) as suma from comercial_ventas where numero_articulo='$codigo_retail' and diario between '$fechaInicioSemana2' and '$fechaTerminoSemana2' and numero_tienda='$numero_local'");
 					if ($row31=$result31->fetch_assoc())
@@ -367,10 +371,7 @@ error_reporting(E_ERROR);
 
 
 
-					if($sumacnt==null)
-					{
-						$sumacnt=0;
-					}
+					
 
 					$sem_inventario='0';
 					if($sumacntpromedio>0){

@@ -43,34 +43,46 @@
 					</li>
 					<!-- SUB. SIDEBAR -->
 					<li class="app-sidebar__heading">Configuración</li>
+					
 					<li class="" id="act-carga-archivos">
 						<a href="#">
 							<i class="metismenu-icon fa-solid fa-code-branch"></i>
 							Registro de archivos
 							<i id="caretIcon" class="fa-solid fa-caret-down fa-rotate-90"></i>
 						</a>
+						
 						<ul class="">
-							
+							<? if ($labor!='BODEGA'){?>
 							<li><a href="carga_archivos_venta.php" id="act-carga-venta" style="list-style: none;"><i class="fa-solid fa-dollar-sign" style="margin-right: 5px"></i> Ventas</a></li>
+							<? }
+							if ($labor!='VENDEDOR'){?>
 							<li><a href="carga_archivos_stock.php" id="act-stock" style="list-style: none;"><i class="fa-solid fa-chart-simple" style="margin-right: 5px"></i>Stock</a></li>
+							<? }?>
 						</ul>
 					</li>
 					<!-- SUB. SIDEBAR -->
 					
-					<? if ($labor=='ADMINISTRADOR'){?>
+					<? if ($labor=='ADMINISTRADOR'||$labor=='OWNER'){?>
 					
 					<li class="app-sidebar__heading">ADMINISTRACI&oacute;N</li>
-					<? if ($labor=='ADMINISTRADOR'){?>
+					<? if ($labor=='OWNER'){?>
 					<li id="act-locales">
 						<a href="locales.php">
 							<i class="metismenu-icon fa-solid fa-star"></i>Locales
 						</a>
 					</li>
 					<? } ?>
-					<? if ($labor=='ADMINISTRADOR'){?>
+					<? if ($labor=='ADMINISTRADOR'||$labor=='OWNER'){?>
 					<li id="act-usuarios">
 						<a href="usuarios.php">
 							<i class="metismenu-icon fa-solid fa-user"u></i>Usuarios
+						</a>
+					</li>
+					<? } ?>
+					<? if ($labor=='ADMINISTRADOR'||$labor=='OWNER'){?>
+					<li id="act-homologacion">
+						<a href="homologacion.php">
+							<i class="metismenu-icon fa-solid fa-user"u></i>Homologacion
 						</a>
 					</li>
 					<? } ?>
@@ -88,10 +100,10 @@
 
 
 <!-- ANIMACIONES SIDEBAR -->
-<div class="app-sidebar-overlay d-none animated fadeIn"></div>
+<div class="app-sidebar-overlay d-none animated fadeIn" ></div>
 <div class="app-main__outer">
 	<div class="app-main__inner">
-		<div  style="background-color: azure" class="header-mobile-wrapper">
+		<div  style="background: linear-gradient(to bottom, #87cefa,#6a0dad );" class="header-mobile-wrapper">
 			<div class="app-header__logo">
 				<a href="#" data-toggle="tooltip" data-placement="bottom" title="GungaStore" class=""><img src="assets/images/logo-lol.png" alt="GungaStore" class="logo-img" style="width: 200px"></a>
 				<button type="button" class="hamburger hamburger--elastic mobile-toggle-sidebar-nav">
@@ -122,19 +134,19 @@
 <!-- HEADER -->
 <div class="app-header">
 	<div class="page-title-heading">
-		<span id="titulo-cabecera" >_</span>
-		<div id="descripcion-cabecera" class="page-title-subheading">
+		<span id="titulo-cabecera" style="color: white" >_</span>
+		<div id="descripcion-cabecera" class="page-title-subheading" style="color: white">
 		...
 		</div>
 	</div>
-	<div class="app-header-right">
+	<div class="app-header-right" >
 		<div class="header-btn-lg pr-0">
 			<div class="header-dots">
 				<div class="dropdown">
-					<button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="p-0 btn btn-link">
+					<button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="p-0 btn btn-link" style="color: aliceblue">
 						<div class="page-title-heading text-decoration-none" id="nombre_cliente"><?=$nombre_local;?></div>
 					</button>
-					<? if ($labor=='ADMINISTRADOR'){?>
+					<? if ($labor=='ADMINISTRADOR'||$labor=='OWNER'){?>
 					<div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-xl rm-pointers dropdown-menu dropdown-menu-right">
 						<div class="dropdown-menu-header mb-0">
 							<div class="dropdown-menu-header-inner bg-night-sky">
@@ -166,7 +178,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="header-btn-lg pr-0">
+		<div class="header-btn-lg pr-0" >
 			<div class="widget-content p-0">
 				<div class="widget-content-wrapper">
 					<div class="widget-content-left">

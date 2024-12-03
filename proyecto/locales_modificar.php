@@ -45,7 +45,7 @@ $local = $result->fetch_assoc(); // Obtenemos los datos del local
 </head>
 
 <body>
-    <div class="app-container app-theme-gray">
+    <div class="app-container"  style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-main">
             <?php include("sidebar-header.php");?>
             <div class="app-inner-layout app-inner-layout-page">

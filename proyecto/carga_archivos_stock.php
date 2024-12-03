@@ -382,6 +382,12 @@ error_reporting(E_ALL)*/
                       });
                   
         	}
+		
+		function descargar_ejemplo_stock(){
+			window.open(`descargar_ejemplo_stock_descarga_ejemplo.php`,`_blank`);
+		}
+		
+		
 	</script>
     <style>
         .custom-file-input ~ .custom-file-label::after {
@@ -392,7 +398,7 @@ error_reporting(E_ALL)*/
 </head>
 
 <body>
-    <div class="app-container app-theme-gray">
+    <div class="app-container" style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-main">
             <?php include("sidebar-header.php");?>
             <div class="app-inner-layout app-inner-layout-page">
@@ -404,19 +410,27 @@ error_reporting(E_ALL)*/
                                     <div class="col-md-12">
                                         <div class="main-card mb-3 card">
                                             <div class="card-body">
-                                                <h5 class="card-title">Subir archivo.</h5>
-                                                <div class="row mb-3">
-                                                    <div class="col-1"></div>
-                                                    <div class="col-10">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="customFile1" onChange="sube_archivo(this)">
-                                                            <label class="custom-file-label" for="customFile">Seleccionar archivo</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1"></div>
-                                                    
-                                                </div>
-                                            </div>
+												<div class="row mb-3">
+													<div class="col-2">
+														<h5 class="card-title">Subir archivo.</h5>
+													</div>
+													<div class="col-2">
+														<a href="#" class="justify-content-end" onClick="descargar_ejemplo_stock()">
+															<button class="mb-2 mr-2 btn btn-primary form-control-sm">Descargar ejemplo</button>
+														</a>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-1"></div>
+													<div class="col-10">
+														<div class="custom-file">
+															<input type="file" class="custom-file-input" id="customFile1" onChange="sube_archivo(this)">
+															<label class="custom-file-label" for="customFile">Seleccionar archivo</label>
+														</div>
+													</div>
+													<div class="col-1"></div>
+												</div>
+											</div>
                                         </div>
                                     </div>
                                 </div>

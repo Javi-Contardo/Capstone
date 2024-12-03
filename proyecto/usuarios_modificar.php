@@ -12,14 +12,9 @@ error_reporting(E_ALL);*/
         $(document).ready(function() 
             {
                 $("#act-usuarios").addClass("mm-active");
-<<<<<<< HEAD
 				$("#titulo-cabecera").text("Usuarios ");
 				$("#descripcion-cabecera").text("Módulo para la gestión de usuarios del sistema Gungastore");
 				$("#titulo-cabecera").append($("<a href='usuarios.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
-=======
-				$("#titulo-cabecera").text("Usuarios");
-				$("#descripcion-cabecera").text("Módulo para la gestión de usuarios del sistema Gungastore");
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 
                 //Evitar el envío del formulario al recargar la página.
                 if ( window.history.replaceState ) {
@@ -44,7 +39,7 @@ error_reporting(E_ALL);*/
 </head>
 
 <body>
-    <div class="app-container app-theme-gray">
+    <div class="app-container"  style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-main">
             <?php include("sidebar-header.php");?>
             <div class="app-inner-layout app-inner-layout-page">
@@ -81,7 +76,7 @@ error_reporting(E_ALL);*/
 																$confirmar_clave=$row[3];
 																$nombre_labor_actual=$row[4];
 																$id_local_actual=$row[5];
-																$query1 = $mysqli -> query ("SELECT id, nombre_local FROM locales where id='$id_local_actual'");
+																$query1 = $mysqli -> query ("SELECT id, nombre_local FROM locales where id='$local'");
 																if ($valores1 = mysqli_fetch_array($query1)) 
 																{
 																	$nombre_local=$valores1[1];
@@ -111,7 +106,7 @@ error_reporting(E_ALL);*/
                                                                                                         email= '$correo',
                                                                                                         nombre='$nombrec',
                                                                                                         clavevisual='$clave', clavecifrada='$clavecifrada',
-                                                                                                        nombre_labor='$laborx',id_local='$local' where id_acceso='$id_user'")) 
+                                                                                                        nombre_labor='$laborx',id_local='$local', nombre_fantasia='$nombre_local' where id_acceso='$id_user'")) 
                                                                 {
                                                                     echo ("Error al modificar el usuario. Error: ".$mysqli -> error);
                                                                 }

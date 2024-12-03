@@ -8,14 +8,8 @@
             {
                 $("#act-carga-archivos").addClass("mm-active");
                 $("#act-carga-venta").addClass("mm-active");
-<<<<<<< HEAD
                 $("#titulo-cabecera").text("Carga de Archivos Ventas");
                 $("#titulo-cabecera").append($("<a href='dashboard.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
-=======
-                $("#titulo-cabecera").text("Conectores B2B (Walmart) | ");
-                $("#titulo-cabecera").append($("<a href='conectorb2b_walmart.php' class='text-success'><i class='fa-solid fa-arrow-left'></i> Atras</a>"));
-                $("#descripcion-cabecera").text("Cargar Archivo Cuenta Corriente");
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
             });
         
         function listado()
@@ -80,11 +74,7 @@
       
         function sube_archivo(input) 
         	{
-<<<<<<< HEAD
             $.post("carga_archivos_venta_progreso_cancelar.php",{limpiar_sesion:'OK'})
-=======
-            $.post("carga_archivos_walmart_venta_progreso_cancelar.php",{limpiar_sesion:'OK'})
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
             console.log("Espere un momento por favor");
             var reader = new FileReader();
             reader.onload = function (e) 
@@ -248,12 +238,6 @@
 						setTimeout(function (){
 							$('#modal-overlay2').modal('hide')
 							var inputfile=document.getElementById('customFile1').file;
-<<<<<<< HEAD
-=======
-							var clone = inputfile.clone();
-							clone.value = '';
-							inputfile.replaceWith(clone);
->>>>>>> 2f8a61adda3ae6fe02dddb3a243eca03f8eb2ceb
 							//document.getElementById('modal-warning-texto2').innerHTML=obj.respuesta;
 						},500);
 						listado();
@@ -391,6 +375,10 @@
                       });
                   
         	}
+		
+		function descargar_ejemplo_ventas(){
+			window.open(`descargar_ejemplo_ventas_descarga_ejemplo.php`,`_blank`);
+		}
 	</script>
     <style>
         .custom-file-input ~ .custom-file-label::after {
@@ -401,7 +389,7 @@
 </head>
 
 <body>
-    <div class="app-container app-theme-gray">
+    <div class="app-container" style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-main">
             <?php include("sidebar-header.php");?>
             <div class="app-inner-layout app-inner-layout-page">
@@ -413,19 +401,27 @@
                                     <div class="col-md-12">
                                         <div class="main-card mb-3 card">
                                             <div class="card-body">
-                                                <h5 class="card-title">Subir archivo.</h5>
-                                                <div class="row mb-3">
-                                                    <div class="col-1"></div>
-                                                    <div class="col-10">
-                                                        <div class="custom-file">
-                                                            <input type="file" class="custom-file-input" id="customFile1" onChange="sube_archivo(this)">
-                                                            <label class="custom-file-label" for="customFile">Seleccionar archivo</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1"></div>
-                                                    
-                                                </div>
-                                            </div>
+												<div class="row mb-3">
+													<div class="col-2">
+														<h5 class="card-title">Subir archivo.</h5>
+													</div>
+													<div class="col-2">
+														<a href="#" class="justify-content-end" onClick="descargar_ejemplo_ventas()">
+															<button class="mb-2 mr-2 btn btn-primary form-control-sm">Descargar ejemplo</button>
+														</a>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-1"></div>
+													<div class="col-10">
+														<div class="custom-file">
+															<input type="file" class="custom-file-input" id="customFile1" onChange="sube_archivo(this)">
+															<label class="custom-file-label" for="customFile">Seleccionar archivo</label>
+														</div>
+													</div>
+													<div class="col-1"></div>
+												</div>
+											</div>
                                         </div>
                                     </div>
                                 </div>

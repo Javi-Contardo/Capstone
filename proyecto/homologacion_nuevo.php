@@ -11,9 +11,10 @@ error_reporting(E_ALL);*/
     <script>
         $(document).ready(function() 
             {
-                $("#act-usuarios").addClass("mm-active");
-				$("#titulo-cabecera").text("Usuarios");
-				$("#descripcion-cabecera").text("Módulo para la gestión de usuarios del sistema Gungastore");
+                $("#act-homologacion").addClass("mm-active");
+				$("#titulo-cabecera").text("Homologacion ");
+				$("#descripcion-cabecera").text("Módulo para la gestión de homologacion del sistema Gungastore");
+				$("#titulo-cabecera").append($("<a href='homologacion.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
 
                 //Evitar el envío del formulario al recargar la página.
                 if ( window.history.replaceState ) {
@@ -37,7 +38,7 @@ error_reporting(E_ALL);*/
 </head>
 
 <body>
-    <div class="app-container app-theme-gray">
+    <div class="app-container" style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-main">
             <?php include("sidebar-header.php");?>
             <div class="app-inner-layout app-inner-layout-page">
@@ -49,8 +50,8 @@ error_reporting(E_ALL);*/
                                     <div class="col-md-12">
                                         <div class="main-card mb-3 card">
                                             <div class="card-body">
-                                                <h5 class="card-title">Crear usuario.</h5>
-                                                <form id="formRegistrarUsuario" class="col-md-10 mx-auto" method="post" action="">
+                                                <h5 class="card-title">Crear homologacion.</h5>
+                                                <form id="#" class="col-md-10 mx-auto" method="post" action="">
                                                     <?php
                                                        
                                                         $btnRegistrar= $_POST['btnRegistrar'];
@@ -62,7 +63,12 @@ error_reporting(E_ALL);*/
                                                         $confirmar_clave= $_POST['clave'];
                                                         $id_clientex= $_POST['id_cliente'];
                                                         $clavecifrada= md5($clave);
-											             /*if ($id_user!='')
+													
+														$result = $mysqli->query("select nombre_local from locales where id='$id_localx'");
+													    if($row = $result->fetch_row()){
+														$nombre_local=$row[0];
+														}
+														/*if ($id_user!='')
                                                         {
                                                             $result = $mysqli->query("select id_acceso,email,nombre,clavevisual,nombre_labor,id_cliente,nombre_fantasia from acceso where id_acceso='$id_user'");
                                                             if($row = $result->fetch_row())
@@ -80,20 +86,20 @@ error_reporting(E_ALL);*/
                                                             
                                                             //Validar si existe el email registrado en la BD
 											
-                                                            $result = $mysqli->query("select id_acceso,email,nombre,clavevisual,nombre_labor from acceso where email='$correo' ");
+                                                            $result = $mysqli->query("select * from homologacion where codigo_retail='$correo' ");
                                                             if($row2 = $result->fetch_row())
                                                             {
                                                                 ?>
                                                                 <script>
                                                                     //Función importada desde sidebar-header.php
-                                                                    alertaGeneral("Error al crear usuario","El correo del usuario ya posee una cuenta asociada.","error");
+                                                                    alertaGeneral("Error al crear la homologacion","El codigo de retail ya pertenece a un producto.","error");
                                                                 </script>
                                                                 <?PHP
                                                             }
                                                             else
                                                             {
                                                                
-                                                                if(!$mysqli -> query("INSERT INTO acceso(email,nombre,clavevisual,clavecifrada,estado,nombre_labor,id_local) VALUES ('$correo','$nombrec','$clave','$clavecifrada','ACTIVO','$laborx','$id_localx') ") )
+                                                                if(!$mysqli -> query("INSERT INTO homologacion(descripcion,codigo_retail) VALUES ('$nombrec','$correo') ") )
                                                                 {
                                                                     echo ("Error al crear el usuario. Error: ".$mysqli -> error);
                                                                 }
@@ -102,7 +108,7 @@ error_reporting(E_ALL);*/
 																?>
                                                                  
                                                                     <script>
-                                                                        var func= alertaGeneralHref("Usuario creado","¡Usuario creado exitosamente!","success","usuarios.php");
+                                                                        var func= alertaGeneralHref("Homologacion creado","¡Homologacion creado exitosamente!","success","homologacion.php");
                                                                     </script> 
                                                                 <?php
                                                             }
@@ -114,68 +120,22 @@ error_reporting(E_ALL);*/
                                                           
                                                     ?>
                                                     <div class="form-group">
-                                                        <label for="nombrec">Nombre Completo</label>
+                                                        <label for="nombrec">Nombre Producto</label>
                                                         <div>
                                                             <input type="text" class="mb-2 form-control-sm form-control" id="nombrec"
-                                                                name="nombrec" placeholder="Escriba su nombre completo acá..." value="<?=$nombrec;?>"/>
+                                                                name="nombrec" placeholder="Escriba el nombre de producto acá..." value="<?=$nombrec;?>"/>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="correo">Correo electrónico</label>
+                                                        <label for="correo">Codigo retail</label>
                                                         <div>
                                                             <input type="text" class="mb-2 form-control-sm form-control" id="email"
-                                                                name="correo" placeholder="Ejemplo: hugot@gmail.com..." value="<?=$correo;?>"/>
+                                                                name="correo" placeholder="Escriba el Codigo retail acá..." value="<?=$correo;?>"/>
                                                         </div>
-                                                    </div>
-
+													</div>
                                                     <div class="form-group">
-                                                        <label for="labor">Labor</label>
-                                                        <select class="mb-2 form-control-sm form-control" id="labor" name="labor" onChange="tipo_usuario()">
-                                                            <option value="" disabled>Seleccione una labor</option>
-                                                        <? 
-																$query = $mysqli -> query ("SELECT nombre_labor FROM labor where nombre_labor != 'OWNER' ");
-																while ($valores = mysqli_fetch_array($query)) {
-																	//echo '<option name="labor" value="'.$valores[nom_labor].'">'.$valores[nom_labor].'</option>';
-																	?>
-																		<option name="opLabor" value="<?=$valores['nombre_labor']?>" <? if($laborx==$valores['nombre_labor'])  {?>selected<? }?>   ><?=$valores['nombre_labor']?></option>
-																	<?
-																}
-													    ?>
-                                                        </select>
-                                                    </div>
-													<div class="form-group">
-                                                        <label for="local">Local</label>
-                                                        <select class="mb-2 form-control-sm form-control" id="local" name="local">
-                                                            <option value="" disabled>Seleccione un local</option>
-                                                        <? 
-																$query = $mysqli -> query ("SELECT id, nombre_local FROM locales");
-																while ($valores = mysqli_fetch_array($query)) {
-																	?>
-																		<option name="opLocal" value="<?=$valores['id']?>" <? if($localx==$valores['nombre_local'])  {?>selected<? }?>   ><?=$valores['nombre_local']?></option>
-																	<?
-																}
-													    ?>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="clave">Contraseña</label>
-                                                        <input type="password" class="mb-2 form-control-sm form-control" id="clave"
-                                                            name="clave" placeholder="Escriba su contraseña acá..." value="<?=$clave;?>"/>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="confirm_password">Repetir contraseña</label>
-                                                        <div>
-                                                            <input type="password" class="mb-2 form-control-sm form-control"
-                                                                id="confirmar_clave" name="confirmar_clave"
-                                                                placeholder="Repita su contraseña acá..." value="<?=$confirmar_clave;?>"/>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary form-control-sm" name="btnRegistrar" value="btnRegistrar"> Crear usuario </button>
+                                                        <button type="submit" class="btn btn-primary form-control-sm" name="btnRegistrar" value="btnRegistrar"> Crear Homologacion </button>
                                                     </div>
                                                 </form>
                                             </div>

@@ -50,7 +50,7 @@
 </head>
 
 <body>
-    <div class="app-container">
+    <div class="app-container" style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-container">
             <div class="h-100 bg-blue-plate bg-animation">
                 <div class="d-flex h-100 justify-content-center align-items-center">
@@ -63,8 +63,9 @@
                                     <div class="modal-body">
                                         <div class="h5 modal-title text-center text-dark">
                                             <h4 class="mt-2">
-                                                <div>Inicio de sesión</div>
-                                            </h4>
+												<img src="dev.negocioelchinoges.cl/assets/images/logo-lol.png" width="200" height="200" alt=""/>
+                                                <strong><div>Inicio de sesión</div></strong>
+											</h4>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-md-12">

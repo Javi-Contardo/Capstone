@@ -146,7 +146,7 @@ if ($proceso=='CAMPANA')
 if ($proceso=='NOTIFICA_OK')
 	{
 	$id=$_POST['id'];
-	if ($labor=='ADMINISTRADOR')
+	if ($labor=='OWNER')
 		{
 		$mysqli->query("update notificaciones set notificado=1 where id='$id'");
 		}

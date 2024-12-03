@@ -1,7 +1,7 @@
 <?
-ini_set('display_errors', 1);
+/*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ERROR);
+error_reporting(E_ERROR);*/
 include("puerta_principal.php");
 
 if ($id_local!='0'){$filtro_cliente=" and numero_tienda='$id_local'";}else{$filtro_cliente="";}
@@ -104,7 +104,6 @@ if ($id_local!='0'){$filtro_cliente=" and numero_tienda='$id_local'";}else{$filt
 		$sOrder
 		$sLimit
 	";
-
 	$rResult = $mysqli->query($sQuery) or die(mysqli_error($mysqli));
 	/* Data set length after filtering */
 	$sQuery = "
@@ -145,14 +144,11 @@ if ($id_local!='0'){$filtro_cliente=" and numero_tienda='$id_local'";}else{$filt
 		$row[] = $aRow[ $aColumns[4] ];	
 		$row[] = $aRow[ $aColumns[5] ];	
 		$row[] = $aRow[ $aColumns[6] ];
-		// Convertir $aRow[$aColumns[6]] a un objeto DateTime
 		$fecha_vencimiento = new DateTime(date('Y-m-d', strtotime($aRow[$aColumns[6]])));
 
-		// Crear un objeto DateTime para la fecha actual
 		$hoy = new DateTime();
-		
-		$diferencia = $hoy->diff($fecha_vencimiento);
-		$diferencia = $diferencia->days;
+
+		$diferencia = $hoy->diff($fecha_vencimiento)->format('%r%a');
 		$row[] = $diferencia;	
 		if($diferencia>=1)
 		{
