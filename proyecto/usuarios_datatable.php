@@ -1,7 +1,7 @@
 <?
 include("puerta_principal.php");
 
-if ($labor!='OWNER'){$filtro_cliente=" and id_cliente='$id_cliente' and nombre_labor!='OWNER' ";}else{ $filtro_cliente="  ";}
+if ($labor!='OWNER'||$id_local!='0'){$filtro_cliente=" and id_local='$id_local' and nombre_labor!='OWNER' ";}else{ $filtro_cliente="  ";}
 
 	$aColumns = array( 'nombre', 'email', 'nombre_labor', 'estado', 'id_local','id_acceso' );
 	
@@ -59,7 +59,7 @@ if ($labor!='OWNER'){$filtro_cliente=" and id_cliente='$id_cliente' and nombre_l
 	$sWhere = "";
 	if ( $_GET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE (";
+		$sWhere = "WHERE id_acceso!='' and id_acceso!='$id_usuario' $filtro_cliente (";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= $aColumns[$i]." LIKE '%".$mysqli->real_escape_string( $_GET['sSearch'] )."%' OR ";
@@ -69,7 +69,7 @@ if ($labor!='OWNER'){$filtro_cliente=" and id_cliente='$id_cliente' and nombre_l
 	}
 	else
 	{
-		$sWhere = "WHERE id_acceso!='' $filtro_cliente ";
+		$sWhere = "WHERE id_acceso!='' and id_acceso!='$id_usuario' $filtro_cliente ";
 	}
 	
 	/* Individual column filtering */
@@ -79,7 +79,7 @@ if ($labor!='OWNER'){$filtro_cliente=" and id_cliente='$id_cliente' and nombre_l
 		{
 			if ( $sWhere == "" )
 			{
-				$sWhere = "WHERE id_acceso!='' $filtro_cliente ";
+				$sWhere = "WHERE ";
 			}
 			else
 			{

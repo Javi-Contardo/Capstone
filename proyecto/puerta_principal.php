@@ -28,6 +28,26 @@
 						{
 						$nombre_local = "$row100[1]";
 						}
+				if ($labor == "ADMINISTRADOR" && (basename($_SERVER['PHP_SELF']) == "homologacion.php"||basename($_SERVER['PHP_SELF']) == "homologacion_nuevo.php"||basename($_SERVER['PHP_SELF']) == "homologacion_modificar.php"||basename($_SERVER['PHP_SELF']) == "locales.php"||basename($_SERVER['PHP_SELF']) == "locales_modificar.php"||basename($_SERVER['PHP_SELF']) == "locales_nuevo.php")) {
+					?>
+					<script language="javascript">location.href = "dashboard.php";</script>
+					<?php
+					exit();
+				}
+				if ($labor == "BODEGA" && (basename($_SERVER['PHP_SELF']) == "homologacion.php"||basename($_SERVER['PHP_SELF']) == "homologacion_nuevo.php"||basename($_SERVER['PHP_SELF']) == "homologacion_modificar.php"||basename($_SERVER['PHP_SELF']) == "locales.php"||basename($_SERVER['PHP_SELF']) == "locales_modificar.php"||basename($_SERVER['PHP_SELF']) == "locales_nuevo.php"||basename($_SERVER['PHP_SELF']) == "dashboard.php"||basename($_SERVER['PHP_SELF']) == "carga_archivos_venta.php")) {
+					?>
+					<script language="javascript">location.href = "carga_archivos_stock.php";</script>
+					<?php
+					exit(); 
+				}
+				if ($labor == "VENTA" && (basename($_SERVER['PHP_SELF']) == "homologacion.php"||basename($_SERVER['PHP_SELF']) == "homologacion_nuevo.php"||basename($_SERVER['PHP_SELF']) == "homologacion_modificar.php"||basename($_SERVER['PHP_SELF']) == "locales.php"||basename($_SERVER['PHP_SELF']) == "locales_modificar.php"||basename($_SERVER['PHP_SELF']) == "locales_nuevo.php"||basename($_SERVER['PHP_SELF']) == "dashboard.php"||basename($_SERVER['PHP_SELF']) == "carga_archivos_stock.php")) {
+					?>
+					<script language="javascript">location.href = "carga_archivos_venta.php";</script>
+					<?php
+					exit(); 
+				}
+				
+				
 				}
 			else
 				{

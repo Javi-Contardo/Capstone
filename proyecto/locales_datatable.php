@@ -59,7 +59,7 @@ include("puerta_principal.php");
 	$sWhere = "";
 	if ( $_GET['sSearch'] != "" )
 	{
-		$sWhere = "WHERE (";
+		$sWhere = "WHERE id!='' $filtro_cliente (";
 		for ( $i=0 ; $i<count($aColumns) ; $i++ )
 		{
 			$sWhere .= $aColumns[$i]." LIKE '%".$mysqli->real_escape_string( $_GET['sSearch'] )."%' OR ";
@@ -69,7 +69,7 @@ include("puerta_principal.php");
 	}
 	else
 	{
-		$sWhere = "WHERE id!=''";
+		$sWhere = "WHERE id!='' $filtro_cliente";
 	}
 	
 	/* Individual column filtering */
@@ -79,7 +79,7 @@ include("puerta_principal.php");
 		{
 			if ( $sWhere == "" )
 			{
-				$sWhere = "WHERE id!='' $filtro_cliente ";
+				$sWhere = "WHERE ";
 			}
 			else
 			{

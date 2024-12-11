@@ -1,47 +1,39 @@
-<?php include("puerta_principal.php");
-/*ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);*/
+<?php
+include("puerta_principal.php");
 ?>
-
 <html lang="es">
 
 <head>
-    <?php include("scripts-header.php");?>
+    <?php include("scripts-header.php"); ?>
     <script>
-        $(document).ready(function() 
-            {
-                $("#act-usuarios").addClass("mm-active");
-				$("#titulo-cabecera").text("Usuarios ");
-				$("#descripcion-cabecera").text("Módulo para la gestión de usuarios del sistema Gungastore");
-				$("#titulo-cabecera").append($("<a href='usuarios.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
+        $(document).ready(function () {
+            $("#act-usuarios").addClass("mm-active");
+            $("#titulo-cabecera").text("Usuarios ");
+            $("#descripcion-cabecera").text("Módulo para la gestión de usuarios del sistema Gungastore");
+            $("#titulo-cabecera").append($("<a href='usuarios.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
 
-                //Evitar el envío del formulario al recargar la página.
-                if ( window.history.replaceState ) {
-                    window.history.replaceState( null, null, window.location.href );
-                }
-            
-			tipo_usuario();
-			
-			
-            });
-         
-        function tipo_usuario()
-        {
-            if($("#labor").val()=='ANALISTA'||$("#labor").val()=='LOGISTICA'||$("#labor").val()=='COMERCIAL'){
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+
+            tipo_usuario();
+        });
+
+        function tipo_usuario() {
+            if ($("#labor").val() == 'ANALISTA' || $("#labor").val() == 'LOGISTICA' || $("#labor").val() == 'COMERCIAL') {
                 $("#lista_clientes").removeClass("d-none");
-            }else{
+            } else {
                 $("#lista_clientes").addClass("d-none");
             }
         }
-	</script>
+    </script>
     <title>Gungastore</title>
 </head>
 
 <body>
-    <div class="app-container"  style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
+    <div class="app-container" style="background: linear-gradient(to bottom, #6a0dad, #87cefa);">
         <div class="app-main">
-            <?php include("sidebar-header.php");?>
+            <?php include("sidebar-header.php"); ?>
             <div class="app-inner-layout app-inner-layout-page">
                 <div class="app-inner-layout__wrapper">
                     <div class="app-inner-layout__content pt-1">
@@ -54,92 +46,88 @@ error_reporting(E_ALL);*/
                                                 <h5 class="card-title">Modificar usuario.</h5>
                                                 <form id="formRegistrarUsuario" class="col-md-10 mx-auto" method="post" action="">
                                                     <?php
-                                                        $id_user=$_GET['id_usuario'];
+                                                    $id_user = $_GET['id_usuario'];
 
-                                                        $btnRegistrar= $_POST['btnRegistrar'];
-                                                        $nombrec= strtoupper($_POST['nombrec']);
-                                                        $correo= strtolower($_POST['correo']);
-                                                        $laborx= $_POST['labor'];
-                                                        $local= $_POST['local'];
-                                                        $clave= $_POST['clave'];
-                                                        $confirmar_clave= $_POST['clave'];
-                                                        $clavecifrada= md5($clave);
+                                                    $btnRegistrar = $_POST['btnRegistrar'];
+                                                    $nombrec1 = isset($_POST['nombrec']) ? strtoupper($_POST['nombrec']) : '';
+                                                    $correo1 = isset($_POST['correo']) ? strtolower($_POST['correo']) : '';
+                                                    $laborx = isset($_POST['labor']) ? $_POST['labor'] : '';
+                                                    $local = isset($_POST['local']) ? $_POST['local'] : '';
+                                                    $clave = isset($_POST['clave']) ? $_POST['clave'] : '';
+                                                    $confirmar_clave = isset($_POST['confirmar_clave']) ? $_POST['confirmar_clave'] : '';
 
-                                                        if ($id_user!='')
-                                                        {
-                                                            $result = $mysqli->query("select id_acceso,email,nombre,clavevisual,nombre_labor, id_local from acceso where id_acceso='$id_user'");
-                                                            if($row = $result->fetch_row())
-															{
-																$nombrec=$row[2];
-																$correo=$row[1];
-																$clave=$row[3];
-																$confirmar_clave=$row[3];
-																$nombre_labor_actual=$row[4];
-																$id_local_actual=$row[5];
-																$query1 = $mysqli -> query ("SELECT id, nombre_local FROM locales where id='$local'");
-																if ($valores1 = mysqli_fetch_array($query1)) 
-																{
-																	$nombre_local=$valores1[1];
-																}
-															}
+                                                    if ($id_user != '') {
+                                                        $result = $mysqli->query("SELECT id_acceso, email, nombre, clavevisual, nombre_labor, id_local, estado FROM acceso WHERE id_acceso='$id_user'");
+                                                        if ($row = $result->fetch_row()) {
+                                                            $nombrec = $row[2];
+                                                            $correo = $row[1];
+                                                            $clave = $row[3];
+                                                            $confirmar_clave = $row[3];
+                                                            $nombre_labor_actual = $row[4];
+                                                            $id_local_actual = $row[5];
+                                                            $estado = $row[6];
                                                         }
-                                                        if(isset($btnRegistrar))
-                                                        {
-                                                            
-                                                            //Validar si existe el email registrado en la BD
-                                                            $result = $mysqli->query("select id_acceso,email,nombre,clavevisual,nombre_labor from acceso where email='$correo' and id_acceso!='$id_user'");
-                                                            if($row2 = $result->fetch_row())
-                                                            {
+                                                    }
+
+                                                    if (isset($btnRegistrar)) {
+                                                        if (empty($nombrec1) || empty($correo1)) {
+                                                            ?>
+                                                            <script>
+                                                                alertaGeneral("Campos requeridos", "Debe completar todos los campos antes de continuar.", "error");
+                                                            </script>
+                                                            <?php
+                                                        } else {
+                                                            $result = $mysqli->query("SELECT * FROM acceso WHERE email='$correo1' AND id_acceso != '$id_user'");
+                                                            if ($result->num_rows > 0) {
                                                                 ?>
                                                                 <script>
-                                                                    //Función importada desde sidebar-header.php
-                                                                    alertaGeneral("Error al modificar usuario","El correo del usuario ya posee una cuenta asociada.","error");
+                                                                    alertaGeneral("Error al modificar el usuario", "El correo del usuario ya posee una cuenta asociada.", "error");
                                                                 </script>
-                                                                <?PHP
-                                                            }
-                                                            else
-                                                            {
-                                                               
-                                                               
-                                             
-                                                                if(!$mysqli -> query("UPDATE acceso SET 
-                                                                                                        email= '$correo',
-                                                                                                        nombre='$nombrec',
-                                                                                                        clavevisual='$clave', clavecifrada='$clavecifrada',
-                                                                                                        nombre_labor='$laborx',id_local='$local', nombre_fantasia='$nombre_local' where id_acceso='$id_user'")) 
-                                                                {
-                                                                    echo ("Error al modificar el usuario. Error: ".$mysqli -> error);
-                                                                }
-                                                            else
-                                                            {
-                                                                ?>
-                                                                 
-                                                                    <script>
-                                                                        var func= alertaGeneralHref("Usuario modificado","¡Usuario modificado exitosamente!","success","usuarios.php");
-                                                                    </script> 
-
                                                                 <?php
+                                                            } else {
+                                                                if (empty($clave)) {
+                                                                    $clave = $row[3]; // clavevisual
+                                                                    $clavecifrada = $row[3]; // cifrada
+                                                                } else {
+                                                                    $clavecifrada = md5($clave);
+                                                                }
+
+                                                                $updateQuery = $mysqli->prepare(
+                                                                    "UPDATE acceso 
+                                                                    SET email = ?, nombre = ?, clavevisual = ?, clavecifrada = ?, estado = ?, nombre_labor = ?, id_local = ? 
+                                                                    WHERE id_acceso = ?"
+                                                                );
+                                                                $updateQuery->bind_param(
+                                                                    'ssssssii', 
+                                                                    $correo1, $nombrec1, $clave, $clavecifrada, $estado, $laborx, $local, $id_user
+                                                                );
+
+                                                                if ($updateQuery->execute()) {
+                                                                    ?>
+                                                                    <script>
+                                                                        alertaGeneralHref("Usuario modificado", "¡Usuario modificado exitosamente!", "success", "usuarios.php");
+                                                                    </script>
+                                                                    <?php
+                                                                } else {
+                                                                    echo "Error al modificar el usuario: " . $mysqli->error;
+                                                                }
                                                             }
-                                                            }
-                                                            
-                                                            
-                                                          
                                                         }
-                                                          
+                                                    }
                                                     ?>
                                                     <div class="form-group">
                                                         <label for="nombrec">Nombre Completo</label>
                                                         <div>
                                                             <input type="text" class="mb-2 form-control-sm form-control" id="nombrec"
-                                                                name="nombrec" placeholder="Escriba su nombre completo acá..." value="<?=$nombrec;?>"/>
+                                                                name="nombrec" placeholder="Escriba su nombre completo acá..." value="<?= $nombrec; ?>" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="correo">Correo electrónico</label>
                                                         <div>
-                                                            <input type="text" class="mb-2 form-control-sm form-control" id="email"
-                                                                name="correo" placeholder="Ejemplo: hugot@gmail.com..." value="<?=$correo;?>"/>
+                                                            <input type="text" class="mb-2 form-control-sm form-control" id="correo"
+                                                                name="correo" placeholder="Ejemplo: hugot@gmail.com..." value="<?= $correo; ?>" />
                                                         </div>
                                                     </div>
 
@@ -147,50 +135,47 @@ error_reporting(E_ALL);*/
                                                         <label for="labor">Labor</label>
                                                         <select class="mb-2 form-control-sm form-control" id="labor" name="labor">
                                                             <option value="" disabled>Seleccione una labor</option>
-                                                             <? 
-																$query = $mysqli -> query ("SELECT nombre_labor FROM labor");
-																while ($valores = mysqli_fetch_array($query)) {
-																	//echo '<option name="labor" value="'.$valores[nom_labor].'">'.$valores[nom_labor].'</option>';
-																	?>
-																		<option name="opLabor" value="<?=$valores['nombre_labor']?>" <? if($laborx==$valores['nombre_labor'])  {?>selected<? }?>   ><?=$valores['nombre_labor']?></option>
-																	<?
-																}
-														?>
+                                                            <?php
+                                                            $filtro_query = $labor == 'ADMINISTRADOR' ? " AND nombre_labor != 'ADMINISTRADOR'" : '';
+                                                            $query = $mysqli->query("SELECT nombre_labor FROM labor WHERE nombre_labor != 'OWNER' $filtro_query");
+                                                            while ($valores = $query->fetch_assoc()) {
+                                                                $selected = $laborx == $valores['nombre_labor'] ? 'selected' : '';
+                                                                echo "<option value='{$valores['nombre_labor']}' $selected>{$valores['nombre_labor']}</option>";
+                                                            }
+                                                            ?>
                                                         </select>
                                                     </div>
-													<div class="form-group">
+
+                                                    <div class="form-group">
                                                         <label for="local">Local</label>
                                                         <select class="mb-2 form-control-sm form-control" id="local" name="local">
-                                                            <option value="<?=$nombre_local;?>" disabled><?=$nombre_local;?></option>
-                                                             <? 
-																$query = $mysqli -> query ("SELECT id, nombre_local FROM locales");
-																while ($valores = mysqli_fetch_array($query)) {
-																	//echo '<option name="labor" value="'.$valores[nom_labor].'">'.$valores[nom_labor].'</option>';
-																	?>
-																		<option name="opLocal" value="<?=$valores['id']?>" <? if($local==$valores['nombre_local'])  {?>selected<? }?>   ><?=$valores['nombre_local']?></option>
-																	<?
-																}
-														?>
+                                                            <option value="" disabled>Seleccione un local</option>
+                                                            <?php
+                                                            $filtro_query1 = $labor == 'ADMINISTRADOR' ? "WHERE id='$id_local_actual'" : '';
+                                                            $query = $mysqli->query("SELECT id, nombre_local FROM locales $filtro_query1");
+                                                            while ($valores = $query->fetch_assoc()) {
+                                                                $selected = $local == $valores['id'] ? 'selected' : '';
+                                                                $disabled = $labor == 'ADMINISTRADOR' ? '' : '';
+                                                                echo "<option value='{$valores['id']}' $selected $disabled>{$valores['nombre_local']}</option>";
+                                                            }
+                                                            ?>
                                                         </select>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="clave">Contraseña</label>
-                                                        <input type="password" class="mb-2 form-control-sm form-control" id="clave"
-                                                            name="clave" placeholder="Escriba su contraseña acá..." value="<?=$clave;?>"/>
+                                                        <input type="password" class="mb-2 form-control-sm form-control" id="clave" value="<?=$clave;?>"
+                                                            name="clave" placeholder="Escriba su contraseña acá..." />
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="confirm_password">Repetir contraseña</label>
-                                                        <div>
-                                                            <input type="password" class="mb-2 form-control-sm form-control"
-                                                                id="confirmar_clave" name="confirmar_clave"
-                                                                placeholder="Repita su contraseña acá..." value="<?=$confirmar_clave;?>"/>
-                                                        </div>
+                                                        <label for="confirmar_clave">Repetir contraseña</label>
+                                                        <input type="password" class="mb-2 form-control-sm form-control" id="confirmar_clave" value="<?=$clave;?>"
+                                                            name="confirmar_clave" placeholder="Repita su contraseña acá..." />
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary form-control-sm" name="btnRegistrar" value="btnRegistrar"> Modificar usuario </button>
+                                                        <button type="submit" class="btn btn-primary form-control-sm" name="btnRegistrar" value="btnRegistrar">Modificar usuario</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -204,13 +189,8 @@ error_reporting(E_ALL);*/
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    <!--DRAWER START-->
     <div class="app-drawer-overlay d-none animated fadeIn"></div>
-    <!-- Incluir scripts. -->
-    <?php include("scripts.php");?>
-
+    <?php include("scripts.php"); ?>
 </body>
 
 </html>

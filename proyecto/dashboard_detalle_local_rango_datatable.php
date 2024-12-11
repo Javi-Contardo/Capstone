@@ -60,9 +60,10 @@ $sQuery = "
     FROM $sTable
     $sWhere
     GROUP BY descripcion, codigo_retail, anio, mes
-    ORDER BY descripcion, codigo_retail, anio, mes
+    ORDER BY anio, mes
     $sLimit
 ";
+
 
 $rResult = $mysqli->query($sQuery) or die($mysqli->error);
 

@@ -10,40 +10,26 @@
 <input type="hidden" id="pruebapass" value="<?php echo $passs; ?>">
 
 	<?
-	
 	if($error==1){
 		?>
-		
 		<script>
-							
-		alertaGeneral("CORREO INCORRECTA","warning");
-
+		alertaGeneral("INCORRECTO","ASEGURESE DE ESCRIBIR CORRECTAMENTE SU CORREO" ,"warning");
 		</script>
-	
 		<?
 	}else if($error==2){
 		?>
-		
-		<script>
-							
-		alertaGeneral("Error al iniciar sesión","Debe especificar un Correo y una contraseña.","warning");
-
+		<script>			
+		alertaGeneral("ERROR AL INICIAR SESION","DEBE ESPECIFICAR UN CORREO Y UNA CONTRASEÑA","warning");
 		</script>
-	
 		<?
 	}
 	else if($error==3){
 		?>
-		
 		<script>
-		var contra = document.getElementById("pruebapass").value;
-		alertaGeneral("CONTRASEÑA INCORRECTA: " + contra,"warning");
-
+		alertaGeneral("INCORRECTO","ASEGURESE DE ESCRIBIR CORRECTAMENTE SU CONTRASEÑA" ,"warning");
 		</script>
-	
 		<?
 	}
-	
 	?>
     <title>Negocio el chino Gestion</title>
 	<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
@@ -79,17 +65,12 @@
                                                         class="form-control"></div>
                                             </div>
                                         </div>
-                                        <div class="position-relative form-check"><input name="check" id="exampleCheck"
-                                                type="checkbox" class="form-check-input"><label for="exampleCheck"
-                                                class="form-check-label">Keep me logged in</label></div>
                                         <div class="divider"></div>
                                         <!--<h6 class="mb-0">¿No tienes una cuenta? <a href="registro_usuarios.php"
                                                 class="text-primary"> Regístrate acá</a></h6>-->
                                     </div>
                                     <div class="justify-content-center clearfix"
                                         style=" padding: 16px; allign-items: center; display: flex;">
-                                        <div class="float-left"><a href="recuperar_contrasena.php"
-                                                class="btn-lg btn btn-link">Recuperar contraseña</a></div>
                                         <div class="float-right">
                                             <button name="inicio" class="btn btn-primary btn-lg" type="submit">Iniciar sesión</button>
                                         </div>

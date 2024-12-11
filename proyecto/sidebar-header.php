@@ -34,6 +34,7 @@
 		<div class="scrollbar-sidebar scrollbar-container">
 			<div class="app-sidebar__inner">
 				<ul class="vertical-nav-menu">
+					<? if ($labor=='ADMINISTRADOR'||$labor=='OWNER'){?>
 					<li class="app-sidebar__heading">Dashboard</li>
 					<li id="act-dashboard">
 						<a href="dashboard.php" >
@@ -41,8 +42,9 @@
 							Dashboard 
 						</a>
 					</li>
+					<?}?>
 					<!-- SUB. SIDEBAR -->
-					<li class="app-sidebar__heading">Configuración</li>
+					<li class="app-sidebar__heading">Subida</li>
 					
 					<li class="" id="act-carga-archivos">
 						<a href="#">
@@ -56,7 +58,7 @@
 							<li><a href="carga_archivos_venta.php" id="act-carga-venta" style="list-style: none;"><i class="fa-solid fa-dollar-sign" style="margin-right: 5px"></i> Ventas</a></li>
 							<? }
 							if ($labor!='VENDEDOR'){?>
-							<li><a href="carga_archivos_stock.php" id="act-stock" style="list-style: none;"><i class="fa-solid fa-chart-simple" style="margin-right: 5px"></i>Stock</a></li>
+							<li><a href="carga_archivos_stock.php" id="act-carga-stock" style="list-style: none;"><i class="fa-solid fa-chart-simple" style="margin-right: 5px"></i>Stock</a></li>
 							<? }?>
 						</ul>
 					</li>
@@ -79,7 +81,7 @@
 						</a>
 					</li>
 					<? } ?>
-					<? if ($labor=='ADMINISTRADOR'||$labor=='OWNER'){?>
+					<? if ($labor=='OWNER'){?>
 					<li id="act-homologacion">
 						<a href="homologacion.php">
 							<i class="metismenu-icon fa-solid fa-user"u></i>Homologacion
@@ -146,7 +148,7 @@
 					<button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="p-0 btn btn-link" style="color: aliceblue">
 						<div class="page-title-heading text-decoration-none" id="nombre_cliente"><?=$nombre_local;?></div>
 					</button>
-					<? if ($labor=='ADMINISTRADOR'||$labor=='OWNER'){?>
+					<? if ($labor=='OWNER'){?>
 					<div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu-xl rm-pointers dropdown-menu dropdown-menu-right">
 						<div class="dropdown-menu-header mb-0">
 							<div class="dropdown-menu-header-inner bg-night-sky">
@@ -218,17 +220,6 @@
 										</div>
 									</div>
 								</div>
-								<div class="scroll-area-xs" style="height: 150px;">
-									<div class="scrollbar-container">
-										<ul class="nav flex-column">
-											<li class="nav-item">
-												<a href="javascript:void(0);" class="nav-link" onClick="abrir_modal_clave()">Cambiar Clave
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-
 							</div>
 						</div>
 					</div>

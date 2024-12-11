@@ -140,7 +140,11 @@ error_reporting(E_ALL);*/
                                                         <select class="mb-2 form-control-sm form-control" id="labor" name="labor" onChange="tipo_usuario()">
                                                             <option value="" disabled>Seleccione una labor</option>
                                                         <? 
-																$query = $mysqli -> query ("SELECT nombre_labor FROM labor where nombre_labor != 'OWNER' ");
+															$filtro_query="";
+															if($labor=='ADMINISTRADOR'){
+																$filtro_query=" and nombre_labor != 'ADMINISTRADOR' ";
+															}
+																$query = $mysqli -> query ("SELECT nombre_labor FROM labor where nombre_labor != 'OWNER' $filtro_query");
 																while ($valores = mysqli_fetch_array($query)) {
 																	//echo '<option name="labor" value="'.$valores[nom_labor].'">'.$valores[nom_labor].'</option>';
 																	?>
@@ -152,13 +156,18 @@ error_reporting(E_ALL);*/
                                                     </div>
 													<div class="form-group">
                                                         <label for="local">Local</label>
-                                                        <select class="mb-2 form-control-sm form-control" id="local" name="local">
+                                                        <select class="mb-2 form-control-sm form-control" id="local" name="local" >
                                                             <option value="" disabled>Seleccione un local</option>
                                                         <? 
-																$query = $mysqli -> query ("SELECT id, nombre_local FROM locales");
+																$filtro_query1="";
+																if ($labor=="ADMINISTRADOR"){
+																	$filtro_query1="where id='$id_local'";
+																}
+																$query = $mysqli -> query ("SELECT id, nombre_local FROM locales $filtro_query1");
 																while ($valores = mysqli_fetch_array($query)) {
 																	?>
-																		<option name="opLocal" value="<?=$valores['id']?>" <? if($localx==$valores['nombre_local'])  {?>selected<? }?>   ><?=$valores['nombre_local']?></option>
+																		<option name="opLocal" value="<?=$valores['id']?>" <? if($localx==$valores['nombre_local'])  {  
+																if ($labor=="ADMINISTRADOR"){?>disabled <?}?>selected<? }?>   ><?=$valores['nombre_local']?></option>
 																	<?
 																}
 													    ?>

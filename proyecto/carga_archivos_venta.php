@@ -8,7 +8,7 @@
             {
                 $("#act-carga-archivos").addClass("mm-active");
                 $("#act-carga-venta").addClass("mm-active");
-                $("#titulo-cabecera").text("Carga de Archivos Ventas");
+                $("#titulo-cabecera").text("Carga de Archivos Ventas ");
                 $("#titulo-cabecera").append($("<a href='dashboard.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
             });
         

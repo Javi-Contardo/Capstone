@@ -12,7 +12,7 @@ error_reporting(E_ALL)*/
             {
                 $("#act-carga-archivos").addClass("mm-active");
                 $("#act-carga-stock").addClass("mm-active");
-                $("#titulo-cabecera").text("Carga de Archivos Stock");
+                $("#titulo-cabecera").text("Carga de Archivos Stock ");
                 $("#titulo-cabecera").append($("<a href='dashboard.php' class='text-success'><i class='fa-duotone fa-solid fa-arrow-left' style=''--fa-secondary-color: #ffffff;'></i> Atras</a>"));
             });
         

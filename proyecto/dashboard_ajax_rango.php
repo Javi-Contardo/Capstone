@@ -53,9 +53,12 @@ $mes_hasta=isset($_POST['mes_hasta'])?$_POST['mes_hasta']:null;
 													<div class="main-card col-12 card" id="listado_detalle_locales" style="display: none">
 														<div class="card-header text-white bg-primary">
 															<span id="titulo_detalle_local_rango"></span>
+															<? if($id_local=='0'){ ?>
                                                             <div class="btn-actions-pane-right">
+																
                                                                 <button class="btn btn-light btn-sm" onClick="cerrar_detalle_local_rango()">Cerrar</button>
                                                             </div>
+															<? } ?>
                                                         </div>
 														<div class="card-body">
 															<div class="tab-content">

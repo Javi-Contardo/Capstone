@@ -1,5 +1,6 @@
 <?php
 
+
 ini_set('memory_limit', '1024M'); // Aumenta el límite de memoria
 set_time_limit(3600); // Aumenta el límite de tiempo de ejecución
 include("puerta_principal.php");
@@ -8,7 +9,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);*/
 require_once 'Classes/PHPExcel.php';
 require_once 'Classes/PHPExcel/IOFactory.php'; // Descomentado para asegurar que IOFactory esté disponible
-
+$filtro_query="";
+if($id_local!='0'){
+	$filtro_query=" and numero_tienda='$id_local'";
+}
 // Crear nuevo objeto PHPExcel
 $objPHPExcel = new PHPExcel();
 
@@ -48,14 +52,13 @@ foreach ($headers as $header) {
 $fila = 2; // Comienza en la fila 2 (después de los encabezados)
 $num = 1;
 
-
 // Consulta para obtener los datos
 $resultlist = $mysqli->query("
     SELECT numero_tienda, nombre_tienda, numero_articulo, desc_art_1, cantidad_existente_tienda, lote, fecha_vencimiento 
     FROM comercial_stock 
     WHERE id != '' 
     AND DATEDIFF(fecha_vencimiento, fecha_carga) <= 7 
-    AND fecha_carga = (SELECT MAX(fecha_carga) FROM comercial_stock) 
+    AND fecha_carga = (SELECT MAX(fecha_carga) FROM comercial_stock) $filtro_query 
     ORDER BY numero_tienda DESC;
 ");
 

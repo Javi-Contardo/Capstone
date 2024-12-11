@@ -276,7 +276,7 @@ function listado_clientes ()
 function valida_sesion()
 	{
 		
-		$.post("puerta_checksesion.php", 
+		/*$.post("puerta_checksesion.php", 
         	    function(result) 
         	    {
         	    	console.log(result);
@@ -284,7 +284,7 @@ function valida_sesion()
 					{
 						location.href='login.php';
 					}
-        	    }); 
+        	    }); */
 		
 	}
 </script>

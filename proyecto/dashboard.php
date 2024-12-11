@@ -1,7 +1,7 @@
 <?php include("puerta_principal.php");
-ini_set('display_errors', 1);
+/*ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ERROR);
+error_reporting(E_ERROR);*/
 ?>
 <html lang="es"><head>
     <?php include("scripts-header.php");?>
@@ -951,7 +951,7 @@ error_reporting(E_ERROR);
 												<div class="col-12">
 													<div class="main-card col-12 card" id="listado_general">
 														<div class="card-body">
-															<h5 class="card-title">Rango de datos <? echo "Hora del servidor: " . date('Y-m-d H:i:s'); ?></h5>
+															<h5 class="card-title">Rango de datos </h5>
 															<div class="d-flex align-items-center mb-12">
 																<!-- Select para los años -->
 																<div class="me-3 d-flex flex-column align-items-start" style="padding-left: 5px">
